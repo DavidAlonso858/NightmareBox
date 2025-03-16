@@ -1,5 +1,6 @@
 package org.iesbelen.nightmarebox.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,4 +30,8 @@ public class Director {
 
     @ElementCollection
     private List<String> paises;
+
+    @OneToMany(mappedBy = "director")
+    @JsonIgnore
+    private List<Pelicula> peliculasDirector;
 }
