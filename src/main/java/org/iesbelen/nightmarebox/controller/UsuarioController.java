@@ -49,7 +49,7 @@ public class UsuarioController {
 
         return usuarioService.replace(usuario, id);
     }
-    
+
     // BORRADO
     @ResponseBody
     @ResponseStatus(HttpStatus.NO_CONTENT)
