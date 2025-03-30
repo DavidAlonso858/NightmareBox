@@ -1,0 +1,58 @@
+{
+    "almacenDirectores": [
+        {
+            "id": 1,
+            "nombre": "David Cronenberg",
+            "edad": 81,
+            "poster": "https://image.tmdb.org/t/p/w342/3xh4e2gWHDilMLtucHzDGsmJMuQ.jpg",
+            "paises": [
+                "Canadá"
+            ]
+        },
+        {
+            "id": 2,
+            "nombre": "Ti West",
+            "edad": 44,
+            "poster": "https://image.tmdb.org/t/p/w342/y65ZHU9m830lbdbggxC8eOT123S.jpg",
+            "paises": [
+                "EE.UU."
+            ]
+        },
+        {
+            "id": 3,
+            "nombre": "Alfred Hitchcock",
+            "edad": 80,
+            "poster": "https://image.tmdb.org/t/p/w342/108fiNM6poRieMg7RIqLJRxdAwG.jpg",
+            "paises": [
+                "Reino Unido"
+            ]
+        },
+        {
+            "id": 4,
+            "nombre": "Paco Plaza",
+            "edad": 51,
+            "poster": "https://image.tmdb.org/t/p/w342/7STjUYAbJyr3gMKm9Qvfy5ESpIt.jpg",
+            "paises": [
+                "España"
+            ]
+        },
+        {
+            "id": 5,
+            "nombre": "Guillermo del Toro",
+            "edad": 60,
+            "poster": "https://image.tmdb.org/t/p/w342/gldeyCtKcaqnK1v4Vu9vqayhzUQ.jpg",
+            "paises": [
+                "México"
+            ]
+        },
+        {
+            "id": 6,
+            "nombre": "James Wan",
+            "edad": 47,
+            "poster": "https://image.tmdb.org/t/p/w342/mMYVuGyP74c7sFJHFrc5YPwj4Wd.jpg",
+            "paises": [
+                "Malasia"
+            ]
+        }
+    ]
+}
