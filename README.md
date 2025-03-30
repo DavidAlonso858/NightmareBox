@@ -23,5 +23,5 @@ Para ejecutar este proyecto en tu máquina local, necesitas tener las siguientes
 En la ubicacion /src/main/frontend -> npm startx2
 ```
 ```bash
-Iniciar el spring boot en la propia IDE o navegar a la ubicacion /src/main/java -> ./mvnw spring-boot:run
+Iniciar spring boot en la propia IDE o navegar a la ubicacion /src/main/java -> ./mvnw spring-boot:run
 ```
