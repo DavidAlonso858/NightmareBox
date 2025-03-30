@@ -1,8 +1,8 @@
-# NightmareBox
+# NightmareBox 🎬👻
 
 **NightmareBox** es una aplicación web de gestión de una filmoteca dedicada a películas del género de terror. Permite a los usuarios explorar directores y películas, agregar valoraciones y obtener información detallada sobre cada película. El backend está construido con **Spring Boot** y el frontend con **Angular**.
 
-## Tecnologías utilizadas
+## Tecnologías utilizadas 🛠️
 
 - **Backend:** Spring Boot (Java)
 - **Frontend:** Angular
@@ -10,7 +10,7 @@
 - **API Restful:** Spring Web
 - **Persistencia:** Spring Data JPA
 
-## Requisitos previos
+## Requisitos previos ⚙️
 
 Para ejecutar este proyecto en tu máquina local, necesitas tener las siguientes herramientas instaladas:
 
@@ -18,7 +18,7 @@ Para ejecutar este proyecto en tu máquina local, necesitas tener las siguientes
 - **Node.js y npm** (para Angular)
 - **MySQL** (para la base de datos)
 
-## Despliegue del proyecto
+## Despliegue del proyecto 🚀
 ```bash
 En la ubicacion /src/main/frontend -> npm startx2
 ```
