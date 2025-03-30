@@ -18,3 +18,10 @@ Para ejecutar este proyecto en tu máquina local, necesitas tener las siguientes
 - **Node.js y npm** (para Angular)
 - **MySQL** (para la base de datos)
 
+## Despliegue del proyecto
+```bash
+En la ubicacion /src/main/frontend -> npm startx2
+```
+```bash
+Iniciar el spring boot en la propia IDE o navegar a la ubicacion /src/main/java -> ./mvnw spring-boot:run
+```
