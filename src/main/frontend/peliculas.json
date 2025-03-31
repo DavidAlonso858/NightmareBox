@@ -1,6 +1,7 @@
 {
   "almacenPeliculas": [
     {
+      "id": 1,
       "titulo": "Dead Ringers",
       "year": 1988,
       "duracion": 116,
@@ -17,6 +18,7 @@
       "valoracion": null
     },
     {
+      "id": 2,
       "titulo": "The Fly",
       "year": 1986,
       "duracion": 96,
@@ -33,6 +35,7 @@
       "valoracion": null
     },
     {
+      "id": 3,
       "titulo": "VideoDrome",
       "year": 1983,
       "duracion": 87,
@@ -48,6 +51,7 @@
       "valoracion": null
     },
     {
+      "id": 4,
       "titulo": "Pearl",
       "year": 2022,
       "duracion": 102,
@@ -64,6 +68,7 @@
       "valoracion": null
     },
     {
+      "id": 5,
       "titulo": "X",
       "year": 2022,
       "duracion": 105,
@@ -79,6 +84,7 @@
       "valoracion": null
     },
     {
+      "id": 6,
       "titulo": "MaXXXine",
       "year": 2024,
       "duracion": 110,
@@ -94,6 +100,7 @@
       "valoracion": null
     },
     {
+      "id": 7,
       "titulo": "Psicosis",
       "year": 1960,
       "duracion": 109,
@@ -109,6 +116,7 @@
       "valoracion": null
     },
     {
+      "id": 8,
       "titulo": "The Birds",
       "year": 1963,
       "duracion": 119,
@@ -124,6 +132,7 @@
       "valoracion": null
     },
     {
+      "id": 9,
       "titulo": "Frenzy",
       "year": 1972,
       "duracion": 116,
@@ -139,6 +148,7 @@
       "valoracion": null
     },
     {
+      "id": 10,
       "titulo": "REC",
       "year": 2007,
       "sinopsis": "Un grupo de reporteros de televisión y sus cámaras se encuentran atrapados en un edificio donde ocurre una extraña y mortal infección.",
@@ -153,6 +163,7 @@
       "valoracion": null
     },
     {
+      "id": 11,
       "titulo": "Veronica",
       "year": 2017,
       "sinopsis": "Una joven madre de tres hijos se ve aterrorizada por una presencia demoníaca después de haber jugado a la ouija con sus amigos.",
@@ -167,6 +178,7 @@
       "valoracion": null
     },
     {
+      "id": 12,
       "titulo": "La abuela",
       "year": 2021,
       "sinopsis": "Una joven se ve obligada a cuidar a su abuela, pero pronto descubre que su abuela tiene oscuros secretos que pondrán en peligro su vida.",
@@ -181,6 +193,7 @@
       "valoracion": null
     },
     {
+      "id": 13,
       "titulo": "El laberinto del fauno",
       "year": 2006,
       "sinopsis": "En la España franquista, una niña se refugia en un mundo de fantasía mientras su madre enferma y su padre adoptivo se convierte en un hombre cruel.",
@@ -196,6 +209,7 @@
       "valoracion": null
     },
     {
+      "id": 14,
       "titulo": "Cronos",
       "year": 1993,
       "sinopsis": "Un anciano descubre un artefacto antiguo que le concede la inmortalidad, pero a un alto costo.",
@@ -211,6 +225,7 @@
       "valoracion": null
     },
     {
+      "id": 15,
       "titulo": "El espinazo del diablo",
       "year": 2001,
       "sinopsis": "Durante la Guerra Civil Española, un niño huérfano llega a un orfanato donde descubre la presencia de un espíritu y la cruel verdad sobre la guerra.",
@@ -226,6 +241,7 @@
       "valoracion": null
     },
     {
+      "id": 16,
       "titulo": "Saw",
       "year": 2004,
       "sinopsis": "Un psicópata conocido como Jigsaw secuestra a dos hombres y los pone en una serie de pruebas mortales para que sobrevivan.",
@@ -240,6 +256,7 @@
       "valoracion": null
     },
     {
+      "id": 17,
       "titulo": "The Conjuring",
       "year": 2013,
       "sinopsis": "Dos investigadores paranormales tratan de ayudar a una familia que está siendo aterrorizada por una entidad demoníaca en su hogar.",
@@ -254,6 +271,7 @@
       "valoracion": null
     },
     {
+      "id": 18,
       "titulo": "Malignant",
       "year": 2021,
       "sinopsis": "Una mujer comienza a ser perseguida por visiones de un hombre extraño, lo que la lleva a descubrir una oscura verdad sobre su pasado.",
@@ -268,6 +286,7 @@
       "valoracion": null
     },
     {
+      "id": 19,
       "titulo": "REC 3",
       "year": 2012,
       "sinopsis": "El caos desatado por un virus mortal continúa en esta secuela, pero esta vez se enfoca en una boda que se convierte en una pesadilla.",
@@ -282,6 +301,7 @@
       "valoracion": null
     },
     {
+      "id": 20,
       "titulo": "Dead Silence",
       "year": 2007,
       "sinopsis": "Un hombre regresa a su ciudad natal para investigar la muerte de su esposa, solo para descubrir una aterradora leyenda relacionada con muñecas.",
