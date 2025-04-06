@@ -1,7 +1,7 @@
 import { Director } from './director'; 
 import { Valoracion } from './valoracion';  
 export interface Pelicula {
-  id: number; 
+  id?: number; 
   titulo: string; 
   year: string; 
   duracion: number;
@@ -9,7 +9,7 @@ export interface Pelicula {
   premio: boolean; 
   poster: string; 
   paises: string[]; 
-  idDirector: Director; 
+  idDirector:  { id: number }; 
   valoracion: Valoracion; 
 }
 

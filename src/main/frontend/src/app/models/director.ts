@@ -1,7 +1,7 @@
 import { Pelicula } from "./pelicula";
 
 export interface Director {
-    id: number,
+    id?: number,
     nombre: string,
     edad: number,
     poster: string,
