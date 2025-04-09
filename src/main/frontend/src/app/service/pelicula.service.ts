@@ -7,32 +7,10 @@ import { Pelicula } from '../models/pelicula';
 })
 export class PeliculaService {
 
-  private urlJson = 'http://localhost:3000/almacenPeliculas';
   private urlSpring = 'http://localhost:8080/pelicula';
 
 
   constructor(private http: HttpClient) { }
-
-
-  getPeliculas() {
-    return this.http.get<Pelicula[]>(this.urlJson);
-  }
-
-  addPelicula(pelicula: Pelicula) {
-    return this.http.post(this.urlJson, pelicula);
-  }
-
-  deletePelicula(id: number) {
-    return this.http.delete(`${this.urlJson}/${id}`);
-  }
-
-  editarPelicula(peli: Pelicula) {
-    return this.http.put<Pelicula>(`${this.urlJson}/${peli.id}`, peli)
-  }
-
-  getPeliculaById(id: number) {
-    return this.http.get<Pelicula>(`${this.urlJson}/${id}`);
-  }
 
   // BACKEND
   getPeliculas2() {
