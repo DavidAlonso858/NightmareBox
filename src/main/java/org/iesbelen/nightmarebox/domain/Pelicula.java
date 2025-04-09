@@ -1,6 +1,7 @@
 package org.iesbelen.nightmarebox.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,8 +31,8 @@ public class Pelicula {
     @Column(name = "duracion_pelicula")
     private Integer duracion;
 
-    @Column(name = "sipnosis_pelicula")
-    private String sipnosis;
+    @Column(name = "sinopsis_pelicula")
+    private String sinopsis;
 
     @Column(name = "premio_pelicula")
     private Boolean premio;
@@ -47,7 +48,7 @@ public class Pelicula {
     private Director director;
 
     @ManyToOne
-    @JoinColumn(name = "id_valoracion", nullable = false)
+    @JoinColumn(name = "id_valoracion")
     private Valoracion valoracion;
 
 
