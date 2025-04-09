@@ -17,11 +17,12 @@ Para ejecutar este proyecto en tu máquina local, necesitas tener las siguientes
 - **JDK 17 o superior** (para ejecutar Spring Boot)
 - **Node.js y npm** (para Angular)
 - **MySQL** (para la base de datos)
-
+- **Spring Boot** (backend)
+  
 ## Despliegue del proyecto 🚀
 ```bash
-En la ubicacion /src/main/frontend -> npm startx2
+En la ubicacion /src/main/frontend -> **npm run startx2**, luego de haber instalado **npm install concurrently --save-dev** para ejecutar los dos json
 ```
 ```bash
-Iniciar spring boot en la propia IDE o navegar a la ubicacion /src/main/java -> ./mvnw spring-boot:run
+Iniciar spring boot en la propia IDE o navegar a la ubicacion /src/main/java -> **./mvnw spring-boot:run**
 ```
