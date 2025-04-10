@@ -12,23 +12,23 @@ export class DirectorService {
   constructor(private http: HttpClient) { }
 
   // BACKEND
-  getDirectores2() {
+  getDirectores() {
     return this.http.get<Director[]>(this.urlSpring);
   }
 
-  addDirector2(dire: Director) {
+  addDirector(dire: Director) {
     return this.http.post(this.urlSpring, dire);
   }
 
-  deleteDirector2(id: number) {
+  deleteDirector(id: number) {
     return this.http.delete(`${this.urlSpring}/${id}`);
   }
 
-  editarDirector2(dire: Director) {
+  editarDirector(dire: Director) {
     return this.http.put<Director>(`${this.urlSpring}/${dire.id}`, dire)
   }
 
-  getDirectorById2(id: number) {
+  getDirectorById(id: number) {
     return this.http.get<Director>(`${this.urlSpring}/${id}`);
   }
 }

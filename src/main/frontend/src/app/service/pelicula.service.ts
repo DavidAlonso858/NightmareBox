@@ -13,23 +13,23 @@ export class PeliculaService {
   constructor(private http: HttpClient) { }
 
   // BACKEND
-  getPeliculas2() {
+  getPeliculas() {
     return this.http.get<Pelicula[]>(this.urlSpring);
   }
 
-  addPelicula2(pelicula: Pelicula) {
+  addPelicula(pelicula: Pelicula) {
     return this.http.post(this.urlSpring, pelicula);
   }
 
-  deletePelicula2(id: number) {
+  deletePelicula(id: number) {
     return this.http.delete(`${this.urlSpring}/${id}`);
   }
 
-  editarPelicula2(peli: Pelicula) {
+  editarPelicula(peli: Pelicula) {
     return this.http.put<Pelicula>(`${this.urlSpring}/${peli.id}`, peli)
   }
 
-  getPeliculaById2(id: number) {
+  getPeliculaById(id: number) {
     return this.http.get<Pelicula>(`${this.urlSpring}/${id}`);
   }
 }
