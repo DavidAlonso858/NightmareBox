@@ -4524,8 +4524,11 @@ var RuntimeError = class extends Error {
     this.code = code;
   }
 };
+function formatRuntimeErrorCode(code) {
+  return `NG0${Math.abs(code)}`;
+}
 function formatRuntimeError(code, message) {
-  const fullCode = `NG0${Math.abs(code)}`;
+  const fullCode = formatRuntimeErrorCode(code);
   let errorMessage = `${fullCode}${message ? ": " + message : ""}`;
   if (ngDevMode && code < 0) {
     const addPeriodSeparator = !errorMessage.match(/[.,;!?\n]$/);
@@ -7347,23 +7350,6 @@ function mergeHostAttribute(dst, marker, key1, key2, value) {
     dst.splice(i++, 0, value);
   }
 }
-var NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR = {};
-var ChainedInjector = class {
-  injector;
-  parentInjector;
-  constructor(injector, parentInjector) {
-    this.injector = injector;
-    this.parentInjector = parentInjector;
-  }
-  get(token, notFoundValue, flags) {
-    flags = convertToBitFlags(flags);
-    const value = this.injector.get(token, NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR, flags);
-    if (value !== NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR || notFoundValue === NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR) {
-      return value;
-    }
-    return this.parentInjector.get(token, notFoundValue, flags);
-  }
-};
 function hasParentInjector(parentLocation) {
   return parentLocation !== NO_PARENT_INJECTOR;
 }
@@ -7387,9 +7373,6 @@ function getParentInjectorView(location2, startView) {
     viewOffset--;
   }
   return parentView;
-}
-function isRouterOutletInjector(currentInjector) {
-  return currentInjector instanceof ChainedInjector && typeof currentInjector.injector.__ngOutletInjector === "function";
 }
 var includeViewProviders = true;
 function setIncludeViewProviders(v) {
@@ -10555,10 +10538,10 @@ function getParentBlockHydrationQueue(deferBlockId, injector) {
 function gatherDeferBlocksByJSActionAttribute(doc) {
   const jsactionNodes = doc.body.querySelectorAll("[jsaction]");
   const blockMap = /* @__PURE__ */ new Set();
+  const eventTypes = [hoverEventNames.join(":;"), interactionEventNames.join(":;")].join("|");
   for (let node of jsactionNodes) {
     const attr = node.getAttribute("jsaction");
     const blockId = node.getAttribute("ngb");
-    const eventTypes = [...hoverEventNames.join(":;"), ...interactionEventNames.join(":;")].join("|");
     if (attr?.match(eventTypes) && blockId !== null) {
       blockMap.add(node);
     }
@@ -10567,8 +10550,8 @@ function gatherDeferBlocksByJSActionAttribute(doc) {
 }
 function appendDeferBlocksToJSActionMap(doc, injector) {
   const blockMap = gatherDeferBlocksByJSActionAttribute(doc);
+  const jsActionMap = injector.get(JSACTION_BLOCK_ELEMENT_MAP);
   for (let rNode of blockMap) {
-    const jsActionMap = injector.get(JSACTION_BLOCK_ELEMENT_MAP);
     sharedMapFunction(rNode, jsActionMap);
   }
 }
@@ -15220,6 +15203,23 @@ function addSet(sourceSet, targetSet) {
   }
 }
 var depsTracker = new DepsTracker();
+var NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR = {};
+var ChainedInjector = class {
+  injector;
+  parentInjector;
+  constructor(injector, parentInjector) {
+    this.injector = injector;
+    this.parentInjector = parentInjector;
+  }
+  get(token, notFoundValue, flags) {
+    flags = convertToBitFlags(flags);
+    const value = this.injector.get(token, NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR, flags);
+    if (value !== NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR || notFoundValue === NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR) {
+      return value;
+    }
+    return this.parentInjector.get(token, notFoundValue, flags);
+  }
+};
 function computeStaticStyling(tNode, attrs, writeToHost) {
   ngDevMode && assertFirstCreatePass(getTView(), "Expecting to be called in first template pass only");
   let styles = writeToHost ? tNode.styles : null;
@@ -15691,7 +15691,7 @@ var ComponentFactory2 = class extends ComponentFactory$1 {
     try {
       const cmpDef = this.componentDef;
       ngDevMode && verifyNotAnOrphanComponent(cmpDef);
-      const tAttributes = rootSelectorOrNode ? ["ng-version", "19.2.4"] : (
+      const tAttributes = rootSelectorOrNode ? ["ng-version", "19.2.5"] : (
         // Extract attributes and classes from the first selector only to match VE behavior.
         extractAttrsAndClassesFromSelector(this.componentDef.selectors[0])
       );
@@ -18514,11 +18514,7 @@ function getInjectorResolutionPathHelper(injector, resolutionPath) {
 }
 function getInjectorParent(injector) {
   if (injector instanceof R3Injector) {
-    const parent = injector.parent;
-    if (isRouterOutletInjector(parent)) {
-      return parent.parentInjector;
-    }
-    return parent;
+    return injector.parent;
   }
   let tNode;
   let lView;
@@ -19907,6 +19903,14 @@ function setImmediateTriggers(injector, elementTriggers) {
     triggerHydrationFromBlockName(injector, elementTrigger.blockName);
   }
 }
+var _hmrWarningProduced = false;
+function logHmrWarning(injector) {
+  if (!_hmrWarningProduced) {
+    _hmrWarningProduced = true;
+    const console2 = injector.get(Console);
+    console2.log(formatRuntimeError(-751, "Angular has detected that this application contains `@defer` blocks and the hot module replacement (HMR) mode is enabled. All `@defer` block dependencies will be loaded eagerly."));
+  }
+}
 function ɵɵdefer(index, primaryTmplIndex, dependencyResolverFn, loadingTmplIndex, placeholderTmplIndex, errorTmplIndex, loadingConfigIndex, placeholderConfigIndex, enableTimerScheduling, flags) {
   const lView = getLView();
   const tView = getTView();
@@ -19915,6 +19919,9 @@ function ɵɵdefer(index, primaryTmplIndex, dependencyResolverFn, loadingTmplInd
   const injector = lView[INJECTOR];
   if (tView.firstCreatePass) {
     performanceMarkFeature("NgDefer");
+    if (ngDevMode && typeof ngHmrMode !== "undefined" && ngHmrMode) {
+      logHmrWarning(injector);
+    }
     const tDetails = {
       primaryTmplIndex,
       loadingTmplIndex: loadingTmplIndex ?? null,
@@ -21023,7 +21030,7 @@ function toStylingKeyValueArray(keyValueArraySet2, stringParser, value) {
   } else if (typeof unwrappedValue === "string") {
     stringParser(styleKeyValueArray, unwrappedValue);
   } else {
-    ngDevMode && throwError2("Unsupported styling type " + typeof unwrappedValue + ": " + unwrappedValue);
+    ngDevMode && throwError2("Unsupported styling type: " + typeof unwrappedValue + " (" + unwrappedValue + ")");
   }
   return styleKeyValueArray;
 }
@@ -23026,7 +23033,7 @@ function ɵɵi18nApply(index) {
 function ɵɵi18nPostprocess(message, replacements = {}) {
   return i18nPostprocess(message, replacements);
 }
-function wrapListener(tNode, lView, context2, listenerFn) {
+function wrapListener(tNode, lView, listenerFn) {
   return function wrapListenerIn_markDirtyAndPreventDefault(e) {
     if (e === Function) {
       return listenerFn;
@@ -23037,6 +23044,7 @@ function wrapListener(tNode, lView, context2, listenerFn) {
       5
       /* NotificationSource.Listener */
     );
+    const context2 = lView[CONTEXT];
     let result = executeListenerWithErrorHandling(lView, context2, listenerFn, e);
     let nextListenerFn = wrapListenerIn_markDirtyAndPreventDefault.__ngNextListenerFn__;
     while (nextListenerFn) {
@@ -23064,15 +23072,18 @@ function handleError(lView, error) {
   const errorHandler = injector ? injector.get(ErrorHandler, null) : null;
   errorHandler && errorHandler.handleError(error);
 }
-function listenToOutput(tNode, tView, lView, index, lookupName, eventName, listenerFn, lCleanup, tCleanup) {
-  ngDevMode && assertIndexInRange(lView, index);
-  const instance = lView[index];
-  const def = tView.data[index];
+function listenToOutput(tNode, lView, directiveIndex, lookupName, eventName, listenerFn) {
+  ngDevMode && assertIndexInRange(lView, directiveIndex);
+  const instance = lView[directiveIndex];
+  const tView = lView[TVIEW];
+  const def = tView.data[directiveIndex];
   const propertyName = def.outputs[lookupName];
   const output2 = instance[propertyName];
   if (ngDevMode && !isOutputSubscribable(output2)) {
     throw new Error(`@Output ${propertyName} not initialized in '${instance.constructor.name}'.`);
   }
+  const tCleanup = tView.firstCreatePass ? getOrCreateTViewCleanup(tView) : null;
+  const lCleanup = getOrCreateLViewCleanup(lView);
   const subscription = output2.subscribe(listenerFn);
   const idx = lCleanup.length;
   lCleanup.push(listenerFn, subscription);
@@ -23123,7 +23134,6 @@ function listenerInternal(tView, lView, renderer, tNode, eventName, listenerFn, 
   const isTNodeDirectiveHost = isDirectiveHost(tNode);
   const firstCreatePass = tView.firstCreatePass;
   const tCleanup = firstCreatePass ? getOrCreateTViewCleanup(tView) : null;
-  const context2 = lView[CONTEXT];
   const lCleanup = getOrCreateLViewCleanup(lView);
   ngDevMode && assertTNodeType(
     tNode,
@@ -23146,7 +23156,7 @@ function listenerInternal(tView, lView, renderer, tNode, eventName, listenerFn, 
       existingListener.__ngLastListenerFn__ = listenerFn;
       processOutputs = false;
     } else {
-      listenerFn = wrapListener(tNode, lView, context2, listenerFn);
+      listenerFn = wrapListener(tNode, lView, listenerFn);
       stashEventListener(target, eventName, listenerFn);
       const cleanupFn = renderer.listen(target, eventName, listenerFn);
       ngDevMode && ngDevMode.rendererAddEventListener++;
@@ -23154,7 +23164,7 @@ function listenerInternal(tView, lView, renderer, tNode, eventName, listenerFn, 
       tCleanup && tCleanup.push(eventName, idxOrTargetGetter, lCleanupIndex, lCleanupIndex + 1);
     }
   } else {
-    listenerFn = wrapListener(tNode, lView, context2, listenerFn);
+    listenerFn = wrapListener(tNode, lView, listenerFn);
   }
   if (processOutputs) {
     const outputConfig = tNode.outputs?.[eventName];
@@ -23163,12 +23173,12 @@ function listenerInternal(tView, lView, renderer, tNode, eventName, listenerFn, 
       for (let i = 0; i < hostDirectiveOutputConfig.length; i += 2) {
         const index = hostDirectiveOutputConfig[i];
         const lookupName = hostDirectiveOutputConfig[i + 1];
-        listenToOutput(tNode, tView, lView, index, lookupName, eventName, listenerFn, lCleanup, tCleanup);
+        listenToOutput(tNode, lView, index, lookupName, eventName, listenerFn);
       }
     }
     if (outputConfig && outputConfig.length) {
       for (const index of outputConfig) {
-        listenToOutput(tNode, tView, lView, index, eventName, eventName, listenerFn, lCleanup, tCleanup);
+        listenToOutput(tNode, lView, index, eventName, eventName, listenerFn);
       }
     }
   }
@@ -25259,7 +25269,7 @@ var Version = class {
     this.patch = parts.slice(2).join(".");
   }
 };
-var VERSION = new Version("19.2.4");
+var VERSION = new Version("19.2.5");
 var ModuleWithComponentFactories = class {
   ngModuleFactory;
   componentFactories;
@@ -29478,7 +29488,6 @@ export {
   ɵɵnamespaceSVG,
   ɵɵnamespaceMathML,
   ɵɵnamespaceHTML,
-  NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR,
   ɵɵgetInheritedFactory,
   ɵɵinjectAttribute,
   Attribute2 as Attribute,
@@ -29582,6 +29591,7 @@ export {
   isNgModule,
   USE_RUNTIME_DEPS_TRACKER_FOR_JIT,
   depsTracker,
+  NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR,
   ɵɵdirectiveInject,
   ɵɵinvalidFactory,
   ComponentFactory2 as ComponentFactory,
@@ -29918,35 +29928,35 @@ export {
 
 @angular/core/fesm2022/untracked-CS7WUAzb.mjs:
   (**
-   * @license Angular v19.2.4
+   * @license Angular v19.2.5
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/core/fesm2022/primitives/di.mjs:
   (**
-   * @license Angular v19.2.4
+   * @license Angular v19.2.5
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/core/fesm2022/primitives/signals.mjs:
   (**
-   * @license Angular v19.2.4
+   * @license Angular v19.2.5
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/core/fesm2022/primitives/event-dispatch.mjs:
   (**
-   * @license Angular v19.2.4
+   * @license Angular v19.2.5
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
 
 @angular/core/fesm2022/core.mjs:
   (**
-   * @license Angular v19.2.4
+   * @license Angular v19.2.5
    * (c) 2010-2025 Google LLC. https://angular.io/
    * License: MIT
    *)
@@ -29967,4 +29977,4 @@ export {
    * found in the LICENSE file at https://angular.dev/license
    *)
 */
-//# sourceMappingURL=chunk-NR5BN73N.js.map
+//# sourceMappingURL=chunk-XEJBNXCQ.js.map
