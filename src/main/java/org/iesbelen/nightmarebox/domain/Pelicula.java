@@ -51,5 +51,6 @@ public class Pelicula {
     @JoinColumn(name = "id_valoracion")
     private Valoracion valoracion;
 
-
+    @ManyToMany(mappedBy = "peliculasFavs")
+    private List<Usuario> usuariosFavorita;
 }

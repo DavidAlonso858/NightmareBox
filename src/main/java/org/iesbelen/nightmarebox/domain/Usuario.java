@@ -37,4 +37,11 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "id_valoracion"))
     List<Valoracion> valoracionesUsuario = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "usuarios_peliculas_favoritas",
+            joinColumns = @JoinColumn(name = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_pelicula")
+    )
+    private List<Pelicula> peliculasFavs;
 }
