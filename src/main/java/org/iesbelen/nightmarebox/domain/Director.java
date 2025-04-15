@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -29,9 +30,9 @@ public class Director {
     private String poster;
 
     @ElementCollection
-    private List<String> paises;
+    private Set<String> paises;
 
     @OneToMany(mappedBy = "director")
     @JsonIgnore
-    private List<Pelicula> peliculasDirector;
+    private Set<Pelicula> peliculasDirector;
 }

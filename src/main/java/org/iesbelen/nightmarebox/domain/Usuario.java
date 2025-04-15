@@ -1,7 +1,12 @@
 package org.iesbelen.nightmarebox.domain;
 
 import jakarta.persistence.*;
+<<<<<<< HEAD
 import jakarta.validation.constraints.Size;
+=======
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+>>>>>>> 2a9c4851 (cambios de list por set + inicio seguridad con token)
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +27,12 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Long id;
     @Column(name = "nombre_usuario")
+<<<<<<< HEAD
     @Size(min = 3, max = 20)
+=======
+    @Min(3)
+    @Max(20)
+>>>>>>> 2a9c4851 (cambios de list por set + inicio seguridad con token)
     private String nombre;
 
     @Column(name = "password_usuario")
