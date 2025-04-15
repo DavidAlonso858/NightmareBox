@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.Year;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -51,6 +52,7 @@ public class Pelicula {
     @JoinColumn(name = "id_valoracion")
     private Valoracion valoracion;
 
+    // muchas peliculas estan en muchos usuarios
     @ManyToMany(mappedBy = "peliculasFavs")
-    private List<Usuario> usuariosFavorita;
+    private Set<Usuario> usuariosFavorita;
 }

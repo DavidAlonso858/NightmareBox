@@ -7,6 +7,9 @@
 /out-tsc
 /bazel-out
 
+# Ignorar propiedades de Spring
+src/main/resources/application.properties
+
 # Node
 node_modules
 npm-debug.log

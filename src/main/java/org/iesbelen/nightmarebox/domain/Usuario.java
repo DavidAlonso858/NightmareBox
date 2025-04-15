@@ -1,6 +1,7 @@
 package org.iesbelen.nightmarebox.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,8 +21,8 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
     private Long id;
-
     @Column(name = "nombre_usuario")
+    @Size(min = 3, max = 20)
     private String nombre;
 
     @Column(name = "password_usuario")
@@ -37,11 +38,12 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "id_valoracion"))
     List<Valoracion> valoracionesUsuario = new ArrayList<>();
 
+    // muchos usuarios estan en muchas peliculas
     @ManyToMany
     @JoinTable(
             name = "usuarios_peliculas_favoritas",
             joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_pelicula")
     )
-    private List<Pelicula> peliculasFavs;
+    private Set<Pelicula> peliculasFavs;
 }

@@ -2,6 +2,8 @@ package org.iesbelen.nightmarebox.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +24,8 @@ public class Valoracion {
     private Long id;
 
     @Column(name = "nota_valoracion")
+    @Min(0)
+    @Max(10)
     private Integer notaValoracion;
 
     @OneToMany(mappedBy = "valoracion")
@@ -31,5 +35,5 @@ public class Valoracion {
     @ManyToMany(
             mappedBy = "valoracionesUsuario")
     @JsonIgnore
-    Set<Usuario> usuarios = new HashSet<>();
+    Set<Usuario> usuarios;
 }
