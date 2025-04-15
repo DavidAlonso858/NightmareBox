@@ -22,6 +22,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
     private Long id;
+
     @Column(name = "nombre_usuario")
     @Size(min = 3, max = 20)
     private String nombre;
