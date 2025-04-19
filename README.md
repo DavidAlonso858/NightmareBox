@@ -1,6 +1,6 @@
 # NightmareBox 🎬👻
 
-**NightmareBox** es una aplicación web de gestión de una filmoteca dedicada a películas del género de terror. Permite a los usuarios explorar directores y películas, agregar valoraciones y obtener información detallada sobre cada película. He trabajado tanto con el IDE **IntelliJ** como con el **VSCode**.
+**NightmareBox** es una aplicación web de gestión de una filmoteca dedicada a películas del género de terror. Permite a los usuarios explorar directores y películas, agregar valoraciones y obtener información detallada sobre cada película. He desarrollado este proyecto tanto con el IDE **IntelliJ** como con el **VSCode**.
 
 ## Tecnologías utilizadas 🛠️
 
