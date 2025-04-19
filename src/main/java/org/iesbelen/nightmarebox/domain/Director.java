@@ -2,6 +2,7 @@ package org.iesbelen.nightmarebox.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,10 +21,12 @@ public class Director {
     @Column(name = "id_director")
     private Long id;
 
-    @Column(name = "nombre_director")
+    @Column(name = "nombre_director", nullable = false)
+    @NotBlank
     private String nombre;
 
-    @Column(name = "edad_director")
+    @Column(name = "edad_director", nullable = false)
+    @NotBlank
     private Integer edad;
 
     @Column(name = "poster_director")

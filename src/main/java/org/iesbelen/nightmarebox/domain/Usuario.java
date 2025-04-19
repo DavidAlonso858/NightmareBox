@@ -2,13 +2,13 @@ package org.iesbelen.nightmarebox.domain;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,20 +23,24 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Long id;
 
-    @Column(name = "nombre_usuario")
-    @Size(min = 3, max = 20)
+    @Column(name = "nombre_usuario", nullable = false)
+    @Size(min = 4, max = 20)
+    @NotBlank
     private String nombre;
 
-    @Column(name = "password_usuario")
+    @Column(name = "password_usuario", nullable = false)
+    @Size(min = 5, max = 20)
+    @NotBlank
     private String password;
 
-    @Column(name = "rol_usuario")
-    private Enum<Rol> rolUsuario;
+    @Enumerated(EnumType.STRING) // el enum personalizado lo guarda como string
+    @Column(name = "rol_usuario", nullable = false)
+    private Rol rolUsuario;
 
     @ManyToMany
     @JoinTable(
-            name = "usuario_valoracion", // nombre de la tabla
-            joinColumns = @JoinColumn(name = "id_usuario"), // name tabla intermedia // referenced el de la principal
+            name = "usuario_valoracion",
+            joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_valoracion"))
     List<Valoracion> valoracionesUsuario = new ArrayList<>();
 

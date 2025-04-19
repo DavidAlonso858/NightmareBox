@@ -3,6 +3,7 @@ package org.iesbelen.nightmarebox.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,14 +23,17 @@ public class Pelicula {
     @Column(name = "id_pelicula")
     private Long id;
 
-    @Column(name = "titulo_pelicula")
+    @Column(name = "titulo_pelicula", nullable = false)
+    @NotBlank
     private String titulo;
 
-    @Column(name = "year_pelicula")
+    @Column(name = "year_pelicula", nullable = false)
     @JsonFormat(pattern = "yyyy", shape = JsonFormat.Shape.STRING)
+    @NotBlank
     private Year year;
 
-    @Column(name = "duracion_pelicula")
+    @Column(name = "duracion_pelicula", nullable = false)
+    @NotBlank
     private Integer duracion;
 
     @Column(name = "sinopsis_pelicula")
@@ -42,7 +46,7 @@ public class Pelicula {
     private String poster;
 
     @ElementCollection
-    private List<String> paises;
+    private Set<String> paises;
 
     @ManyToOne
     @JoinColumn(name = "id_director", nullable = false)
@@ -51,6 +55,10 @@ public class Pelicula {
     @ManyToOne
     @JoinColumn(name = "id_valoracion")
     private Valoracion valoracion;
+
+    @ManyToOne
+    @JoinColumn(name = "id_subgenero")
+    private SubGenero subGenero;
 
     // muchas peliculas estan en muchos usuarios
     @ManyToMany(mappedBy = "peliculasFavs")
