@@ -49,4 +49,4 @@ Iniciar spring boot en la propia IDE o navegar a la ubicacion /src/main/java -> 
 - Diferentes funcionalidades y accesos para administradores y usuarios comunes. Los admins pueden añadir/modificar/eliminar películas y directores. Los usuarios pueden ver películas, marcar sus favoritas si quieren teneras guardas en una lista y valorar todas las películas que hayan visto.
 
 **Diferentes filtros en películas, como el de país con una API externa de banderas**
-- Se integra una API externa para mostrar banderas y asociarlas a los países de origen de las películas. El administrador puede seleccionar países al crear películas, y los usuarios pueden filtrar películas por país. Como ves el readme
+- Se integra una API externa para mostrar banderas y asociarlas a los países de origen de las películas. El administrador puede seleccionar países al crear películas, y los usuarios pueden filtrar películas por país.
