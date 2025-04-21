@@ -22,6 +22,9 @@ public class PeliculaService {
         return peliculaRepository.findById(id)
                 .orElseThrow(() -> new PeliculaNotFoundException(id));
     }
+    public Pelicula findByNombre(String nombre) {
+        return peliculaRepository.findByNombre(nombre).orElseThrow(() -> new PeliculaNotFoundException(nombre));
+    }
 
     public Pelicula save(Pelicula pelicula) {
         return peliculaRepository.save(pelicula);

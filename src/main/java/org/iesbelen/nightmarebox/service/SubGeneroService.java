@@ -1,6 +1,5 @@
 package org.iesbelen.nightmarebox.service;
 
-import org.iesbelen.nightmarebox.domain.Pelicula;
 import org.iesbelen.nightmarebox.domain.SubGenero;
 import org.iesbelen.nightmarebox.exception.PeliculaNotFoundException;
 import org.iesbelen.nightmarebox.exception.SubGeneroNotFoundException;

@@ -23,6 +23,10 @@ public class DirectorService {
                 (() -> new DirectorNotFoundException(id));
     }
 
+    public Director findByNombre(String nombre) {
+        return directorRepository.findByNombre(nombre).orElseThrow(() -> new DirectorNotFoundException(nombre));
+    }
+
     public Director save(Director director) {
         return directorRepository.save(director);
     }

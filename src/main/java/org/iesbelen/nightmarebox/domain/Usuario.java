@@ -24,16 +24,14 @@ public class Usuario {
     private Long id;
 
     @Column(name = "nombre_usuario", nullable = false)
-    @Size(min = 4, max = 20)
     @NotBlank
     private String nombre;
 
     @Column(name = "password_usuario", nullable = false)
-    @Size(min = 5, max = 20)
     @NotBlank
     private String password;
 
-    @Enumerated(EnumType.STRING) // el enum personalizado lo guarda como string
+    @Enumerated(EnumType.STRING) // el enum personalizado lo guarda como string en la BD
     @Column(name = "rol_usuario", nullable = false)
     private Rol rolUsuario;
 

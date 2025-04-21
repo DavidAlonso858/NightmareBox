@@ -1,19 +1,28 @@
 package org.iesbelen.nightmarebox.service;
 
+import lombok.RequiredArgsConstructor;
 import org.iesbelen.nightmarebox.domain.Usuario;
 import org.iesbelen.nightmarebox.exception.UsuarioNotFoundException;
 import org.iesbelen.nightmarebox.repository.UsuarioRepository;
+import org.iesbelen.nightmarebox.utilJWT.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
+    private final PasswordEncoder passwordEncoder;
 
     public List<Usuario> findAll() {
         return usuarioRepository.findAll();
@@ -24,18 +33,34 @@ public class UsuarioService {
                 .orElseThrow(() -> new UsuarioNotFoundException(id));
     }
 
+    public Usuario findByNombre(String nombre) {
+        return usuarioRepository.findByNombre(nombre).orElseThrow(() -> new UsuarioNotFoundException(nombre));
+    }
+
+    public String generateToken(UserDetails userDetails) {
+        return jwtUtils.generateToken(userDetails);
+    }
+
     public Usuario save(Usuario usuario) {
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);
     }
 
     public Usuario replace(Usuario usuario, Long id) {
         return usuarioRepository.findById(id)
-                .map(u -> (id.equals(usuario.getId()) ? usuarioRepository.save(usuario) : null))
+                .map(u -> {
+                    if (id.equals(usuario.getId())) {
+                        // Hashear la nueva contraseña
+                        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+                        return usuarioRepository.save(usuario);
+                    } else {
+                        return null;
+                    }
+                })
                 .orElseThrow(() -> new UsuarioNotFoundException(id));
     }
 
     public void delete(Long id) {
         usuarioRepository.deleteById(id);
-
     }
 }
