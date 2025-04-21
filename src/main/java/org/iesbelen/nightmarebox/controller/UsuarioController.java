@@ -6,11 +6,13 @@ import org.iesbelen.nightmarebox.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +26,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
     @Autowired
-    private AuthenticationManagerBuilder authenticationManagerBuilder;
+    private AuthenticationManager authenticationManager;
 
     // OBTENCION
     @GetMapping(value = {"", "/"})
@@ -54,7 +57,7 @@ public class UsuarioController {
     public ResponseEntity<?> loginUser(@RequestBody Usuario usuario) {
 
         try {
-            Authentication authentication = authenticationManagerBuilder.build().authenticate(
+            Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(usuario.getNombre(), usuario.getPassword())
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
