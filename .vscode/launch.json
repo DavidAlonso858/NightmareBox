@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-NightmareBoxApplication<NightmareBox>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "org.iesbelen.nightmarebox.NightmareBoxApplication",
+            "projectName": "NightmareBox",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
