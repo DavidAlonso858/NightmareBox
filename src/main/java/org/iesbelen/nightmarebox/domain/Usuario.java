@@ -25,12 +25,10 @@ public class Usuario {
 
     @Column(name = "nombre_usuario", nullable = false)
     @NotBlank
-    @Size(min = 3, max = 20, message = "El nombre debe tener entre {min} y {max} caracteres")
     private String nombre;
 
     @Column(name = "password_usuario", nullable = false)
     @NotBlank
-    @Size(min = 4, max = 20, message = "La contraseña debe tener entre {min} y {max} caracteres")
     private String password;
 
     @Enumerated(EnumType.STRING) // el enum personalizado lo guarda como string en la BD
