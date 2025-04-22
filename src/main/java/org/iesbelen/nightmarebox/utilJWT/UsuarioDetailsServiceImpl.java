@@ -13,8 +13,9 @@ import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
-public class UsuarioDetailsServiceImpl implements UserDetailsService {
-    private final UsuarioService usuarioService;
+public class UsuarioDetailsServiceImpl implements UserDetailsService { // intermediario para el login
+    private final UsuarioService usuarioService; 
+    // mejor sin autowired por el ciclo de las diferentes clases de jwt
 
 
     @Override
