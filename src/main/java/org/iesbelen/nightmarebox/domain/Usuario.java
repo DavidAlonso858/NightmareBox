@@ -25,6 +25,7 @@ public class Usuario {
 
     @Column(name = "nombre_usuario", nullable = false)
     @NotBlank
+    @Size(min = 3, max = 20)
     private String nombre;
 
     @Column(name = "password_usuario", nullable = false)

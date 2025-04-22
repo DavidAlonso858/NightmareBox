@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 @Slf4j
@@ -47,7 +49,7 @@ public class UsuarioController {
 
     // CREACION
     @PostMapping("/signUp")
-    public Usuario newUsuario(@RequestBody Usuario usuario) {
+    public Usuario newUsuario(@RequestBody @Valid Usuario usuario) {
         log.info("USUARIO CREADO {}", usuario);
 
         return usuarioService.save(usuario);
@@ -75,7 +77,7 @@ public class UsuarioController {
 
     // EDICION
     @PutMapping("/{id}")
-    public Usuario replaceUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
+    public Usuario replaceUsuario(@PathVariable Long id, @RequestBody @Valid Usuario usuario) {
         log.info("EDITANDO USUARIO CON ID: {}", id);
 
         return usuarioService.replace(usuario, id);

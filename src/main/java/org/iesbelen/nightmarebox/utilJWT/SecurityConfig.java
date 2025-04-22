@@ -21,39 +21,44 @@ import org.springframework.web.cors.CorsConfigurationSource;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
+    @Bean // Hasheo de la contra 
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
+    @Bean // Filtro personalizado con la clase hecha 
     public JwtAuthFilter jwtAuthFilter(JwtUtils jwtUtils, UserDetailsService userDetailsService) {
         return new JwtAuthFilter((UsuarioDetailsServiceImpl) userDetailsService, jwtUtils);
     }
 
-    @Bean
+    @Bean // Define la cadena de filtros y las reglas de acceso
     public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
+                .csrf(csrf -> csrf.disable()) // desactiva una proteccion
+                .authorizeHttpRequests(auth -> auth // QUIEN PUEDE ACCEDER A LA URL
                         .requestMatchers(
                                 "/usuario/login",
                                 "/usuario/signUp",
-                                "/usuario/**"
+                                "/usuario/**",
+                                "/pelicula/**",
+                                "director/**",
+                                "/subgenero/**"
+
                         ).permitAll()
                         .anyRequest().authenticated())
-                .sessionManagement(session -> session
+                .sessionManagement(session -> session // guarda info de sesion, en este caso sin estado (STATELESS)
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); // <- AÑADIR FILTRO AQUÍ
 
         return http.build();
     }
-    @Bean
+
+    @Bean // Gestor estandar de Spring para autentificar
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
-    @Bean
+    @Bean // Define como debe verificar 
     public AuthenticationProvider authenticationProvider(UsuarioDetailsServiceImpl usuarioDetailsServiceImpl) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(usuarioDetailsServiceImpl); // 👈 este debe ser el bueno
