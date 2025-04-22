@@ -1,22 +1,24 @@
 package org.iesbelen.nightmarebox.controller;
 
 import lombok.extern.slf4j.Slf4j;
+
+import org.iesbelen.nightmarebox.domain.Rol;
 import org.iesbelen.nightmarebox.domain.Usuario;
+import org.iesbelen.nightmarebox.dto.UsuarioSignUpDTO;
 import org.iesbelen.nightmarebox.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
+import java.net.URI;
 import java.util.List;
 
 @Slf4j
@@ -33,7 +35,7 @@ public class UsuarioController {
     private AuthenticationManager authenticationManager;
 
     // OBTENCION
-    @GetMapping(value = {"", "/"})
+    @GetMapping(value = { "", "/" })
     public List<Usuario> all() {
         log.info("TODOS LOS USUARIOS");
 
@@ -49,10 +51,22 @@ public class UsuarioController {
 
     // CREACION
     @PostMapping("/signUp")
-    public Usuario newUsuario(@RequestBody @Valid Usuario usuario) {
-        log.info("USUARIO CREADO {}", usuario);
+    public Usuario newUsuario(@RequestBody @Valid UsuarioSignUpDTO usuarioDTO) {
+        log.info("Registro DTO para usuario: {}", usuarioDTO.getNombre());
 
-        return usuarioService.save(usuario);
+        Usuario nuevoUsuario = new Usuario();
+
+        nuevoUsuario.setNombre(usuarioDTO.getNombre());
+        nuevoUsuario.setPassword(usuarioDTO.getPassword());
+
+        if (usuarioDTO.getRolUsuario() != null) {
+            nuevoUsuario.setRolUsuario(usuarioDTO.getRolUsuario());
+        } else {
+            nuevoUsuario.setRolUsuario(Rol.USUARIO);
+        }
+
+        return usuarioService.save(nuevoUsuario);
+
     }
 
     @PostMapping("/login")
@@ -60,8 +74,7 @@ public class UsuarioController {
 
         try {
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(usuario.getNombre(), usuario.getPassword())
-            );
+                    new UsernamePasswordAuthenticationToken(usuario.getNombre(), usuario.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String jwtToken = usuarioService.generateToken(userDetails);
@@ -73,7 +86,6 @@ public class UsuarioController {
             return new ResponseEntity<>("Credenciales inválidas", HttpStatus.UNAUTHORIZED);
         }
     }
-
 
     // EDICION
     @PutMapping("/{id}")

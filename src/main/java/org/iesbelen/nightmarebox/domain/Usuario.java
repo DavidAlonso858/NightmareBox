@@ -2,8 +2,6 @@ package org.iesbelen.nightmarebox.domain;
 
 import jakarta.persistence.*;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,13 +21,10 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Long id;
 
-    @Column(name = "nombre_usuario", nullable = false)
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @Column(name = "nombre_usuario", nullable = false) // validaciones en el dto
     private String nombre;
 
-    @Column(name = "password_usuario", nullable = false)
-    @NotBlank
+    @Column(name = "password_usuario", nullable = false) // validaciones en el dto por la contra hasheada
     private String password;
 
     @Enumerated(EnumType.STRING) // el enum personalizado lo guarda como string en la BD
