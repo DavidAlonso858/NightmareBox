@@ -1,7 +1,9 @@
 package org.iesbelen.nightmarebox.service;
 
 import org.iesbelen.nightmarebox.domain.Pelicula;
+import org.iesbelen.nightmarebox.domain.SubGenero;
 import org.iesbelen.nightmarebox.exception.PeliculaNotFoundException;
+import org.iesbelen.nightmarebox.exception.SubGeneroNotFoundException;
 import org.iesbelen.nightmarebox.repository.PeliculaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +24,13 @@ public class PeliculaService {
         return peliculaRepository.findById(id)
                 .orElseThrow(() -> new PeliculaNotFoundException(id));
     }
+
     public Pelicula findByTitulo(String titulo) {
         return peliculaRepository.findByTitulo(titulo).orElseThrow(() -> new PeliculaNotFoundException(titulo));
+    }
+
+    public List<Pelicula> findBySubGenero(SubGenero subGenero) {
+        return peliculaRepository.findBySubGenero(subGenero);
     }
 
     public Pelicula save(Pelicula pelicula) {

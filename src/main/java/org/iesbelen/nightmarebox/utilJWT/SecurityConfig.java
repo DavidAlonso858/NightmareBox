@@ -42,7 +42,8 @@ public class SecurityConfig {
                                 "/usuario/**",
                                 "/pelicula/**",
                                 "director/**",
-                                "/subgenero/**"
+                                "/subgenero/**",
+                                "/valoracion/**"
 
                         ).permitAll()
                         .anyRequest().authenticated())
