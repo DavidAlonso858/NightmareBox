@@ -2,6 +2,7 @@ package org.iesbelen.nightmarebox.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.iesbelen.nightmarebox.domain.Pelicula;
+import org.iesbelen.nightmarebox.dto.PeliculaMediaValoracionDTO;
 import org.iesbelen.nightmarebox.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class PeliculaController {
     }
 
     @GetMapping("/{id}")
-    public Pelicula one(@PathVariable Long id) {
+    public PeliculaMediaValoracionDTO one(@PathVariable Long id) {
         log.info("PELICULA CON ID: {}", id);
 
         return this.peliculaService.findById(id);

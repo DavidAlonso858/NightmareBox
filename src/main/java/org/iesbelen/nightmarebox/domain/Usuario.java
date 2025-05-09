@@ -1,5 +1,6 @@
 package org.iesbelen.nightmarebox.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -31,12 +32,9 @@ public class Usuario {
     @Column(name = "rol_usuario", nullable = false)
     private Rol rolUsuario;
 
-    @ManyToMany
-    @JoinTable(
-            name = "usuario_valoracion",
-            joinColumns = @JoinColumn(name = "id_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "id_valoracion"))
-    List<Valoracion> valoracionesUsuario = new ArrayList<>();
+    @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
+    private List<Valoracion> valoraciones;
 
     // muchos usuarios estan en muchas peliculas
     @ManyToMany

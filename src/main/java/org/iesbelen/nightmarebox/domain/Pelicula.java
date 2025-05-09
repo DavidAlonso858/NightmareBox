@@ -1,6 +1,7 @@
 package org.iesbelen.nightmarebox.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Year;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -50,9 +52,9 @@ public class Pelicula {
     @JoinColumn(name = "id_director", nullable = false)
     private Director director;
 
-    @ManyToOne
-    @JoinColumn(name = "id_valoracion")
-    private Valoracion valoracion;
+    @OneToMany(mappedBy = "pelicula")
+    @JsonIgnore
+    private List<Valoracion> valoraciones;
 
     @ManyToOne
     @JoinColumn(name = "id_subgenero")

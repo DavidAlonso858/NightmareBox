@@ -19,20 +19,17 @@ public class Valoracion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_valoracion")
     private Long id;
 
-    @Column(name = "nota_valoracion")
     @Min(0)
     @Max(10)
     private Integer notaValoracion;
 
-    @OneToMany(mappedBy = "valoracion")
-    @JsonIgnore
-    private List<Pelicula> peliculasValoracion;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
-    @ManyToMany(
-            mappedBy = "valoracionesUsuario")
-    @JsonIgnore
-    Set<Usuario> usuarios;
+    @ManyToOne
+    @JoinColumn(name = "pelicula_id")
+    private Pelicula pelicula;
 }
