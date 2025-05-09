@@ -1,8 +1,11 @@
 package org.iesbelen.nightmarebox.service;
 
 import lombok.RequiredArgsConstructor;
+import org.iesbelen.nightmarebox.domain.Pelicula;
 import org.iesbelen.nightmarebox.domain.Usuario;
+import org.iesbelen.nightmarebox.dto.PeliculaMediaValoracionDTO;
 import org.iesbelen.nightmarebox.exception.UsuarioNotFoundException;
+import org.iesbelen.nightmarebox.repository.PeliculaRepository;
 import org.iesbelen.nightmarebox.repository.UsuarioRepository;
 import org.iesbelen.nightmarebox.utilJWT.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PeliculaService peliculaService;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -37,6 +43,15 @@ public class UsuarioService {
         return usuarioRepository.findByNombre(nombre).orElseThrow(() -> new UsuarioNotFoundException(nombre));
     }
 
+    // PROBARLO PILLANDO LA ID DEL JWT
+    public Usuario agregarPelicula(Long idPelicula, Long idUsuario) {
+        Usuario user = this.findById(idUsuario);
+        Pelicula peli = this.peliculaService.encontrarPorId(idPelicula);
+
+        user.getPeliculasFavs().add(peli);
+        return usuarioRepository.save(user);
+    }
+
     public String generateToken(UserDetails userDetails) {
         return jwtUtils.generateToken(userDetails);
     }
@@ -45,7 +60,6 @@ public class UsuarioService {
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);
     }
-
 
 
     public Usuario replace(Usuario usuario, Long id) {

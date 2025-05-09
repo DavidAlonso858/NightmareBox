@@ -23,6 +23,11 @@ public class PeliculaService {
         return peliculaRepository.findAll();
     }
 
+    public Pelicula encontrarPorId(Long id) {
+        return peliculaRepository.findById(id)
+                .orElseThrow(() -> new PeliculaNotFoundException(id));
+    }
+
     public PeliculaMediaValoracionDTO findById(Long id) {
         Pelicula pelicula = peliculaRepository.findById(id)
                 .orElseThrow(() -> new PeliculaNotFoundException(id));

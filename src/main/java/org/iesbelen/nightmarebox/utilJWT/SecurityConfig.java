@@ -45,6 +45,7 @@ public class SecurityConfig {
                                 "/subgenero/**",
                                 "/valoracion/**"
 
+
                         ).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session // guarda info de sesion, en este caso sin estado (STATELESS)

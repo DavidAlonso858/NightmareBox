@@ -35,7 +35,7 @@ public class UsuarioController {
     private AuthenticationManager authenticationManager;
 
     // OBTENCION
-    @GetMapping(value = { "", "/" })
+    @GetMapping(value = {"", "/"})
     public List<Usuario> all() {
         log.info("TODOS LOS USUARIOS");
 
@@ -94,6 +94,20 @@ public class UsuarioController {
 
         return usuarioService.replace(usuario, id);
     }
+
+    // AGREGADO PELICULAS FAVS
+    @PutMapping("/favoritas/{idPelicula}")
+    public ResponseEntity<Usuario> agregarPeliculaFavorita(
+            @PathVariable Long idPelicula,
+            Authentication authentication) {
+
+        String username = authentication.getName(); // el username del JWT
+        Usuario usuario = usuarioService.findByNombre(username);
+        Usuario actualizado = usuarioService.agregarPelicula(idPelicula, usuario.getId());
+
+        return ResponseEntity.ok(actualizado);
+    }
+
 
     // BORRADO
     @ResponseBody
