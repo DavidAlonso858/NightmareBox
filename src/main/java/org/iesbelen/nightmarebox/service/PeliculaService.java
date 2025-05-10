@@ -44,6 +44,7 @@ public class PeliculaService {
         dto.setPoster(pelicula.getPoster());
         dto.setPaises(pelicula.getPaises());
         dto.setDirector(pelicula.getDirector());
+        dto.setSubGenero(pelicula.getSubGenero());
         dto.setMediaValoracion(media != null ? media : 0.0);
 
         return dto;
@@ -62,10 +63,28 @@ public class PeliculaService {
     }
 
     public Pelicula replace(Pelicula pelicula, Long id) {
-        return peliculaRepository.findById(id)
-                .map(p -> (id.equals(pelicula.getId()) ? peliculaRepository.save(pelicula) : null))
-                .orElseThrow(() -> new PeliculaNotFoundException(id));
+        return peliculaRepository.findById(id).map(p -> {
+            p.setTitulo(pelicula.getTitulo());
+            p.setYear(pelicula.getYear());
+            p.setDuracion(pelicula.getDuracion());
+            p.setSinopsis(pelicula.getSinopsis());
+            p.setPremio(pelicula.getPremio());
+            p.setPoster(pelicula.getPoster());
+            p.setPaises(pelicula.getPaises());
+
+            // Asignar el subgénero por su ID (si viene en el JSON)
+            if (pelicula.getSubGenero() != null && pelicula.getSubGenero().getId() != null) {
+                SubGenero subGenero = new SubGenero();
+                subGenero.setId(pelicula.getSubGenero().getId());
+                p.setSubGenero(subGenero);
+            } else {
+                p.setSubGenero(null); // Por si se quiere quitar el subgénero
+            }
+
+            return peliculaRepository.save(p);
+        }).orElseThrow(() -> new PeliculaNotFoundException(id));
     }
+
 
     public void delete(Long id) {
         peliculaRepository.deleteById(id);

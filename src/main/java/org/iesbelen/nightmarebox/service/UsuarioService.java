@@ -1,6 +1,7 @@
 package org.iesbelen.nightmarebox.service;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.iesbelen.nightmarebox.domain.Pelicula;
 import org.iesbelen.nightmarebox.domain.Usuario;
 import org.iesbelen.nightmarebox.dto.PeliculaMediaValoracionDTO;
@@ -47,6 +48,9 @@ public class UsuarioService {
     public Usuario agregarPelicula(Long idPelicula, Long idUsuario) {
         Usuario user = this.findById(idUsuario);
         Pelicula peli = this.peliculaService.encontrarPorId(idPelicula);
+
+        // inicializarlo para poder agregarlo
+        Hibernate.initialize(user.getPeliculasFavs());
 
         user.getPeliculasFavs().add(peli);
         return usuarioRepository.save(user);

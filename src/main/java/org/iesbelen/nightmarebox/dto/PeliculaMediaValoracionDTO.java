@@ -3,7 +3,9 @@ package org.iesbelen.nightmarebox.dto;
 
 import lombok.Data;
 import org.iesbelen.nightmarebox.domain.Director;
+import org.iesbelen.nightmarebox.domain.SubGenero;
 
+import javax.security.auth.Subject;
 import java.time.Year;
 import java.util.Set;
 
@@ -18,6 +20,7 @@ public class PeliculaMediaValoracionDTO {
     private String poster;
     private Set<String> paises;
     private Director director;
+    private SubGenero subGenero;
     private Double mediaValoracion;
 }
 

@@ -37,7 +37,7 @@ public class Usuario {
     private List<Valoracion> valoraciones;
 
     // muchos usuarios estan en muchas peliculas
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinTable(
             name = "usuarios_peliculas_favoritas",
             joinColumns = @JoinColumn(name = "id_usuario"),

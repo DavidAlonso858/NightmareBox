@@ -97,15 +97,18 @@ public class UsuarioController {
 
     // AGREGADO PELICULAS FAVS
     @PutMapping("/favoritas/{idPelicula}")
-    public ResponseEntity<Usuario> agregarPeliculaFavorita(
-            @PathVariable Long idPelicula,
-            Authentication authentication) {
+    public ResponseEntity<?> agregarPeliculaFavorita(@PathVariable Long idPelicula, Authentication authentication) {
 
-        String username = authentication.getName(); // el username del JWT
-        Usuario usuario = usuarioService.findByNombre(username);
-        Usuario actualizado = usuarioService.agregarPelicula(idPelicula, usuario.getId());
+        try {
+            String username = authentication.getName(); // el username del JWT
+            Usuario usuario = usuarioService.findByNombre(username);
+            Usuario actualizado = usuarioService.agregarPelicula(idPelicula, usuario.getId());
 
-        return ResponseEntity.ok(actualizado);
+            return ResponseEntity.ok(actualizado);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Fallo al agregar la peli fav", HttpStatus.UNAUTHORIZED);
+        }
     }
 
 

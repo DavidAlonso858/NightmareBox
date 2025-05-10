@@ -6,6 +6,7 @@ import org.iesbelen.nightmarebox.dto.PeliculaMediaValoracionDTO;
 import org.iesbelen.nightmarebox.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,10 +44,16 @@ public class PeliculaController {
 
     // EDICION
     @PutMapping("/{id}")
-    public Pelicula replacePelicula(@PathVariable Long id, @RequestBody Pelicula pelicula) {
+    public ResponseEntity<?> replacePelicula(@PathVariable Long id, @RequestBody Pelicula pelicula) {
         log.info("EDITANDO PELICULA CON ID: {}", id);
+        try {
+            Pelicula actualizado = peliculaService.replace(pelicula, id);
 
-        return this.peliculaService.replace(pelicula, id);
+            return ResponseEntity.ok(actualizado);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Fallo al editar", HttpStatus.UNAUTHORIZED);
+        }
     }
 
     // BORRADO
