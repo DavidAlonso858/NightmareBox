@@ -1,21 +1,18 @@
-import {Director} from './director';
-import {Valoracion} from './valoracion';
-import {SubGenero} from './subgenero';
-import {Usuario} from './usuario';
+import { Director } from './director';
+import { SubGenero } from './subgenero';
 
-// las ? indican que el atributo es opcional
 export interface Pelicula {
-  id?: number;
+  id: number;
   titulo: string;
-  year: string; // Año como string por el formato yyyy
+  year: string; // si se formatea como "2022"
   duracion: number;
   sinopsis?: string;
   premio?: boolean;
   poster?: string;
-  paises?: string[];
+  paises: string[];
   director: Director;
-  valoracion?: Valoracion;
   subGenero?: SubGenero;
-  usuariosFavorita?: Usuario[];
+  notaMedia?: number; // si el DTO incluye esto
 }
+
 

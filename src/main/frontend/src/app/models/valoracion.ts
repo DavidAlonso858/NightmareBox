@@ -1,10 +1,9 @@
-import {Pelicula} from './pelicula';
-import {Usuario} from './usuario';
+import { Usuario } from './usuario';
+import { Pelicula } from './pelicula';
 
-// las ? indican que el atributo es opcional
 export interface Valoracion {
-  id?: number;
+  id: number;
   notaValoracion: number;
-  peliculasValoracion?: Pelicula[];
-  usuarios?: Usuario[];
+  usuario: Usuario;
+  pelicula: Pelicula;
 }

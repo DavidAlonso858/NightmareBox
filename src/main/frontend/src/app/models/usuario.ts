@@ -1,13 +1,9 @@
-import {Rol} from './rol';
-import {Valoracion} from './valoracion';
-import {Pelicula} from './pelicula';
+import { Pelicula } from './pelicula';
 
-// las ? indican que el atributo es opcional
 export interface Usuario {
-  id?: number;
+  id: number;
   nombre: string;
-  password: string;
-  rolUsuario: Rol;
-  valoracionesUsuario?: Valoracion[];
+  password: string; // si se usa en login/registro
+  rolUsuario: 'ADMINISTRADOR' | 'USUARIO';
   peliculasFavs?: Pelicula[];
 }
