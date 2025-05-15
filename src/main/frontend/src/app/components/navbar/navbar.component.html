@@ -1,7 +1,20 @@
 <header>
-    <img src="/favicon.ico" alt="NightmareBox">
-    <h1>NightmareBox</h1>
     <nav>
-      
+        <div class="nav-left">
+            <img src="/favicon.ico" alt="NightmareBox">
+            NightmareBox
+        </div>
+        
+        <div class="nav-center">
+            <a routerLink="/random" routerLinkActive="active">Random</a>
+            <a routerLink="/directores" routerLinkActive="active">Directores</a>
+            <a routerLink="/peliculas" routerLinkActive="active">Películas</a>
+        </div>
+
+        <div class="nav-right">
+            <a *ngIf="estaLogueado() && usuario?.rol === 'ADMINISTRADOR'" routerLink="/usuarios">Usuarios</a>
+            <a *ngIf="estaLogueado()" (click)="cerrarSesion()">Cerrar sesión</a>
+            <a *ngIf="!estaLogueado()" routerLink="/login">Iniciar Sesión</a>
+        </div>
     </nav>
 </header>

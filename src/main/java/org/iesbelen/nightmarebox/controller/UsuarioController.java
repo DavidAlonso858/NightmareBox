@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
-import java.net.URI;
 import java.util.List;
 
 @Slf4j
@@ -35,7 +34,7 @@ public class UsuarioController {
     private AuthenticationManager authenticationManager;
 
     // OBTENCION
-    @GetMapping(value = {"", "/"})
+    @GetMapping(value = { "", "/" })
     public List<Usuario> all() {
         log.info("TODOS LOS USUARIOS");
 
@@ -47,6 +46,16 @@ public class UsuarioController {
         log.info("USUARIO CON ID {}", id);
 
         return usuarioService.findById(id);
+    }
+
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<Usuario> getByNombre(@PathVariable String nombre) {
+        Usuario usuario = usuarioService.findByNombre(nombre);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // CREACION
@@ -110,7 +119,6 @@ public class UsuarioController {
             return new ResponseEntity<>("Fallo al agregar la peli fav", HttpStatus.UNAUTHORIZED);
         }
     }
-
 
     // BORRADO
     @ResponseBody
