@@ -1,0 +1,36 @@
+<body class="d-flex align-items-center justify-content-center vh-100">
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="box shadow mb-5">
+        <h2 class="text-white text-center  fw-bold">Introduzca los datos para iniciar sesión</h2>
+
+        <div class="formu-apartado">
+            <label for="nombre" class="label text-white me-3 mb-2 fs-4">Usuario:</label>
+            <input type="text" id="nombre" formControlName="nombre" class="form-control w-50 mb-2 fs-5"
+                title="nombre de usuario requerido" required>
+
+            <!--MENSAJE VALIDACION-->
+            <div *ngIf="loginForm.get('nombre')?.invalid && loginForm.get('nombre')?.touched"
+                class="text-warning ms-2 fs-5">
+                es obligatorio el Usuario
+            </div>
+        </div>
+
+        <div class="formu-apartado">
+            <label for="password" class="label text-white me-3 fs-4">Contraseña:</label>
+            <input type="password" id="password" formControlName="password" class="form-control w-50 fs-5"
+                title="contraseña requerida" required>
+
+            <!--MENSAJE VALIDACION-->
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                class="text-warning  ms-2 fs-5">
+                es obligatoria la Contraseña
+            </div>
+        </div>
+
+
+        <div class="formu-apartado">
+            <button type="submit" class="btn text-white mt-4 fs-5">Enviar</button>
+        </div>
+
+    </form>
+</body>
