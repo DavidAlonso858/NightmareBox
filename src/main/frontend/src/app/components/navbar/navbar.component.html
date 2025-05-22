@@ -20,7 +20,8 @@
 
             <a *ngIf="estaLogueado()" (click)="cerrarSesion()"> / Cerrar sesión</a>
 
-            <a *ngIf="!estaLogueado()" [routerLink]="['/login']">Iniciar Sesión</a>
+            <a *ngIf="!estaLogueado()" [routerLink]="['/login']">Iniciar Sesión </a>
+            <a *ngIf="!estaLogueado()" [routerLink]="['/signUp']">/ Registrarse</a>
         </div>
     </nav>
 </header>

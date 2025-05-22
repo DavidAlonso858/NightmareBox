@@ -1,0 +1,40 @@
+#fondoSignUp {
+    background: url('/fondoSilent.png');
+    background-size: cover;
+    /* Para que la imagen se ajuste al tamaño de la pantalla */
+}
+
+h2{
+    margin-bottom: 75px;
+    margin-top: -75px;
+}
+
+form {
+    padding-top: 150px;
+    padding-bottom: 80px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: rgba(0, 0, 0, 0.8);
+    
+}
+.btn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: rgb(182, 23, 23);
+}
+
+.btn:hover {
+    box-shadow: 0 6px 12px rgba(255, 252, 254, 0.6);
+}
+
+label {
+    width: 120px;
+}
+
+.formu-apartado {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+
+}

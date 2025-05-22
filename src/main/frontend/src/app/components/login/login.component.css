@@ -1,4 +1,4 @@
-body {
+#fondoLogin {
     background: url('/fondoResident.jpg');
     background-size: cover;
     /* Para que la imagen se ajuste al tamaño de la pantalla */
