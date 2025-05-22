@@ -1,11 +1,11 @@
 <header>
     <nav>
         <div class="nav-left">
-           <a [routerLink]="['/']" routerLinkActive="active">
-            <img src="/favicon.ico" alt="NightmareBox">
-            NightmareBox</a>
+            <a [routerLink]="['/']" routerLinkActive="active">
+                <img src="/favicon.ico" alt="NightmareBox">
+                NightmareBox</a>
         </div>
-        
+
         <div class="nav-center">
             <a [routerLink]="['/random']" routerLinkActive="active">Random</a>
             <a [routerLink]="['/directores']" routerLinkActive="active">Directores</a>
@@ -14,7 +14,12 @@
 
         <div class="nav-right">
             <a *ngIf="estaLogueado() && usuario?.rol === 'ADMINISTRADOR'" [routerLink]="['/usuarios']">Usuarios</a>
-            <a *ngIf="estaLogueado()" (click)="cerrarSesion()">Cerrar sesión</a>
+
+            <a *ngIf="estaLogueado()" [routerLink]="['/perfil', nombreUsuario]">{{nombreUsuario}}</a>
+            <!--PONER {{ }} para una variable del ts-->
+
+            <a *ngIf="estaLogueado()" (click)="cerrarSesion()"> / Cerrar sesión</a>
+
             <a *ngIf="!estaLogueado()" [routerLink]="['/login']">Iniciar Sesión</a>
         </div>
     </nav>

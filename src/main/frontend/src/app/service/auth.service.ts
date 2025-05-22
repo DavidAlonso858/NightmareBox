@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private apiUrl = 'http://localhost:8080/usuario';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  
-  login(nombre: string, password: string){
+
+  login(nombre: string, password: string) {
     return this.http.post(`${this.apiUrl}/login`, { nombre, password }, { responseType: 'text' });
     // responseType: 'text' porque el backend devuelve el token como String
   }
@@ -35,6 +35,14 @@ export class AuthService {
     });
   }
 
+  obtenerUsuarioPorNombre() {
+    const token = this.obtenerToken();
+    if (!token) return;
+
+    const payload = JSON.parse(atob(token.split('.')[1])); // para descodificar el token
+    return payload.sub;
+  }
+
   // MÉTODOS DE LOCALSTORAGE
   guardarToken(token: string) {
     localStorage.setItem('token', token);
@@ -49,7 +57,7 @@ export class AuthService {
     localStorage.removeItem('usuario');
   }
 
-  estaLogueado(){
+  estaLogueado() {
     return !!this.obtenerToken();
   }
 

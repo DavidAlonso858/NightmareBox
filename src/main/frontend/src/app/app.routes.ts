@@ -4,6 +4,7 @@ import { DirectorComponent } from './components/director/director.component';
 import { PeliculaComponent } from './components/pelicula/pelicula.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 export const routes: Routes = [
     {
@@ -20,5 +21,10 @@ export const routes: Routes = [
     },
     {
         path: 'signUp', component: SignUpComponent
+    },
+    {
+        path: 'perfil/:nombreUsuario', component: PerfilComponent
+
     }
+
 ];

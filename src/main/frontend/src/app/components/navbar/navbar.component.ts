@@ -11,8 +11,10 @@ import { AuthService } from '../../service/auth.service';
 })
 export class NavbarComponent {
   usuario: any;
+  nombreUsuario: any;
 
   constructor(private authService: AuthService) {
+    this.nombreUsuario = this.authService.obtenerUsuarioPorNombre();
     this.usuario = this.authService.obtenerUsuario();
 
     if (!this.usuario && this.authService.estaLogueado()) {
