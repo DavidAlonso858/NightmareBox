@@ -1,0 +1,63 @@
+:host {
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Fondo CRT auténtico */
+.crt-presentacion {
+  height: 100%;
+  width: 100%;
+  background: 
+    /* Líneas de escaneo VISIBLES como en CRT real */
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.9) 0px,
+      rgba(0, 0, 0, 0.9) 1px,
+      transparent 2px,
+      transparent 3px
+    ),
+    /* Fondo rojo con variación de intensidad */
+    radial-gradient(
+      ellipse at center,
+      #ff0000 0%,
+      #8b0000 50%,
+      #400000 100%
+    );
+  position: relative;
+  color: #ff5555;
+  z-index: 0;
+  /* Efecto de curvatura de pantalla CRT */
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+
+/* Efecto de flicker aleatorio típico de CRT */
+@keyframes flicker {
+  0%, 100% { opacity: 0.9; }
+  20% { opacity: 0.95; }
+  40% { opacity: 0.85; }
+  60% { opacity: 0.92; }
+  80% { opacity: 0.87; }
+}
+
+.crt-presentacion {
+  animation: crtPowerOn 3s ease-out;
+}
+
+@keyframes crtPowerOn {
+  0% { 
+    opacity: 0;
+    filter: brightness(10);
+    transform: scale(0.98);
+  }
+  80% {
+    filter: brightness(1.5);
+    transform: scale(1);
+  }
+  100% { 
+    opacity: 1;
+    filter: brightness(1);
+  }
+}

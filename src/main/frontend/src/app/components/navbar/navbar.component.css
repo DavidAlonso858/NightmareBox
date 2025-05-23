@@ -2,10 +2,10 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #1a1a1a;
+  background: #070707;
   color: white;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 12px;
 }
 
 
