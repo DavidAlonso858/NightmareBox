@@ -20,8 +20,8 @@ export class SignUpComponent {
     this.titulo.setTitle('NigmareBox-Registro')
 
     this.signUpForm = this.fb.group({
-      nombre: ['', Validators.required],
-      password: ['', Validators.required]
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      password: ['', [Validators.required,, Validators.minLength(5), Validators.maxLength(25)]]
     });
 
   }

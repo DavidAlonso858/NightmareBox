@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
   private apiUrl = 'http://localhost:8080/usuario';
 
+  // PARA QUE SE VEA REACTIVAMENTE EN EL NAVBAR
   private usuarioSubject = new BehaviorSubject<any>(this.obtenerUsuario());
   usuario$ = this.usuarioSubject.asObservable();
 
@@ -51,7 +52,7 @@ export class AuthService {
   cerrarSesion() {
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
-    this.usuarioSubject.next(null); // 🔥 notificar logout
+    this.usuarioSubject.next(null); // notificar logout
   }
 
   estaLogueado() {
@@ -60,7 +61,7 @@ export class AuthService {
 
   guardarUsuario(usuario: any) {
     localStorage.setItem('usuario', JSON.stringify(usuario));
-    this.usuarioSubject.next(usuario); // 🔥 notificar cambio
+    this.usuarioSubject.next(usuario); // notificar cambio
   }
 
   obtenerUsuario() {
