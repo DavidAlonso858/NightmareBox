@@ -26,26 +26,25 @@ export class LoginComponent {
 
   }
 
-  onSubmit() {
+ onSubmit() {
   if (this.loginForm.valid) {
-    const nombre = this.loginForm.value.nombre;
-    const password = this.loginForm.value.password;
+    const { nombre, password } = this.loginForm.value;
 
     this.authService.login(nombre, password).subscribe({
       next: (token) => {
         this.authService.guardarToken(token);
-        this.authService.cargarUsuarioDesdeBackend(); // opcional
-        this.router.navigate(['']); // redirige a home o lo que quieras
+        this.authService.cargarUsuarioDesdeBackend(); // ACTUALIZA EL BehaviorSubject PARA MOSTRAR EL NOMBRE
+        this.router.navigate(['/']); 
       },
       error: (err) => {
-        console.error('Error de login:', err);
+        console.error('Error al iniciar sesión:', err);
         alert('Credenciales incorrectas');
       }
     });
   } else {
-    // Marca todos los campos como tocados para que salten las validaciones
     this.loginForm.markAllAsTouched();
   }
 }
+
 
 }

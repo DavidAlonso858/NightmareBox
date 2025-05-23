@@ -1,29 +1,30 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
   imports: [RouterModule, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
-  usuario: any;
-  nombreUsuario: any;
+export class NavbarComponent implements OnInit {
+  usuario: any = null;
+  nombreUsuario: string = '';
 
-  constructor(private authService: AuthService) {
-    this.nombreUsuario = this.authService.obtenerUsuarioPorNombre();
-    this.usuario = this.authService.obtenerUsuario();
+  constructor(private authService: AuthService) {}
 
-    if (!this.usuario && this.authService.estaLogueado()) {
+  ngOnInit(): void {
+    this.authService.usuario$.subscribe(usuario => {
+      this.usuario = usuario;
+      this.nombreUsuario = usuario?.nombre ?? '';
+    });
+
+    // Por si refresca la página y hay token pero no usuario cargado aún
+    if (this.authService.estaLogueado() && !this.usuario) {
       this.authService.cargarUsuarioDesdeBackend();
-
-      // Espera un poco para que se guarde en localStorage
-      setTimeout(() => {
-        this.usuario = this.authService.obtenerUsuario();
-      }, 500);
     }
   }
 
@@ -33,6 +34,5 @@ export class NavbarComponent {
 
   cerrarSesion() {
     this.authService.cerrarSesion();
-    window.location.reload();
   }
 }

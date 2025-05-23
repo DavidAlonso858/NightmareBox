@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +8,10 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private apiUrl = 'http://localhost:8080/usuario';
 
-  constructor(private http: HttpClient) { }
+  private usuarioSubject = new BehaviorSubject<any>(this.obtenerUsuario());
+  usuario$ = this.usuarioSubject.asObservable();
 
+  constructor(private http: HttpClient) { }
 
   login(nombre: string, password: string) {
     return this.http.post(`${this.apiUrl}/login`, { nombre, password }, { responseType: 'text' });
@@ -21,7 +23,6 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/signUp`, usuario);
   }
 
-  // OBTENER USUARIO DESDE BACKEND USANDO JWT
   cargarUsuarioDesdeBackend() {
     const token = this.obtenerToken();
     if (!token) return;
@@ -30,17 +31,12 @@ export class AuthService {
     const nombre = payload.sub;
 
     this.http.get(`${this.apiUrl}/nombre/${nombre}`).subscribe({
-      next: (usuario) => this.guardarUsuario(usuario),
+      next: (usuario) => {
+        this.guardarUsuario(usuario);
+        this.usuarioSubject.next(usuario); // notificar a los que están suscritos
+      },
       error: (err) => console.error('Error al obtener usuario', err)
     });
-  }
-
-  obtenerUsuarioPorNombre() {
-    const token = this.obtenerToken();
-    if (!token) return;
-
-    const payload = JSON.parse(atob(token.split('.')[1])); // para descodificar el token
-    return payload.sub;
   }
 
   // MÉTODOS DE LOCALSTORAGE
@@ -55,6 +51,7 @@ export class AuthService {
   cerrarSesion() {
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
+    this.usuarioSubject.next(null); // 🔥 notificar logout
   }
 
   estaLogueado() {
@@ -63,6 +60,7 @@ export class AuthService {
 
   guardarUsuario(usuario: any) {
     localStorage.setItem('usuario', JSON.stringify(usuario));
+    this.usuarioSubject.next(usuario); // 🔥 notificar cambio
   }
 
   obtenerUsuario() {
