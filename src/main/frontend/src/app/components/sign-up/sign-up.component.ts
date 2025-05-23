@@ -4,6 +4,7 @@ import { RouterModule, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
 import { Title } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class SignUpComponent {
 
     this.signUpForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      password: ['', [Validators.required,, Validators.minLength(5), Validators.maxLength(25)]]
+      password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(25)]]
     });
 
   }
@@ -38,11 +39,23 @@ export class SignUpComponent {
       this.authService.signUp(nuevoUsuario).subscribe({
         next: () => {
           this.router.navigate(['/login']);
-          alert('Registro correcto. Inicie sesión con sus credenciales.');
+          // ALERT PERSONALIZADO
+          Swal.fire({
+            title: 'Registro completado 🩸',
+            html: 'Ahora formas parte de <b>la caja de las pesadillas</b>',
+            imageUrl: '/favicon.ico',
+            imageWidth: 80,
+            imageAlt: 'Icono terrorífico',
+            background: '#FFFFFF',
+            color: '#FF0000',
+            confirmButtonColor: '#c40000',
+            position: 'top',
+            confirmButtonText: 'Inicia sesion para terminar'
+          });
+
         },
         error: (err) => {
           console.error('Error de registro:', err);
-          alert('Credenciales incorrectas');
         }
       });
     } else {

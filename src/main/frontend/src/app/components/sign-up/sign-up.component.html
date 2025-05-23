@@ -11,7 +11,7 @@
             <!--MENSAJE VALIDACION-->
             <div *ngIf="signUpForm.get('nombre')?.invalid && signUpForm.get('nombre')?.touched"
                 class="text-warning ms-2 fs-5">
-                es obligatorio el Usuario y entre 3 y 20 caracteres
+                es obligatorio el Usuario y entre 3-20 caracteres
             </div>
         </div>
 
@@ -23,7 +23,7 @@
             <!--MENSAJE VALIDACION-->
             <div *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched"
                 class="text-warning  ms-2 fs-5">
-                es obligatoria la Contraseña y entre 5 o 25 caracteres
+                es obligatoria la Contraseña y entre 5-25 caracteres
             </div>
         </div>
 
