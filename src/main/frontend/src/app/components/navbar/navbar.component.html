@@ -13,12 +13,12 @@
         </div>
 
         <div class="nav-right">
-            <a *ngIf="estaLogueado() && usuario?.rol === 'ADMINISTRADOR'" [routerLink]="['/usuarios']">Usuarios</a>
+            <a *ngIf="estaLogueado() && usuario?.rolUsuario === 'ADMINISTRADOR'" [routerLink]="['/usuarios']" class="me-3 text-primary">Usuarios</a>
 
             <a *ngIf="estaLogueado()" [routerLink]="['/perfil', nombreUsuario]">{{nombreUsuario}}</a>
             <!--PONER {{ }} para una variable del ts-->
 
-            <a *ngIf="estaLogueado()" (click)="cerrarSesion()"> / Cerrar sesión</a>
+            <a *ngIf="estaLogueado()" (click)="cerrarSesion()" class="cursor"> / Cerrar sesión</a>
 
             <a *ngIf="!estaLogueado()" [routerLink]="['/login']">Iniciar Sesión </a>
             <a *ngIf="!estaLogueado()" [routerLink]="['/signUp']">/ Registrarse</a>
