@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
+  standalone:true,
   imports: [CommonModule, RouterModule, ReactiveFormsModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

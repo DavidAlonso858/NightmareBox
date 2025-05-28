@@ -7,7 +7,7 @@ import { SubGenero } from '../models/subgenero';
 })
 export class SubgeneroService {
 
-  private urlSpring = 'htpp://localhost:8080/subgenero'
+  private urlSpring = 'http://localhost:8080/subgenero';
 
   constructor(private http: HttpClient) { }
 

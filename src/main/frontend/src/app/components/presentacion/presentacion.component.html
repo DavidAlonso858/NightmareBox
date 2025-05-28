@@ -1,42 +1,43 @@
 <div class="crt-presentacion">
-
   <div class="crt-table-container">
 
+    <!-- SLASHER -->
     <div class="crt-row">
-      <div class="crt-cell">
-        <h3 class="genre-title">Slasher</h3>
-        <div class="carousel">...</div>
-      </div>
-
-    </div>
-
-    <div class="crt-row">
-      <div class="crt-cell">
-        <h3 class="genre-title">Zombies</h3>
-        <div class="carousel">...</div>
-      </div>
-      <div class="crt-cell">
-        <h3 class="genre-title">Monstrous</h3>
-        <div class="carousel">...</div>
+      <div class="crt-cell" *ngIf="subgeneroLista[4]">
+        <h3 class="genre-title">{{ subgeneroLista[4].nombre }}</h3>
+        <div class="carousel">Contenido de {{ subgeneroLista[4].nombre }} </div>
       </div>
     </div>
 
+    
     <div class="crt-row">
-      <div class="crt-cell">
-        <h3 class="genre-title">Psicológico</h3>
-        <div class="carousel">...</div>
+      <div class="crt-cell" *ngIf="subgeneroLista[0]">
+        <h3 class="genre-title">{{ subgeneroLista[0].nombre }}</h3>
+        <div class="carousel">Contenido de {{ subgeneroLista[0].nombre }}</div>
+      </div>
+      <div class="crt-cell" *ngIf="subgeneroLista[1]">
+        <h3 class="genre-title">{{ subgeneroLista[1].nombre }}</h3>
+        <div class="carousel">Contenido de {{ subgeneroLista[1].nombre }}</div>
+      </div>
+    </div>
+
+    <!-- PSICOLOGICO-->
+    <div class="crt-row">
+      <div class="crt-cell" *ngIf="subgeneroLista[3]">
+        <h3 class="genre-title">{{subgeneroLista[3].nombre}}</h3>
+        <div class="carousel">Contenido de {{subgeneroLista[3].nombre}}</div>
       </div>
     </div>
 
 
     <div class="crt-row">
-      <div class="crt-cell">
-        <h3 class="genre-title">Found Footage</h3>
-        <div class="carousel">...</div>
+      <div class="crt-cell" *ngIf="subgeneroLista[2]">
+        <h3 class="genre-title">{{ subgeneroLista[2].nombre }}</h3>
+        <div class="carousel">Contenido de {{ subgeneroLista[2].nombre }}</div>
       </div>
-      <div class="crt-cell">
-        <h3 class="genre-title">Body Horror</h3>
-        <div class="carousel">...</div>
+      <div class="crt-cell" *ngIf="subgeneroLista[5]">
+        <h3 class="genre-title">{{ subgeneroLista[5].nombre }}</h3>
+        <div class="carousel">Contenido de {{ subgeneroLista[5].nombre }}</div>
       </div>
     </div>
 

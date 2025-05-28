@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
+  standalone:true,
   imports: [],
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css'
