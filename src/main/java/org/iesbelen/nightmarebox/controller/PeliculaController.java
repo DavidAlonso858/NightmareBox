@@ -22,7 +22,7 @@ public class PeliculaController {
     private PeliculaService peliculaService;
 
     // OBTENCION
-    @GetMapping(value = {"", "/"})
+    @GetMapping(value = { "", "/" })
     public List<Pelicula> all() {
         log.info("TODAS LAS PELICULAS");
         return this.peliculaService.findAll();
@@ -35,8 +35,14 @@ public class PeliculaController {
         return this.peliculaService.findById(id);
     }
 
+    @GetMapping("/subgenero/{id}")
+    public ResponseEntity<List<Pelicula>> getPeliculasBySubGenero(@PathVariable Long id) {
+        List<Pelicula> peliculas = peliculaService.findBySubGenero(id);
+        return ResponseEntity.ok(peliculas);
+    }
+
     // CREACION
-    @PostMapping(value = {"", "/"})
+    @PostMapping(value = { "", "/" })
     public Pelicula newPelicula(@RequestBody Pelicula pelicula) {
         log.info("NUEVA PELICULA: {}", pelicula);
         return this.peliculaService.save(pelicula);

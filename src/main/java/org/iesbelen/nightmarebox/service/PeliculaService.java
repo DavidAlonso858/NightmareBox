@@ -54,8 +54,8 @@ public class PeliculaService {
         return peliculaRepository.findByTitulo(titulo).orElseThrow(() -> new PeliculaNotFoundException(titulo));
     }
 
-    public List<Pelicula> findBySubGenero(SubGenero subGenero) {
-        return peliculaRepository.findBySubGenero(subGenero);
+    public List<Pelicula> findBySubGenero(Long idSubGenero) {
+        return peliculaRepository.findBySubGeneroId(idSubGenero);
     }
 
     public Pelicula save(Pelicula pelicula) {

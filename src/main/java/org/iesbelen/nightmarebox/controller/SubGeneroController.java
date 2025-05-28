@@ -61,7 +61,7 @@ public class SubGeneroController {
         // Pongo a null las peliculas con ese subgenero que estoy borrando
 
         SubGenero subGenero = this.subGeneroService.findById(id);
-        List<Pelicula> peliculasSubGenero = peliculaService.findBySubGenero(subGenero);
+        List<Pelicula> peliculasSubGenero = peliculaService.findBySubGenero(id);
 
         if (!peliculasSubGenero.isEmpty()) {
             for (Pelicula pelicula : peliculasSubGenero) {

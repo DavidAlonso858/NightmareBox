@@ -7,9 +7,10 @@ body {
 .crt-presentacion {
   display: block;
   /* hace que se comporte como un bloque (ocupe todo el ancho disponible)*/
-  min-height: 100vh; /* para que el contenedor crezca*/
+  min-height: 100vh;
+  /* para que el contenedor crezca*/
   padding: 50px 0px;
-  width: 100%;  
+  width: 100%;
   background:
     /* Líneas de escaneo VISIBLES como en CRT real */
     repeating-linear-gradient(to bottom,
@@ -65,8 +66,6 @@ body {
   padding: 20px;
 }
 
-/* Estructura de tabla natural */
-
 .crt-row {
   display: flex;
   gap: 20px;
@@ -75,7 +74,10 @@ body {
 }
 
 .crt-cell {
-  flex: 1; /* para que todas tengan el mismo ancho*/
+  flex: 1;
+  /* para que todas tengan el mismo ancho*/
+  max-width: 100%;
+  overflow-x: hidden;
   text-align: center;
   border: 1px solid #ff5555;
   padding: 15px;
@@ -125,7 +127,57 @@ body {
 }
 
 .crt-cell:hover {
-  box-shadow: 0 0 15px #ff0000; /*Los 0 son sin desplazamiento y el 15 el radio*/ 
-  transform: translateY(-2px); /* mueve la celda dos pixeles hacia arriba*/
+  box-shadow: 0 0 15px #ff0000;
+  /*Los 0 son sin desplazamiento y el 15 el radio*/
+  transform: translateY(-2px);
+  /* mueve la celda dos pixeles hacia arriba*/
   background-color: rgba(40, 0, 0, 0.9);
+}
+
+/* CARROUSEL */
+.carousel {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px 5px;
+  max-width: 100%;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none; /* Para Chrome, Safari y Opera */
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  max-width: 100%;
+}
+
+.carousel-img {
+  width: 180px;
+  height: 270px;
+  border-radius: 5px;
+  transition: transform 0.3s;
+  object-fit: cover;
+  border: 1px solid #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+
+.carousel-img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px #ffffff;
+  border: 1px solid #ffffff;
+  z-index: 10;
+}
+
+/* MOVILES*/
+@media (max-width: 768px) {
+  .crt-row {
+    flex-direction: column;
+  }
+
+  .carousel-img {
+    width: 100px;
+    height: 150px;
+  }
 }

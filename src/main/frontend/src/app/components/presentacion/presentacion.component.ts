@@ -4,6 +4,8 @@ import { SubGenero } from '../../models/subgenero';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgModel } from '@angular/forms';
+import { Pelicula } from '../../models/pelicula';
+import { PeliculaService } from '../../service/pelicula.service';
 
 @Component({
   selector: 'app-presentacion',
@@ -15,8 +17,11 @@ import { NgModel } from '@angular/forms';
 export class PresentacionComponent {
 
   subgeneroLista: SubGenero[] = [];
+  peliculaLista: Pelicula[] = [];
+  peliculaListaSubgenero: Pelicula[] = [];
 
-  constructor(private subgenero: SubgeneroService) {
+
+  constructor(private subgenero: SubgeneroService, private pelicula: PeliculaService) {
 
   }
 
@@ -27,6 +32,21 @@ export class PresentacionComponent {
 
     })
 
+    this.pelicula.getPeliculas().subscribe((p) => {
+      this.peliculaLista = p;
+      console.log(this.peliculaLista);
+    })
+
+  }
+
+  filtrarPeliculasPorSubgenero(subgeneroId: number) {
+    this.peliculaLista.filter((p) => {
+
+      if (p.subGenero?.id == subgeneroId) {
+        this.peliculaListaSubgenero.push(p);
+      }
+    })
+    return this.peliculaListaSubgenero;
   }
 
 

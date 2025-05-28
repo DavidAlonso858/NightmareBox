@@ -32,4 +32,8 @@ export class PeliculaService {
   getPeliculaById(id: number) {
     return this.http.get<Pelicula>(`${this.urlSpring}/${id}`);
   }
+
+  getPeliculaBySubgenero(id:number){
+    return this.http.get<Pelicula[]>(`${this.urlSpring}/subgenero/${id}`);
+  }
 }
