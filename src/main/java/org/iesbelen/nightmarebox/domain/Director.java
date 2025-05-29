@@ -29,7 +29,6 @@ public class Director {
     private String nombre;
 
     @Column(name = "edad_director", nullable = false)
-    @NotBlank
     private Integer edad;
 
     @Column(name = "poster_director")
