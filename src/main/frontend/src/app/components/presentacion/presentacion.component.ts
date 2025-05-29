@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, ElementRef, NgModule, ViewChild } from '@angular/core';
 import { SubgeneroService } from '../../service/subgenero.service';
 import { SubGenero } from '../../models/subgenero';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,7 @@ import { PeliculaService } from '../../service/pelicula.service';
   styleUrl: './presentacion.component.css'
 })
 export class PresentacionComponent {
+  @ViewChild('track') track!: ElementRef;
 
   subgeneroLista: SubGenero[] = [];
   peliculaLista: Pelicula[] = [];
@@ -50,4 +51,14 @@ export class PresentacionComponent {
   }
 
 
+  scrollCarrusel(direction: 'left' | 'right') {
+    const el = this.track.nativeElement as HTMLElement;
+    const scrollAmount = 200;
+
+    if (direction === 'left') {
+      el.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    } else {
+      el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  }
 }

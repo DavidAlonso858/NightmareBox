@@ -6,11 +6,12 @@
       <div class="crt-cell" *ngIf="subgeneroLista[4]">
         <h3 class="genre-title">{{ subgeneroLista[4].nombre }}</h3>
         <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[4].id) AS peliculaListaSubgenero">
-          <div class="carousel-track">
+          <button class="carousel-btn left" (click)="scrollCarrusel('left')">&#10094;</button>
+          <div class="carousel-track" #track>
             <div>
-              <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster"
-                [alt]="peli.titulo" class="carousel-img">
-
+              <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
+                class="carousel-img">
+              <button class="carousel-btn right" (click)="scrollCarrusel('right')">&#10095;</button>
             </div>
           </div>
         </div>
