@@ -3,7 +3,6 @@ import { SubgeneroService } from '../../service/subgenero.service';
 import { SubGenero } from '../../models/subgenero';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { NgModel } from '@angular/forms';
 import { Pelicula } from '../../models/pelicula';
 import { PeliculaService } from '../../service/pelicula.service';
 
@@ -14,13 +13,17 @@ import { PeliculaService } from '../../service/pelicula.service';
   templateUrl: './presentacion.component.html',
   styleUrl: './presentacion.component.css'
 })
+
 export class PresentacionComponent {
-  @ViewChild('track') track!: ElementRef;
+  @ViewChild('track4') track4 !: ElementRef;
+  @ViewChild('track0') track0 !: ElementRef;
+  @ViewChild('track1') track1 !: ElementRef;
+  @ViewChild('track2') track2 !: ElementRef;
+  @ViewChild('track3') track3 !: ElementRef;
+  @ViewChild('track5') track5 !: ElementRef;
 
   subgeneroLista: SubGenero[] = [];
   peliculaLista: Pelicula[] = [];
-  peliculaListaSubgenero: Pelicula[] = [];
-
 
   constructor(private subgenero: SubgeneroService, private pelicula: PeliculaService) {
 
@@ -37,28 +40,23 @@ export class PresentacionComponent {
       this.peliculaLista = p;
       console.log(this.peliculaLista);
     })
-
   }
 
   filtrarPeliculasPorSubgenero(subgeneroId: number) {
-    this.peliculaLista.filter((p) => {
-
-      if (p.subGenero?.id == subgeneroId) {
-        this.peliculaListaSubgenero.push(p);
-      }
-    })
-    return this.peliculaListaSubgenero;
+    const peliculasSubgenero = this.peliculaLista.filter(p => p.subGenero?.id == subgeneroId)
+    return [...peliculasSubgenero, ...peliculasSubgenero]; // duplico para que funcione siempre el efecto de carrousel
   }
 
+  // le paso la direccion predefinida y el elemento del carrousel-track
+  scrollCarrusel(direction: 'left' | 'right', track: HTMLElement) {
+    const scrollAmount = 300; // 300 pixeles al moverse
+    track.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount });
 
-  scrollCarrusel(direction: 'left' | 'right') {
-    const el = this.track.nativeElement as HTMLElement;
-    const scrollAmount = 200;
-
-    if (direction === 'left') {
-      el.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    } else {
-      el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
+    // vuelve al principio cuando estoy al fina del duplicado
+    setTimeout(() => {
+      if (track.scrollLeft + track.offsetWidth >= track.scrollWidth - 10) {
+        track.scrollTo({ left: 0, behavior: 'auto' }); // Salto sin animación
+      }
+    }, 300);
   }
 }

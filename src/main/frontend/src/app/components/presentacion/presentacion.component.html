@@ -5,28 +5,49 @@
     <div class="crt-row">
       <div class="crt-cell" *ngIf="subgeneroLista[4]">
         <h3 class="genre-title">{{ subgeneroLista[4].nombre }}</h3>
-        <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[4].id) AS peliculaListaSubgenero">
-          <button class="carousel-btn left" (click)="scrollCarrusel('left')">&#10094;</button>
-          <div class="carousel-track" #track>
-            <div>
-              <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
-                class="carousel-img">
-              <button class="carousel-btn right" (click)="scrollCarrusel('right')">&#10095;</button>
-            </div>
+
+        <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[4].id) as peliculaListaSubgenero">
+          <button class="carousel-btn left" (click)="scrollCarrusel('left', track4)">&#10094;</button>
+
+          <div class="carousel-track" #track4>
+            <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
+              class="carousel-img" />
           </div>
+
+          <button class="carousel-btn right" (click)="scrollCarrusel('right', track4)">&#10095;</button>
         </div>
       </div>
     </div>
 
 
+
     <div class="crt-row">
       <div class="crt-cell" *ngIf="subgeneroLista[0]">
         <h3 class="genre-title">{{ subgeneroLista[0].nombre }}</h3>
-        <div class="carousel">Contenido de {{ subgeneroLista[0].nombre }}</div>
+        <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[0].id) as peliculaListaSubgenero">
+          <button class="carousel-btn left" (click)="scrollCarrusel('left', track0)">&#10094;</button>
+
+          <div class="carousel-track" #track0>
+            <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
+              class="carousel-img" />
+          </div>
+
+          <button class="carousel-btn right" (click)="scrollCarrusel('right', track0)">&#10095;</button>
+        </div>
       </div>
+
       <div class="crt-cell" *ngIf="subgeneroLista[1]">
         <h3 class="genre-title">{{ subgeneroLista[1].nombre }}</h3>
-        <div class="carousel">Contenido de {{ subgeneroLista[1].nombre }}</div>
+        <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[1].id) as peliculaListaSubgenero">
+          <button class="carousel-btn left" (click)="scrollCarrusel('left', track1)">&#10094;</button>
+
+          <div class="carousel-track" #track1>
+            <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
+              class="carousel-img" />
+          </div>
+
+          <button class="carousel-btn right" (click)="scrollCarrusel('right', track1)">&#10095;</button>
+        </div>
       </div>
     </div>
 
@@ -34,7 +55,16 @@
     <div class="crt-row">
       <div class="crt-cell" *ngIf="subgeneroLista[3]">
         <h3 class="genre-title">{{subgeneroLista[3].nombre}}</h3>
-        <div class="carousel">Contenido de {{subgeneroLista[3].nombre}}</div>
+        <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[3].id) as peliculaListaSubgenero">
+          <button class="carousel-btn left" (click)="scrollCarrusel('left', track3)">&#10094;</button>
+
+          <div class="carousel-track" #track3>
+            <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
+              class="carousel-img" />
+          </div>
+
+          <button class="carousel-btn right" (click)="scrollCarrusel('right', track3)">&#10095;</button>
+        </div>
       </div>
     </div>
 
@@ -42,13 +72,31 @@
     <div class="crt-row">
       <div class="crt-cell" *ngIf="subgeneroLista[2]">
         <h3 class="genre-title">{{ subgeneroLista[2].nombre }}</h3>
-        <div class="carousel">Contenido de {{ subgeneroLista[2].nombre }}</div>
+        <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[2].id) as peliculaListaSubgenero">
+          <button class="carousel-btn left" (click)="scrollCarrusel('left', track2)">&#10094;</button>
+
+          <div class="carousel-track" #track2>
+            <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
+              class="carousel-img" />
+          </div>
+
+          <button class="carousel-btn right" (click)="scrollCarrusel('right', track2)">&#10095;</button>
+        </div>
       </div>
       <div class="crt-cell" *ngIf="subgeneroLista[5]">
         <h3 class="genre-title">{{ subgeneroLista[5].nombre }}</h3>
-        <div class="carousel">Contenido de {{ subgeneroLista[5].nombre }}</div>
-      </div>
-    </div>
+        <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[5].id) as peliculaListaSubgenero">
+          <button class="carousel-btn left" (click)="scrollCarrusel('left', track5)">&#10094;</button>
 
+          <div class="carousel-track" #track5>
+            <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
+              class="carousel-img" />
+          </div>
+
+          <button class="carousel-btn right" (click)="scrollCarrusel('right', track5)">&#10095;</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
