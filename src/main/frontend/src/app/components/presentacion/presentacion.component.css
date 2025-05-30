@@ -160,15 +160,15 @@ body {
   width: 160px;
   height: 230px;
   border-radius: 5px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   transition: transform 0.3s; /* animacion suave del hover*/
   border: 1px solid #ff0000;
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
 
 .carousel-img:hover {
-  transform: scale(1.08);
+  transform: scale(1.10);
   box-shadow: 0 0 15px #ffffff;
   border: 1px solid #ffffff;
 }
