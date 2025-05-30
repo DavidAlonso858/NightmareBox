@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Pelicula } from '../../models/pelicula';
 import { PeliculaService } from '../../service/pelicula.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-presentacion',
@@ -25,8 +26,8 @@ export class PresentacionComponent {
   subgeneroLista: SubGenero[] = [];
   peliculaLista: Pelicula[] = [];
 
-  constructor(private subgenero: SubgeneroService, private pelicula: PeliculaService) {
-
+  constructor(private title: Title, private subgenero: SubgeneroService, private pelicula: PeliculaService) {
+    this.title.setTitle('NightmareBox')
   }
 
   ngOnInit(): void {
