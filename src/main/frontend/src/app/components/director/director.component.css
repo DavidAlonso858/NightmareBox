@@ -1,12 +1,11 @@
 body {
     background: linear-gradient(135deg, #1a0000 0%, #2d0000 50%, #1a0000 100%);
     color: #ffffff;
-    font-family: 'Arial', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
 }
 
-.container {
+.container { /* centrar el contenido de la pagina*/
     max-width: 1400px;
     margin: 0 auto;
     padding: 40px 20px;
@@ -14,7 +13,7 @@ body {
 
 .header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 55px;
 }
 
 .header h1 {
@@ -141,6 +140,7 @@ body {
 }
 
 .section-title {
+    margin-top: 0;
     font-size: 2.5rem;
     color: #ff4444;
     text-align: center;
@@ -192,22 +192,17 @@ body {
     margin-bottom: 20px;
 }
 
-.featured-image {
-    width: 80px;
-    height: 80px;
+.featured-image img {
+    width: 200px;
+    height: 180px;
     border-radius: 50%;
-    background: linear-gradient(45deg, #ff4444, #cc0000);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: white;
     margin-right: 20px;
-    border: 3px solid #ff6666;
+    border: 2px solid black;
+;
 }
 
 .featured-info h3 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: #ff4444;
     margin-bottom: 5px;
 }
