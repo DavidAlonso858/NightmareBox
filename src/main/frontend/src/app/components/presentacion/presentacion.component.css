@@ -53,8 +53,24 @@ body {
   }
 }
 
-/* TABLA SUBGENEROS*/
+/* TITULO */
+.header h1 {
+  font-size: 3.2rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 8px #ff0000;
+  margin-bottom: 20px;
+  letter-spacing: 5px;
+}
 
+.header p {
+  font-size: 1.6rem;
+  color: #cccccc;
+  font-style: italic;
+}
+
+
+/* TABLA SUBGENEROS*/
 .crt-table-container {
   width: 90%;
   max-width: 1000px;
@@ -91,7 +107,7 @@ body {
   color: white;
   text-shadow: 0 0 8px #ff0000;
   margin: 0 0 10px 0;
-  font-size: 1.6rem;
+  font-size: 2rem;
   border-bottom: 1px dashed #ff5555;
   padding-bottom: 8px;
   letter-spacing: 5px;
@@ -136,10 +152,13 @@ body {
 
 /* CARROUSEL */
 .carousel {
-  white-space: nowrap; /* todo se muestra en una linea*/
+  white-space: nowrap;
+  /* todo se muestra en una linea*/
   padding: 10px 5px;
-  max-width: 100%; /* para evitar que supere el ancho del elemento padre*/
-  position: relative; /* para que los botones etc se posicionen junto a el*/
+  max-width: 100%;
+  /* para evitar que supere el ancho del elemento padre*/
+  position: relative;
+  /* para que los botones etc se posicionen junto a el*/
   display: flex;
   align-items: center;
 }
@@ -152,7 +171,8 @@ body {
 .carousel-track {
   display: flex;
   gap: 12px;
-  overflow-x: auto; /* permite el scrolleo horizontal*/
+  overflow-x: auto;
+  /* permite el scrolleo horizontal*/
   scroll-behavior: smooth;
 }
 
@@ -162,7 +182,8 @@ body {
   border-radius: 5px;
   margin-top: 15px;
   margin-bottom: 15px;
-  transition: transform 0.3s; /* animacion suave del hover*/
+  transition: transform 0.3s;
+  /* animacion suave del hover*/
   border: 1px solid #ff0000;
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
@@ -174,19 +195,22 @@ body {
 }
 
 .carousel-btn {
-  position: absolute; /* para colocarse encima del carrousel*/
+  position: absolute;
+  /* para colocarse encima del carrousel*/
   /* centrar el boton de forma vertical*/
   top: 50%;
   transform: translateY(-50%);
-  
-  z-index: 20; /* para que este por encima*/
+
+  z-index: 20;
+  /* para que este por encima*/
   background-color: rgba(0, 0, 0, 0.6);
   border: 2px solid #ff0000;
   color: white;
   font-size: 2rem;
   cursor: pointer;
   padding: 5px 10px;
-  transition: all 0.2s ease-in-out; /* suaviza la transicion del hover*/
+  transition: all 0.2s ease-in-out;
+  /* suaviza la transicion del hover*/
   box-shadow: 0 0 8px #ff0000;
   border-radius: 5px;
 }

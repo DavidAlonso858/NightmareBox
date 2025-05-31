@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-director',
@@ -7,6 +8,11 @@ import { Component } from '@angular/core';
   templateUrl: './director.component.html',
   styleUrl: './director.component.css'
 })
+
 export class DirectorComponent {
 
+  constructor(private title: Title) {
+    this.title.setTitle('NightmareBox - Directores');
+  }
+  
 }

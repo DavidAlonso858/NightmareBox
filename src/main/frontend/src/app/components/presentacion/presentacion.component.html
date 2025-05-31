@@ -1,10 +1,15 @@
 <div class="crt-presentacion">
-  <div class="crt-table-container">
 
+  <div class="header text-center">
+    <h1>Bienvenidos a la Caja de las Pesadillas</h1>
+    <p class="mb-4">Consulta, valora y aprende sobre lo que hay detrás de ellas en el cine</p>
+  </div>
+
+  <div class="crt-table-container">
     <!-- SLASHER -->
     <div class="crt-row">
       <div class="crt-cell" *ngIf="subgeneroLista[4]">
-        <h3 class="genre-title">{{ subgeneroLista[4].nombre }}</h3>
+        <h3 class="genre-title">{{ subgeneroLista[4].nombre }} 🔪</h3>
 
         <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[4].id) as peliculaListaSubgenero">
           <button class="carousel-btn left" (click)="scrollCarrusel('left', track4)">&#10094;</button>
@@ -23,7 +28,7 @@
 
     <div class="crt-row">
       <div class="crt-cell" *ngIf="subgeneroLista[0]">
-        <h3 class="genre-title">{{ subgeneroLista[0].nombre }}</h3>
+        <h3 class="genre-title">{{ subgeneroLista[0].nombre }} 🧬</h3>
         <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[0].id) as peliculaListaSubgenero">
           <button class="carousel-btn left" (click)="scrollCarrusel('left', track0)">&#10094;</button>
 
@@ -37,7 +42,7 @@
       </div>
 
       <div class="crt-cell" *ngIf="subgeneroLista[1]">
-        <h3 class="genre-title">{{ subgeneroLista[1].nombre }}</h3>
+        <h3 class="genre-title">{{ subgeneroLista[1].nombre}} 🎞️</h3>
         <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[1].id) as peliculaListaSubgenero">
           <button class="carousel-btn left" (click)="scrollCarrusel('left', track1)">&#10094;</button>
 
@@ -54,7 +59,7 @@
     <!-- PSICOLOGICO-->
     <div class="crt-row">
       <div class="crt-cell" *ngIf="subgeneroLista[3]">
-        <h3 class="genre-title">{{subgeneroLista[3].nombre}}</h3>
+        <h3 class="genre-title">{{subgeneroLista[3].nombre}} 🧠</h3>
         <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[3].id) as peliculaListaSubgenero">
           <button class="carousel-btn left" (click)="scrollCarrusel('left', track3)">&#10094;</button>
 
@@ -71,7 +76,7 @@
 
     <div class="crt-row">
       <div class="crt-cell" *ngIf="subgeneroLista[2]">
-        <h3 class="genre-title">{{ subgeneroLista[2].nombre }}</h3>
+        <h3 class="genre-title">{{ subgeneroLista[2].nombre}} 🧌</h3>
         <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[2].id) as peliculaListaSubgenero">
           <button class="carousel-btn left" (click)="scrollCarrusel('left', track2)">&#10094;</button>
 
@@ -84,7 +89,7 @@
         </div>
       </div>
       <div class="crt-cell" *ngIf="subgeneroLista[5]">
-        <h3 class="genre-title">{{ subgeneroLista[5].nombre }}</h3>
+        <h3 class="genre-title">{{ subgeneroLista[5].nombre}} 🧟</h3>
         <div class="carousel" *ngIf="filtrarPeliculasPorSubgenero(subgeneroLista[5].id) as peliculaListaSubgenero">
           <button class="carousel-btn left" (click)="scrollCarrusel('left', track5)">&#10094;</button>
 

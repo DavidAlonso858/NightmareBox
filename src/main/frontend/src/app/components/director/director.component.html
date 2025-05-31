@@ -1,1 +1,122 @@
-<p>director works!</p>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Maestros del Terror</h1>
+            <p>Algunos de los directores que han definido el género del horror</p>
+        </div>
+
+        <div class="featured-directors">
+            <h2 class="section-title">Directores Destacados</h2>
+            <div class="featured-grid">
+                <div class="featured-card">
+                    <div class="featured-header">
+                        <div class="featured-image">🎬</div>
+                        <div class="featured-info">
+                            <h3>John Carpenter</h3>
+                            <p>Maestro del Suspense</p>
+                        </div>
+                    </div>
+                    <div class="featured-description">
+                        Pionero del horror moderno, conocido por su habilidad para crear atmósferas tensas y memorables
+                        bandas sonoras que han marcado generaciones de cinéfilos del terror.
+                    </div>
+                    <div class="featured-films">
+                        <span class="film-tag">Halloween</span>
+                        <span class="film-tag">The Thing</span>
+                        <span class="film-tag">They Live</span>
+                        <span class="film-tag">Escape from New York</span>
+                    </div>
+                </div>
+
+                <div class="featured-card">
+                    <div class="featured-header">
+                        <div class="featured-image">🔪</div>
+                        <div class="featured-info">
+                            <h3>Wes Craven</h3>
+                            <p>El Pesadilla de Elm Street</p>
+                        </div>
+                    </div>
+                    <div class="featured-description">
+                        Creador de iconos del terror como Freddy Krueger, revolucionó el género con su enfoque
+                        meta-cinematográfico y su comprensión única de los miedos adolescentes.
+                    </div>
+                    <div class="featured-films">
+                        <span class="film-tag">A Nightmare on Elm Street</span>
+                        <span class="film-tag">Scream</span>
+                        <span class="film-tag">The Hills Have Eyes</span>
+                        <span class="film-tag">Red Eye</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Todos los Directores</h2>
+        <div class="directors-grid">
+            <div class="director-card">
+                <div class="director-image">👹</div>
+                <div class="director-name">Sam Raimi</div>
+                <div class="director-specialty">Horror Cómico</div>
+                <div class="director-stats">
+                    <div class="stat">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Películas</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">8.2</span>
+                        <span class="stat-label">Rating</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">1981</span>
+                        <span class="stat-label">Debut</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Animación de entrada
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.director-card, .featured-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // Funcionalidad de búsqueda
+            const searchInput = document.querySelector('.search-input');
+            const directorCards = document.querySelectorAll('.director-card');
+
+            searchInput.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                directorCards.forEach(card => {
+                    const directorName = card.querySelector('.director-name').textContent.toLowerCase();
+                    const specialty = card.querySelector('.director-specialty').textContent.toLowerCase();
+
+                    if (directorName.includes(searchTerm) || specialty.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeIn 0.5s ease';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Efectos de hover adicionales
+        document.querySelectorAll('.director-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
