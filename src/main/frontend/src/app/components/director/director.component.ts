@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Pelicula } from '../../models/pelicula';
 import { PeliculaService } from '../../service/pelicula.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-director',
@@ -18,6 +19,7 @@ import { PeliculaService } from '../../service/pelicula.service';
 export class DirectorComponent {
 
   directores: Director[] = [];
+  directoresGenerales: Director[] = [];
   peliculasDirector: Pelicula[] = [];
   peliculas: Pelicula[] = [];
 
@@ -29,19 +31,31 @@ export class DirectorComponent {
     this.directorService.getDirectores().subscribe(directores => {
       this.directores = directores;
     });
+
     this.peliculaService.getPeliculas().subscribe(peliculas => {
       this.peliculas = peliculas;
     });
+
   }
+
+
+  // la lista de directores sin los destacados includidos
+  genralesFiltro() {
+    this.directoresGenerales = this.directores.filter(d => ![1, 3, 9, 23, 13, 19].includes(d.id))
+    console.log(this.directoresGenerales);
+
+    // ordenados alfabeticamente
+    return this.directoresGenerales.sort((a, b) => a.nombre.localeCompare(b.nombre));
+  }
+
 
   listaPeliculasDirector(id: number) {
     const director = this.directores.find(d => d.id === id);
-    console.log(director);
 
     if (director) {
       this.peliculasDirector = this.peliculas.filter(p => p.director?.id === director.id);
     }
-    
+
     return this.peliculasDirector;
   }
 
