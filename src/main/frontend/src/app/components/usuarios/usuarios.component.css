@@ -1,0 +1,75 @@
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #0a009d 0%, #f8f8f8 50%, #001ca8 100%);
+    color: #160cd3;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.container h1 {
+    letter-spacing: 2px;
+    font-size: 50px;
+    margin-bottom: 35px;
+}
+
+td {
+    font-size: 20px;
+}
+
+.password-field {
+    color: #6c757d;
+}
+
+.table-responsive {
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.763);
+}
+
+
+table {
+    margin-bottom: 0 !important;
+}
+
+#rolCSS {
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.2s ease-in-out;
+}
+
+#rolCSS:hover {
+    transform: scale(1.08);
+}
+
+
+.table-danger th {
+    background-color: #0a003e52 !important;
+    border-color: #ffffff !important;
+}
+
+#pelisFavs {
+    font-size: 18px;
+}
+
+.custom-select-rol {
+  background-color: #2e2e2e;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 15px;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-select-rol:hover,
+.custom-select-rol:focus {
+  background-color: #3d3d3d;
+  border-color: #888;
+}

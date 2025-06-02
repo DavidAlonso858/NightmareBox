@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,18 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  getUsuarios() {
+    return this.http.get<Usuario[]>(this.apiUrl);
+  }
+
+  actualizarUsuario(usuario: Usuario): Observable<Usuario> {
+  return this.http.put<Usuario>(`${this.apiUrl}/${usuario.id}`, usuario);
+}
+
+
   login(nombre: string, password: string) {
-    return this.http.post(`${this.apiUrl}/login`, { nombre, password }, { responseType: 'text' });
     // responseType: 'text' porque el backend devuelve el token como String
+    return this.http.post(`${this.apiUrl}/login`, { nombre, password }, { responseType: 'text' });
   }
 
   // REGISTRO
