@@ -161,6 +161,12 @@
 
         <!--GENERALES-->
         <h2 class="section-title">Todos los Directores</h2>
+
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Buscar director por nombre..." [(ngModel)]="searchTerm"
+                (input)="onSearchChange()">
+        </div>
+
         <div class="directors-grid">
             <div class="director-card bg-black" *ngFor="let director of genralesFiltro()">
                 <!-- uno más en las id por como funcionan los arrays/listas-->
