@@ -41,23 +41,21 @@ public class UsuarioController {
         return usuarioService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Usuario one(@PathVariable Long id) {
-        log.info("USUARIO CON ID {}", id);
+@GetMapping("/id/{id}")     // Changed path
+public Usuario one(@PathVariable Long id) {
+    log.info("USUARIO CON ID {}", id);
+    return usuarioService.findById(id);
+}
 
-        return usuarioService.findById(id);
+@GetMapping("/nombre/{nombre}")  // Changed path
+public ResponseEntity<Usuario> getByNombre(@PathVariable String nombre) {
+    Usuario usuario = usuarioService.findByNombre(nombre);
+    if (usuario != null) {
+        return ResponseEntity.ok(usuario);
+    } else {
+        return ResponseEntity.notFound().build();
     }
-
-    @GetMapping("/nombre/{nombre}")
-    public ResponseEntity<Usuario> getByNombre(@PathVariable String nombre) {
-        Usuario usuario = usuarioService.findByNombre(nombre);
-        if (usuario != null) {
-            return ResponseEntity.ok(usuario);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
+}
     // CREACION
     @PostMapping("/signUp")
     public Usuario newUsuario(@RequestBody @Valid UsuarioSignUpDTO usuarioDTO) {

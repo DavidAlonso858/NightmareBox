@@ -31,7 +31,7 @@ public class JwtAuthFilter extends OncePerRequestFilter { // indica que esta cla
                                     FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization"); // Busca si hay una cabeccera donde se envia el token
 
-        if (request.getServletPath().startsWith("/usuario/login") || request.getServletPath().startsWith("/usuario/signUp")) {
+        if (request.getServletPath().startsWith("/usuario/login") || request.getServletPath().startsWith("/usuario/signUp") || request.getServletPath().startsWith("/usuario/**")) {
             filterChain.doFilter(request, response);
             return;
         }

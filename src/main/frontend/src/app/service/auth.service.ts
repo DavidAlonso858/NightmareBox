@@ -23,6 +23,11 @@ export class AuthService {
     return this.http.put<Usuario>(`${this.apiUrl}/${usuario.id}`, usuario);
   }
 
+  
+getNombre(nombre: string | null) {
+    return this.http.get<Usuario>(`${this.apiUrl}/nombre/${nombre}`);
+}
+
   borradoUsuario(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }

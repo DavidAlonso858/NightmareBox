@@ -24,7 +24,7 @@ export const routes: Routes = [
         path: 'signUp', component: SignUpComponent
     },
     {
-        path: 'perfil/:nombreUsuario', component: PerfilComponent
+        path: 'usuario/:nombreUsuario', component: PerfilComponent
 
     },
     {

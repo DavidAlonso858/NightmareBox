@@ -17,7 +17,7 @@
             <a *ngIf="estaLogueado() && usuario?.rolUsuario === 'ADMINISTRADOR'" [routerLink]="['/usuarios']"
                 class="me-3 text-primary">Usuarios</a>
 
-            <a *ngIf="estaLogueado()" [routerLink]="['/perfil', nombreUsuario]">{{nombreUsuario}}</a>
+            <a *ngIf="estaLogueado()" [routerLink]="['/usuario', nombreUsuario]">{{nombreUsuario}}</a>
             <!--PONER {{ }} para una variable del ts-->
 
             <a *ngIf="estaLogueado()" (click)="cerrarSesion()" class="cursor"> / Cerrar sesión</a>
