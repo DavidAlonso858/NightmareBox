@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   usuario: any = null;
   nombreUsuario: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.authService.usuario$.subscribe(usuario => {
@@ -34,5 +34,6 @@ export class NavbarComponent implements OnInit {
 
   cerrarSesion() {
     this.authService.cerrarSesion();
+    this.router.navigate(['/login']);
   }
 }
