@@ -31,10 +31,13 @@
                                 <th scope="col">
                                     Rol
                                 </th>
+                                <th scope="col">
+                                    Borrado
+                                </th>
                             </tr>
                         </thead>
 
-                        <tbody class="prueba">
+                        <tbody>
                             <tr *ngFor="let usuario of usuarios" class="text-center">
                                 <td>
                                     <span class="badge bg-secondary">{{usuario.id}}</span>
@@ -63,7 +66,14 @@
                                         <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
                                     </select>
 
+                                </td>
 
+                                <td *ngIf="usuario.rolUsuario == 'USUARIO'">
+                                    <button class=" bg-danger rounded-3"
+                                        (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+                                </td>
+
+                                <td *ngIf="usuario.rolUsuario == 'ADMINISTRADOR'">
                                 </td>
 
                             </tr>

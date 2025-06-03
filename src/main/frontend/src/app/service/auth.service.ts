@@ -19,10 +19,13 @@ export class AuthService {
     return this.http.get<Usuario[]>(this.apiUrl);
   }
 
-  actualizarUsuario(usuario: Usuario): Observable<Usuario> {
-  return this.http.put<Usuario>(`${this.apiUrl}/${usuario.id}`, usuario);
-}
+  actualizarUsuario(usuario: Usuario) {
+    return this.http.put<Usuario>(`${this.apiUrl}/${usuario.id}`, usuario);
+  }
 
+  borradoUsuario(id: number) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 
   login(nombre: string, password: string) {
     // responseType: 'text' porque el backend devuelve el token como String

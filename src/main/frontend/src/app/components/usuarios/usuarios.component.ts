@@ -22,7 +22,7 @@ export class UsuariosComponent {
   constructor(private usuariosService: AuthService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
     this.usuariosService.getUsuarios().subscribe(data => {
       this.usuarios = data
@@ -30,7 +30,7 @@ export class UsuariosComponent {
 
   }
 
-  cambiarRol(usuario: Usuario): void {
+  cambiarRol(usuario: Usuario) {
     this.usuariosService.actualizarUsuario(usuario).subscribe({
       next: (res) => {
         console.log('Rol actualizado con éxito:', res);
@@ -40,6 +40,20 @@ export class UsuariosComponent {
       }
     });
   }
+
+  eliminarUsuario(id: number) {
+    if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) { // una alert de confirmacion
+      this.usuariosService.borradoUsuario(id).subscribe({
+        next: () => {
+          this.usuarios = this.usuarios.filter(u => u.id !== id);
+        },
+        error: (err) => {
+          console.error('Error al eliminar usuario', err);
+        }
+      });
+    }
+  }
+
 
 }
 

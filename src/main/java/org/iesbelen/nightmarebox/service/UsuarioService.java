@@ -65,19 +65,23 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-
-    public Usuario replace(Usuario usuario, Long id) {
-        return usuarioRepository.findById(id)
-                .map(u -> {
-                    if (id.equals(usuario.getId())) {
-                        // Hashear la nueva contraseña
-                        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-                        return usuarioRepository.save(usuario);
-                    } else {
-                        return null;
-                    }
-                })
+    public Usuario replace(Usuario usuarioActualizado, Long id) {
+        Usuario usuarioExistente = usuarioRepository.findById(id)
                 .orElseThrow(() -> new UsuarioNotFoundException(id));
+
+        if (!id.equals(usuarioActualizado.getId())) {
+            throw new IllegalArgumentException("El ID del path no coincide con el ID del cuerpo");
+        }
+
+        // Actualizamos solo los campos necesarios
+        usuarioExistente.setNombre(usuarioActualizado.getNombre());
+
+        usuarioExistente.setPassword(usuarioActualizado.getPassword());
+
+        usuarioExistente.setRolUsuario(usuarioActualizado.getRolUsuario());
+        usuarioExistente.setPeliculasFavs(usuarioActualizado.getPeliculasFavs());
+
+        return usuarioRepository.save(usuarioExistente);
     }
 
     public void delete(Long id) {
