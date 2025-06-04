@@ -6,9 +6,9 @@
             {{ peliculasFavoritas.length }} películas en tu colección <i class="bi bi-collection-fill ms-1"></i>
         </div>
 
-        <div class="row" *ngFor="let pelicula of peliculasFavoritas">
+        <div class="row">
             <!--1para moviles, 3 para grandes...-->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mt-4">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mt-4" *ngFor="let pelicula of peliculasFavoritas">
                 <div class="movie-card-container">
                     <img [src]="pelicula.poster" class="img-fluid rounded shadow" [alt]="pelicula.titulo">
 
