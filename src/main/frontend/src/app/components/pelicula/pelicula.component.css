@@ -1,0 +1,30 @@
+.container {
+    /* centrar el contenido de la pagina*/
+    max-width: 2000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #1a0000 0%, #2d0000 50%, #1a0000 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 8px #ff0000;
+    margin-bottom: 20px;
+    letter-spacing: 5px;
+}
+
+.header p {
+    font-size: 1.6rem;
+    color: #cccccc;
+    font-style: italic;
+}

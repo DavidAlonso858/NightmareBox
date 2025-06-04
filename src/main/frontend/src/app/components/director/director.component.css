@@ -1,20 +1,28 @@
 body {
+    overflow-y: hidden;
+    /* Poder scrollear para abajo*/
+}
+
+.fondo {
+    /* hace que se comporte como un bloque (ocupe todo el ancho disponible)*/
+    height: 100%;
+    width: 100%;
     background: linear-gradient(135deg, #1a0000 0%, #2d0000 50%, #1a0000 100%);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto ;
+    padding: 40px ;
     color: #ffffff;
     min-height: 100vh;
     overflow-x: hidden;
 }
 
-.container {
-    /* centrar el contenido de la pagina*/
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 40px 20px;
-}
-
 .header {
     text-align: center;
-    margin-bottom: 55px;
+    margin-bottom: 50px;
 }
 
 .header h1 {
