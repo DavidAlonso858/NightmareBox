@@ -1,19 +1,22 @@
-<div class="container">
-    <div class="header">
-        <h1>Filmoteca de Terror</h1>
-        <p>Explora nuestra colección de películas de horror por subgénero, director, año, país o valoración</p>
-    </div>
-
-    <div class="search-bar">
-        <input type="text" class="search-input" placeholder="Buscar película por nombre... 🔍" [(ngModel)]="searchTerm"
-            (input)="onSearchChange()">
-    </div>
-
-    <div class="row">
-        <div class="col-12 col-md-4 col-lg-3">
-            <img *ngFor="let pelicula of peliculas" [src]="pelicula.poster" [alt]="pelicula.titulo">
+<div class="fondo">
+    <div class="container">
+        <div class="header">
+            <h1>Catálogo de Pesadillas</h1>
+            <p>Explora nuestra colección terror cinematográfico de forma ordenada e intuitiva</p>
         </div>
+
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Buscar película por nombre... 🔍"
+                [(ngModel)]="searchTerm" (input)="onSearchChange()">
+        </div>
+
+        <div class="row m-5 p-5">
+            <div class="col-12 col-md-3 col-lg-4" *ngFor="let pelicula of peliculas">
+                <!--img-fluid clase de boostrap que se ajusta auto-->
+                <img class="img-fluid rounded shadow mb-4" [src]="pelicula.poster" [alt]="pelicula.titulo">
+            </div>
+        </div>
+
+
     </div>
-
-
 </div>

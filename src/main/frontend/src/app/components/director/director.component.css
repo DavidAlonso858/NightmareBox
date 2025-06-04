@@ -1,20 +1,27 @@
-body {
-    overflow-y: hidden;
-    /* Poder scrollear para abajo*/
-}
-
 .fondo {
-    /* hace que se comporte como un bloque (ocupe todo el ancho disponible)*/
     height: 100%;
     width: 100%;
-    background: linear-gradient(135deg, #1a0000 0%, #2d0000 50%, #1a0000 100%);
+
+    background:
+        radial-gradient(ellipse 100% 120% at center,
+            #000000 0%,
+            /* negro puro centro */
+            #0a0000 15%,
+            #180000 30%,
+            #2d0000 50%,
+            #3d0000 70%,
+            #2d0000 85%,
+            #1a0000 95%,
+            #000000 100%);
+    background-attachment: fixed;
+
 }
 
 .container {
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto ;
-    padding: 40px ;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 40px;
     color: #ffffff;
     min-height: 100vh;
     overflow-x: hidden;
