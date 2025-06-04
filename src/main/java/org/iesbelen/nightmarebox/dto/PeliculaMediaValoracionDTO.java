@@ -5,7 +5,6 @@ import lombok.Data;
 import org.iesbelen.nightmarebox.domain.Director;
 import org.iesbelen.nightmarebox.domain.SubGenero;
 
-import javax.security.auth.Subject;
 import java.time.Year;
 import java.util.Set;
 

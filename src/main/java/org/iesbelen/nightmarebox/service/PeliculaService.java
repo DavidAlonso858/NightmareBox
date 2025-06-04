@@ -50,6 +50,26 @@ public class PeliculaService {
         return dto;
     }
 
+    public PeliculaMediaValoracionDTO convertirAPeliculaDTO(Pelicula pelicula) {
+
+        PeliculaMediaValoracionDTO dto = new PeliculaMediaValoracionDTO();
+
+        dto.setId(pelicula.getId());
+        dto.setTitulo(pelicula.getTitulo());
+        dto.setYear(pelicula.getYear());
+        dto.setDuracion(pelicula.getDuracion());
+        dto.setSinopsis(pelicula.getSinopsis());
+        dto.setPremio(pelicula.getPremio());
+        dto.setPoster(pelicula.getPoster());
+        dto.setPaises(pelicula.getPaises());
+        dto.setDirector(pelicula.getDirector());
+        dto.setSubGenero(pelicula.getSubGenero());
+
+        Double media = valoracionRepository.obtenerMediaValoracionPorPelicula(pelicula.getId());
+        dto.setMediaValoracion(media);
+        return dto;
+    }
+
     public Pelicula findByTitulo(String titulo) {
         return peliculaRepository.findByTitulo(titulo).orElseThrow(() -> new PeliculaNotFoundException(titulo));
     }
@@ -84,7 +104,6 @@ public class PeliculaService {
             return peliculaRepository.save(p);
         }).orElseThrow(() -> new PeliculaNotFoundException(id));
     }
-
 
     public void delete(Long id) {
         peliculaRepository.deleteById(id);

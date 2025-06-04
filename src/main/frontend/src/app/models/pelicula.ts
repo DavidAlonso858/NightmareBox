@@ -11,8 +11,8 @@ export interface Pelicula {
   poster?: string;
   paises: string[];
   director: Director;
-  subGenero?: SubGenero;
-  notaMedia?: number; // si el DTO incluye esto
+  subGenero: SubGenero;
+  mediaValoracion: number; // si el DTO incluye esto
 }
 
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Usuario } from '../models/usuario';
+import { Pelicula } from '../models/pelicula';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,14 @@ export class AuthService {
     return this.http.put<Usuario>(`${this.apiUrl}/${usuario.id}`, usuario);
   }
 
-  
-getNombre(nombre: string | null) {
+
+  getNombre(nombre: string | null) {
     return this.http.get<Usuario>(`${this.apiUrl}/nombre/${nombre}`);
-}
+  }
+
+  getPeliculasFavoritas(nombre: string | null) {
+    return this.http.get<Pelicula[]>(`${this.apiUrl}/favoritas/${nombre}`);
+  }
 
   borradoUsuario(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);

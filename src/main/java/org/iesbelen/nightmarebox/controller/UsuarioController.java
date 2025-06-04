@@ -4,7 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.iesbelen.nightmarebox.domain.Rol;
 import org.iesbelen.nightmarebox.domain.Usuario;
+import org.iesbelen.nightmarebox.dto.PeliculaMediaValoracionDTO;
 import org.iesbelen.nightmarebox.dto.UsuarioSignUpDTO;
+import org.iesbelen.nightmarebox.service.PeliculaService;
 import org.iesbelen.nightmarebox.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private PeliculaService peliculaService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -41,21 +45,34 @@ public class UsuarioController {
         return usuarioService.findAll();
     }
 
-@GetMapping("/id/{id}")     // Changed path
-public Usuario one(@PathVariable Long id) {
-    log.info("USUARIO CON ID {}", id);
-    return usuarioService.findById(id);
-}
-
-@GetMapping("/nombre/{nombre}")  // Changed path
-public ResponseEntity<Usuario> getByNombre(@PathVariable String nombre) {
-    Usuario usuario = usuarioService.findByNombre(nombre);
-    if (usuario != null) {
-        return ResponseEntity.ok(usuario);
-    } else {
-        return ResponseEntity.notFound().build();
+    @GetMapping("/id/{id}") // Changed path
+    public Usuario one(@PathVariable Long id) {
+        log.info("USUARIO CON ID {}", id);
+        return usuarioService.findById(id);
     }
-}
+
+    @GetMapping("/nombre/{nombre}") // Changed path
+    public ResponseEntity<Usuario> getByNombre(@PathVariable String nombre) {
+        Usuario usuario = usuarioService.findByNombre(nombre);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/favoritas/{nombre}")
+    public ResponseEntity<List<PeliculaMediaValoracionDTO>> obtenerFavoritasConMedia(@PathVariable String nombre) {
+        Usuario usuario = usuarioService.findByNombre(nombre);
+
+        List<PeliculaMediaValoracionDTO> favoritasDTO = usuario.getPeliculasFavs()
+                .stream()
+                .map(pelicula -> peliculaService.convertirAPeliculaDTO(pelicula))
+                .toList();
+
+        return ResponseEntity.ok(favoritasDTO);
+    }
+
     // CREACION
     @PostMapping("/signUp")
     public Usuario newUsuario(@RequestBody @Valid UsuarioSignUpDTO usuarioDTO) {

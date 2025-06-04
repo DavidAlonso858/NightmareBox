@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Usuario } from '../../models/usuario';
 import { AuthService } from '../../service/auth.service';
+import { Pelicula } from '../../models/pelicula';
 
 @Component({
   selector: 'app-perfil',
@@ -16,6 +17,7 @@ import { AuthService } from '../../service/auth.service';
 export class PerfilComponent {
   nombreUsuario: string | null = null;
   usuario: Usuario | null = null;
+  peliculasFavoritas: Pelicula[] = [];
 
 
   // PARA PILLAR DATOS DE LA URL
@@ -33,11 +35,11 @@ export class PerfilComponent {
       console.log(this.usuario);
     })
 
-  }
-
-  listarPeliculasFavoritas() {
-    return this.usuario?.peliculasFavs || [];
-
+    this.usuarioService.getPeliculasFavoritas(this.nombreUsuario).subscribe(pelis => {
+      this.peliculasFavoritas = pelis;
+      console.log(this.peliculasFavoritas);
+      
+    });
   }
 
 }
