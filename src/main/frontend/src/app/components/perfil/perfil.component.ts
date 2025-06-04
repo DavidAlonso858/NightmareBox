@@ -37,6 +37,7 @@ export class PerfilComponent {
 
   listarPeliculasFavoritas() {
     return this.usuario?.peliculasFavs || [];
+
   }
 
 }

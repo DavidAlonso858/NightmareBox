@@ -1,13 +1,28 @@
 <div class="crt-presentacion">
     <div class="crt-table-container">
         <h3 class="genre-title text-center">Películas Favoritas ⭐</h3>
+
+        <div class="favorites-counter text-center mt-3 mb-1">
+            {{ listarPeliculasFavoritas().length }} películas en tu colección <i class="bi bi-collection-fill ms-1"></i>
+        </div>
+
         <div class="row" *ngFor="let pelicula of listarPeliculasFavoritas()">
             <!--1para moviles, 3 para grandes...-->
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 mt-4">
-                <img [src]="pelicula.poster" class="img-fluid rounded shadow" [alt]="pelicula.poster">
-            </div>
+                <div class="movie-card-container">
+                    <img [src]="pelicula.poster" class="img-fluid rounded shadow" [alt]="pelicula.titulo">
 
-            <!-- ... puedes seguir añadiendo más películas -->
+                    <div class="movie-overlay">
+                        <div class="movie-title">{{ pelicula.titulo }}
+                        </div>
+                        <div class="movie-info">
+                            <span>{{pelicula.year}}</span>
+                            <span class="movie-rating">{{ pelicula.notaMedia}}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
     </div>

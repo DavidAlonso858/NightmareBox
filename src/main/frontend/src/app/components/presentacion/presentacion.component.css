@@ -113,7 +113,7 @@ body {
   letter-spacing: 5px;
 }
 
-/* EFECTO CRT LINEA VITAL ROJA */
+/* EFECTO CRT LINEA VITAL ROJA SIN AGREGAR HTML */
 .crt-cell::before {
   content: "";
   position: absolute;
