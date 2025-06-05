@@ -145,9 +145,38 @@
     border-radius: 20px;
     padding: 30px;
     border: 2px solid rgba(255, 68, 68, 0.3);
-    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.featured-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 0;
+    background: linear-gradient(to right,
+            transparent, #ff0000, transparent);
+    animation: scanline 6s linear infinite;
+}
+
+@keyframes scanline {
+    0% {
+        top: 0;
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0.6;
+    }
 }
 
 .featured-card:hover {

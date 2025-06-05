@@ -69,10 +69,14 @@ export class PeliculaComponent {
     this.aplicarFiltros();
   }
 
-  // Método unificado para aplicar todos los filtros
-  aplicarFiltros(): void {
-    this.peliculasFiltradas = this.generalesFiltro();
+  busquedaPelicula(): void {
+    this.aplicarFiltros();
+  }
+
+  // Método unificado para aplicar todos los filtros y saber cuantas se filtran
+  aplicarFiltros() {
     console.log('peliculas filtradas', this.peliculasFiltradas.length);
+    return this.peliculasFiltradas = this.generalesFiltro();
   }
 
   generalesFiltro(): Pelicula[] {
@@ -115,11 +119,6 @@ export class PeliculaComponent {
         coincideDuracion
       );
     });
-  }
-
-  // BUSQUEDA
-  busquedaPelicula(): void {
-    this.aplicarFiltros();
   }
 
   limpiarFiltros(): void {
