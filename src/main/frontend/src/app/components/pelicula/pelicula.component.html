@@ -1,22 +1,63 @@
 <div class="fondo">
     <div class="container">
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+
         <div class="header">
             <h1>Catálogo de Pesadillas</h1>
-            <p>Explora nuestra colección terror cinematográfico de forma ordenada e intuitiva</p>
+            <p>Explora nuestra colección de terror cinematográfico para encontrar tu próxima pesadilla.</p>
         </div>
 
         <div class="search-bar">
-            <input type="text" class="search-input" placeholder="Buscar película por nombre... 🔍"
-                [(ngModel)]="searchTerm" (input)="onSearchChange()">
+            <input type="text" class="search-input text-center" placeholder="Buscar película por nombre... 🔍"
+                [(ngModel)]="searchTerm" (input)="busquedaPelicula()">
+        </div>
+
+
+        <div class="filters-container">
+            <div class="filtro-fila row">
+                <div class="filtroSubgenero">
+                    <select [(ngModel)]="subgeneroSeleccionado" name="sub" id="sub">
+                        <option [ngValue]="null">-- Selecciona un Subgénero --</option>
+                        <option *ngFor="let sub of subgeneros" [value]="sub.id">{{sub.nombre}}</option>
+                    </select>
+                </div>
+
+                <div class="filtroDirector">
+                    <select [(ngModel)]="directorSeleccionado" name="dir" id="dir">
+                        <option [ngValue]="null">-- Selecciona un Director --</option>
+                        <option *ngFor="let dir of directores" [value]="dir.id">{{dir.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filtroAnio">
+                <label for="anioInicio">Desde:</label>
+                <input type="number" id="anioInicio" name="anioInicio" [(ngModel)]="anioInicio" placeholder="Ej: 1990"
+                    min="1900" max="2099" />
+
+                <label for="anioFin">Hasta:</label>
+                <input type="number" id="anioFin" name="anioFin" [(ngModel)]="anioFin" placeholder="Ej: 2025" min="1900"
+                    max="2099" />
+            </div>
+
+            <div class="filtroPremio">
+                <label>
+                    <input type="checkbox" [(ngModel)]="conPremio" />
+                    Solo con premio
+                </label>
+            </div>
         </div>
 
         <div class="row m-5 p-5">
-            <div class="col-12 col-md-3 col-lg-4" *ngFor="let pelicula of peliculas">
+            <div class="col-12 col-md-3 col-lg-4" *ngFor="let pelicula of generalesFiltro()">
                 <!--img-fluid clase de boostrap que se ajusta auto-->
                 <img class="img-fluid rounded shadow mb-4" [src]="pelicula.poster" [alt]="pelicula.titulo">
             </div>
         </div>
 
-
     </div>
+
 </div>

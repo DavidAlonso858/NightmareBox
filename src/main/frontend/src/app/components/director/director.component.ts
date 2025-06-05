@@ -73,7 +73,7 @@ export class DirectorComponent {
   }
 
   // BUSQUEDA
-  onSearchChange(): void {
+  busquedaPelicula(): void {
     this.filteredDirectores = this.directores.filter(director =>
       director.nombre.toLowerCase().includes(this.searchTerm.toLowerCase())
     );

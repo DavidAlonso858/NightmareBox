@@ -1,8 +1,57 @@
 .fondo {
     background: radial-gradient(ellipse at center, #330000 0%, #1a0000 35%, #000000 70%, #0a0a0a 100%);
     background-attachment: fixed;
-    height: 100%;
+    min-height: 100vh;
     width: 100%;
+}
+
+/* Efectos de sangre goteando */
+.blood-drip {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #ff0000, transparent);
+    animation: drip 4s infinite;
+}
+
+.blood-drip:nth-child(1) {
+    left: 20%;
+    animation-delay: 0s;
+    height: 50px;
+}
+
+.blood-drip:nth-child(2) {
+    left: 40%;
+    animation-delay: 1s;
+    height: 30px;
+}
+
+.blood-drip:nth-child(3) {
+    left: 60%;
+    animation-delay: 2s;
+    height: 40px;
+}
+
+.blood-drip:nth-child(4) {
+    left: 80%;
+    animation-delay: 0.5s;
+    height: 35px;
+}
+
+@keyframes drip {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(100vh);
+    }
 }
 
 .container {
@@ -61,4 +110,236 @@
 
 .search-input::placeholder {
     color: #999;
+}
+
+
+
+.filters-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+    max-width: 85%;
+    margin: 0 auto;
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.8), rgba(30, 0, 0, 0.6));
+    border: 2px solid rgba(255, 68, 68, 0.3);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.filters-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ff0000, #660000, #ff0000);
+    border-radius: 15px;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+/* Contenedor para los filtros en fila */
+.filtros-fila {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.filtroSubgenero,
+.filtroDirector {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.filtroSubgenero::before,
+.filtroDirector::before {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.filtroSubgenero::before {
+    content: '👻';
+    margin-left: 10px;
+}
+
+.filtroDirector::before {
+    content: '🎬';
+    margin-left: 10px;
+}
+
+.filtroSubgenero select,
+.filtroDirector select {
+    width: 100%;
+    /* Ocupan todo el ancho de su contenedor */
+    padding: 15px 15px 15px 45px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #440000;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+    appearance: none;
+    cursor: pointer;
+}
+
+.filtroSubgenero select:focus,
+.filtroDirector select:focus {
+    border-color: #ff4444;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 68, 68, 0.4);
+}
+
+/* Estilos para las flechas de selección */
+.filtroSubgenero::after,
+.filtroDirector::after {
+    content: '▼';
+
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ff4444;
+    pointer-events: none;
+    font-size: 12px;
+}
+
+/* Estilos para filtroAnio */
+.filtroAnio label {
+    color: #ff6666;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    gap: 5px;
+}
+
+.filtroAnio label::before {
+    content: '📅';
+    font-size: 14px;
+}
+
+.filtroAnio input[type="number"] {
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #440000;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: 100%;
+}
+
+.filtroAnio input[type="number"]:focus {
+    border-color: #ff4444;
+    box-shadow:
+        inset 0 2px 5px rgba(0, 0, 0, 0.3),
+        0 0 15px rgba(255, 68, 68, 0.4);
+}
+
+.filtroAnio input[type="number"]::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Estilos para filtroPremio */
+.filtroPremio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.filtroPremio label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #440000;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    color: #ffffff;
+    font-weight: bold;
+    position: relative;
+}
+
+.filtroPremio label:hover {
+    border-color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+}
+
+.filtroPremio label::before {
+    content: '🏆';
+    font-size: 20px;
+}
+
+.filtroPremio input[type="checkbox"] {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #660000;
+    border-radius: 4px;
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filtroPremio input[type="checkbox"]:checked {
+    background: #ff4444;
+    border-color: #ff4444;
+}
+
+.filtroPremio input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+select option {
+    background: #000;
+    color: #fff;
+    padding: 8px;
+}
+
+select option:hover {
+    background: #ff4444;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .filters-container {
+        max-width: 100%;
+        /* Ocupa todo el ancho en móviles */
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .filtroAnio {
+        align-items: stretch;
+    }
 }
