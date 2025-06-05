@@ -51,7 +51,7 @@ export class PeliculaComponent {
     })
 
     this.directorService.getDirectores().subscribe(data => {
-      this.directores = data;
+      this.directores = data.sort((a, b) => a.nombre.localeCompare(b.nombre));
     })
 
   }
@@ -62,7 +62,7 @@ export class PeliculaComponent {
         ? peli.titulo.toLowerCase().includes(this.searchTerm.toLowerCase())
         : true;
 
-      const coincideSubgenero = this.subgeneroSeleccionado 
+      const coincideSubgenero = this.subgeneroSeleccionado
         ? peli.subGenero?.id == this.subgeneroSeleccionado
         : true;
 
