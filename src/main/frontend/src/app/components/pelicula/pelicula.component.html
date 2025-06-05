@@ -46,24 +46,38 @@
             <div class="filtro-duracion d-flex justify-content-center">
                 <h5>Duración:</h5>
                 <div class="duracion-barra">
-                    <input type="range" min="0" max="240" value="120" step="5" class="slider" id="duracionSlider">
+
+                    <input type="range" min="0" max="200" [(ngModel)]="duracionMaxima" step="5" class="slider"
+                        id="duracionSlider" (input)="onDuracionChange()">
                     <div class="duracion-marcas">
                         <span>0</span>
-                        <span>60 </span>
-                        <span>90 min </span>
-                        <span>120 </span>
-                        <span>+120</span>
+                        <span>45</span>
+                        <span>95 min</span>
+                        <span>145</span>
+                        <span>+195</span>
                     </div>
+
+                    <div class="duracion-actual text-warning">
+                        <small>{{ obtenerTextoDuracion() }}</small>
+                    </div>
+
                 </div>
             </div>
-
 
             <div class="filtroPremio">
                 <label>
                     <input type="checkbox" [(ngModel)]="conPremio" />
                     Solo con premio
                 </label>
+
             </div>
+
+            <div class="botonFiltro">
+                <button (click)="limpiarFiltros()" class="btn-limpiar-filtros">
+                    Limpiar filtros
+                </button>
+            </div>
+            
         </div>
 
         <div class="row m-5 p-5">

@@ -25,12 +25,12 @@ export class PeliculaComponent {
   subgeneros: SubGenero[] = []
   directores: Director[] = []
 
-
   subgeneroSeleccionado: number | null = null;
   directorSeleccionado: number | null = null;
   anioInicio: string = '';
   anioFin: string = '';
   conPremio: boolean = false;
+  duracionMaxima: number = 200; // de base esta al maximo
 
   searchTerm: string = '';
 
@@ -53,7 +53,26 @@ export class PeliculaComponent {
     this.directorService.getDirectores().subscribe(data => {
       this.directores = data.sort((a, b) => a.nombre.localeCompare(b.nombre));
     })
+  }
 
+  obtenerTextoDuracion(): string {
+    if (this.duracionMaxima >= 200) {
+      return '+200 min';
+    } else if (this.duracionMaxima <= 0) {
+      return '0 minutos';
+    } else {
+      return `Hasta ${this.duracionMaxima} min`;
+    }
+  }
+
+  onDuracionChange(): void {
+    this.aplicarFiltros();
+  }
+
+  // Método unificado para aplicar todos los filtros
+  aplicarFiltros(): void {
+    this.peliculasFiltradas = this.generalesFiltro();
+    console.log('peliculas filtradas', this.peliculasFiltradas.length);
   }
 
   generalesFiltro(): Pelicula[] {
@@ -82,22 +101,36 @@ export class PeliculaComponent {
         ? peli.premio === true
         : true;
 
+      const coincideDuracion = this.duracionMaxima >= 200
+        ? true
+        : peli.duracion <= this.duracionMaxima;
+
       return (
         coincideTitulo &&
         coincideSubgenero &&
         coincideDirector &&
         coincideAnioInicio &&
         coincideAnioFin &&
-        coincidePremio
+        coincidePremio &&
+        coincideDuracion
       );
     });
   }
 
-
   // BUSQUEDA
   busquedaPelicula(): void {
-    this.peliculasFiltradas = this.peliculas.filter(peli =>
-      peli.titulo.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+    this.aplicarFiltros();
   }
+
+  limpiarFiltros(): void {
+    this.searchTerm = '';
+    this.subgeneroSeleccionado = null;
+    this.directorSeleccionado = null;
+    this.anioInicio = '';
+    this.anioFin = '';
+    this.conPremio = false;
+    this.duracionMaxima = 200;
+    this.aplicarFiltros();
+  }
+
 }

@@ -95,7 +95,7 @@
     border: 2px solid rgba(255, 68, 68, 0.3);
     border-radius: 25px;
     padding: 15px 25px;
-    font-size: 1.3rem;
+    font-size: 20px;
     color: white;
     width: 100%;
     max-width: 500px;
@@ -269,14 +269,15 @@
     font-style: italic;
 }
 
-/* Estilos para filtroPremio */
+/* Estilos Premio */
+
+
 .filtroPremio {
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
-
 
 .filtroPremio label {
     display: flex;
@@ -332,10 +333,43 @@
     font-weight: bold;
 }
 
-/* Estilo para el filtro de duración */
+.botonFiltro {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.btn-limpiar-filtros {
+
+    width: 18%;
+    padding: 12px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #660000;
+    border-radius: 10px;
+    color: #d9ff0091;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-limpiar-filtros:hover {
+    border-color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+    color: white;
+    transform: scale(1.10);
+    box-shadow: 0 4px 15px rgba(255, 68, 68, 0.2);
+}
+
+.btn-limpiar-filtros::before {
+    content: '🧹';
+    font-size: 16px;
+}
+
+
+/* Estilo Duracion */
 .filtro-duracion {
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .filtro-duracion h5 {
@@ -350,7 +384,6 @@
     padding: 1px 0 35px;
 }
 
-/* Estilo del slider */
 .duracion-barra input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
@@ -361,7 +394,6 @@
     outline: none;
 }
 
-/* Estilo del pulgar del slider */
 .duracion-barra input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 20px;
