@@ -5,6 +5,7 @@ import org.iesbelen.nightmarebox.domain.Valoracion;
 import org.iesbelen.nightmarebox.service.ValoracionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class ValoracionController {
     private ValoracionService valoracionService;
 
     // OBTENCION
-    @GetMapping(value = {"/", ""})
+    @GetMapping(value = { "/", "" })
     public List<Valoracion> all() {
         log.info("TODAS LAS VALORACIONES");
         return valoracionService.findAll();
@@ -32,8 +33,23 @@ public class ValoracionController {
         return valoracionService.findById(id);
     }
 
+    @GetMapping("/usuario/{idUsuario}/pelicula/{idPelicula}")
+    public ResponseEntity<Valoracion> getValoracionPorUsuarioYPelicula(
+            @PathVariable Long idUsuario,
+            @PathVariable Long idPelicula) {
+
+        log.info("BUSCANDO VALORACION de usuario {} para pelicula {}", idUsuario, idPelicula);
+
+        Valoracion valoracion = valoracionService.findByUsuarioAndPelicula(idUsuario, idPelicula);
+        if (valoracion != null) {
+            return ResponseEntity.ok(valoracion);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     // CREACION
-    @PostMapping(value = {"", "/"})
+    @PostMapping(value = { "", "/" })
     public Valoracion newValoracion(@RequestBody Valoracion valoracion) {
         log.info("VALORACION CREADA: {}", valoracion);
 

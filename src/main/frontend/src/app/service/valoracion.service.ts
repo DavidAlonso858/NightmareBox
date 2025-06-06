@@ -30,4 +30,9 @@ export class ValoracionService {
   editarValoracion(val: Valoracion) {
     return this.http.put(this.urlSpring, val);
   }
+
+  getValoracionDeUsuarioParaPelicula(idUsuario: number, idPelicula: number) {
+    return this.http.get<Valoracion>(`${this.urlSpring}/usuario/${idUsuario}/pelicula/${idPelicula}`);
+  }
+
 }
