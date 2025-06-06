@@ -36,7 +36,22 @@
                     </div>
                     <span class="rating-number">{{ pelicula.mediaValoracion }}</span>
                 </div>
+
+                <div class="valoracion-personal d-flex justify-content-end align-items-center mt-4"
+                    *ngIf="estaLogueado()">
+                    <label for="valoracion" class="valoracion-label me-2">Valora esta película:</label>
+
+                    <select [(ngModel)]="valoracionSeleccionada" id="valoracion"
+                        class="form-select valoracion-select me-2">
+                        <option *ngFor="let nota of notas" [value]="nota">{{ nota }}</option>
+                    </select>
+
+                    <button class="btn btn-valoracion" (click)="enviarValoracion()">Enviar</button>
+                </div>
+
+
             </div>
+
 
         </div>
         <div class="synopsis-section" *ngIf="pelicula.sinopsis">
