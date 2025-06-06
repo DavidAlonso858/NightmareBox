@@ -1,46 +1,48 @@
-<div class="movie-container" *ngIf="pelicula">
-    <div class="movie-hero">
-        <div class="poster-section">
-            <img [src]="pelicula.poster" [alt]="pelicula.titulo" class="poster">
-            <div class="award-badge" *ngIf="pelicula.premio" title="Película Premiada">🏆</div>
-        </div>
+<div class="fondo">
+    <div class="movie-container" *ngIf="pelicula">
+        <div class="movie-hero">
+            <div class="poster-section">
+                <img [src]="pelicula.poster" [alt]="pelicula.titulo" class="poster">
+                <div class="award-badge" *ngIf="pelicula.premio" title="Película Premiada">🏆</div>
+            </div>
 
-        <div class="movie-info">
-            <h1 class="movie-title">{{ pelicula.titulo }}</h1>
-            <p class="movie-year">{{ pelicula.year }}</p>
+            <div class="movie-info">
+                <h1 class="movie-title">{{ pelicula.titulo }}</h1>
+                <p class="movie-year">{{ pelicula.year }}</p>
 
-            <div class="movie-details">
-                <div class="detail-item">
-                    <div class="detail-label">Duración</div>
-                    <div class="detail-value text-center">{{ pelicula.duracion }} minutos</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Subgénero</div>
-                    <div class="detail-value text-center">{{ pelicula.subGenero?.nombre }}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">País</div>
-                    <div class="detail-value">
-                        <div class="countries-tags">
-                            <span class="country-tag" *ngFor="let pais of pelicula.paises">{{ pais }}</span>
+                <div class="movie-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Duración</div>
+                        <div class="detail-value text-center">{{ pelicula.duracion }} minutos</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Subgénero</div>
+                        <div class="detail-value text-center">{{ pelicula.subGenero?.nombre }}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">País</div>
+                        <div class="detail-value">
+                            <div class="countries-tags">
+                                <span class="country-tag" *ngFor="let pais of pelicula.paises">{{ pais }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="rating-section" *ngIf="pelicula.mediaValoracion">
-                <div class="rating-stars">
-                    <ng-container *ngFor="let estrella of estrellasLlenas">&#9733;</ng-container>
-                    <ng-container *ngFor="let estrella of estrellasVacias">&#9734;</ng-container>
+                <div class="rating-section" *ngIf="pelicula.mediaValoracion">
+                    <div class="rating-stars">
+                        <ng-container *ngFor="let estrella of estrellasLlenas">&#9733;</ng-container> <!-- ★ -->
+                        <ng-container *ngFor="let estrella of estrellasVacias">&#9734;</ng-container> <!-- ☆ -->
+                    </div>
+                    <span class="rating-number">{{ pelicula.mediaValoracion }}</span>
                 </div>
-                <span class="rating-number">{{ pelicula.mediaValoracion }}</span>
             </div>
 
         </div>
+        <div class="synopsis-section" *ngIf="pelicula.sinopsis">
+            <h2 class="synopsis-title">🎭 Sinopsis</h2>
+            <p class="synopsis-text text-center">{{ pelicula.sinopsis }}</p>
+        </div>
     </div>
 
-    <div class="synopsis-section" *ngIf="pelicula.sinopsis">
-        <h2 class="synopsis-title">🎭 Sinopsis</h2>
-        <p class="synopsis-text text-center">{{ pelicula.sinopsis }}</p>
-    </div>
 </div>

@@ -31,7 +31,10 @@
 
                     <div class="featured-films d-flex justify-content-center"
                         *ngIf="listaPeliculasDirector(directores[18].id) as peliculasDirector">
-                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector">{{pelicula.titulo}}</span>
+
+                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
+                                class="text-decoration-none" [routerLink]="['/pelicula/',pelicula.id]"
+                                routerLinkActive="active">{{pelicula.titulo}}</a></span>
                     </div>
                 </div>
 
@@ -50,12 +53,14 @@
                     <div class="featured-description">
                         Conocido por explorar los límites entre la carne y la tecnología. Su
                         cine destaca por una estética perturbadora y profunda carga filosófica, convirtiéndolo en un
-                        referente del terror psicológico y visceral que incomoda tanto como fascina.
+                        referente de las transformaciones corporeas y visceral que incomoda tanto como fascina.
                     </div>
 
                     <div class="featured-films d-flex justify-content-center"
                         *ngIf="listaPeliculasDirector(directores[0].id) as peliculasDirector">
-                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector">{{pelicula.titulo}}</span>
+                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
+                                class="text-decoration-none" [routerLink]="['/pelicula/',pelicula.id]"
+                                routerLinkActive="active">{{pelicula.titulo}}</a></span>
                     </div>
                 </div>
                 <div class="featured-card">
@@ -79,7 +84,9 @@
 
                     <div class="featured-films d-flex justify-content-center"
                         *ngIf="listaPeliculasDirector(directores[2].id) as peliculasDirector">
-                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector">{{pelicula.titulo}}</span>
+                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
+                                class="text-decoration-none" [routerLink]="['/pelicula/',pelicula.id]"
+                                routerLinkActive="active">{{pelicula.titulo}}</a></span>
                     </div>
                 </div>
                 <div class="featured-card">
@@ -103,7 +110,9 @@
 
                     <div class="featured-films d-flex justify-content-center"
                         *ngIf="listaPeliculasDirector(directores[12].id) as peliculasDirector">
-                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector">{{pelicula.titulo}}</span>
+                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
+                                class="text-decoration-none" [routerLink]="['/pelicula/',pelicula.id]"
+                                routerLinkActive="active">{{pelicula.titulo}}</a></span>
 
                     </div>
                 </div>
@@ -128,7 +137,9 @@
 
                     <div class="featured-films d-flex justify-content-center"
                         *ngIf="listaPeliculasDirector(directores[22].id) as peliculasDirector">
-                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector">{{pelicula.titulo}}</span>
+                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
+                                class="text-decoration-none" [routerLink]="['/pelicula/',pelicula.id]"
+                                routerLinkActive="active">{{pelicula.titulo}}</a></span>
                     </div>
                 </div>
 
@@ -147,12 +158,15 @@
                     <div class="featured-description">
                         Su debut con Paranormal Activity redefinió el terror
                         minimalista. Con recursos limitados y atmósfera doméstica, logró generar un miedo cotidiano,
-                        sutil e inquietante, influenciando una nueva generación de cineastas del horror digital.
+                        sutil e inquietante, influenciando una nueva generación de cineastas del horror digital que
+                        estamos viviendo.
                     </div>
 
                     <div class="featured-films d-flex justify-content-center"
                         *ngIf="listaPeliculasDirector(directores[8].id) as peliculasDirector">
-                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector">{{pelicula.titulo}}</span>
+                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
+                                class="text-decoration-none" [routerLink]="['/pelicula/', pelicula.id]"
+                                routerLinkActive="active">{{pelicula.titulo}}</a></span>
                     </div>
                 </div>
             </div>
@@ -177,7 +191,9 @@
                 <div class="director-stats">
                     <div class="featured-films d-flex justify-content-center"
                         *ngIf="listaPeliculasDirector(director.id) as peliculasDirector">
-                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector">{{pelicula.titulo}}</span>
+                        <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
+                                class="text-decoration-none" [routerLink]="['/pelicula/', pelicula.id]"
+                                routerLinkActive="active">{{pelicula.titulo}}</a></span>
                     </div>
                 </div>
             </div>

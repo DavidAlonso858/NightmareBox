@@ -15,6 +15,7 @@ import { PeliculaService } from '../../service/pelicula.service';
 export class FichaPeliculaComponent {
   pelicula: Pelicula = {} as Pelicula;
   id: number = 0;
+
   estrellasLlenas: number[] = [];
   estrellasVacias: number[] = [];
 
@@ -24,6 +25,8 @@ export class FichaPeliculaComponent {
 
   ngOnInit() {
     const idParametro = this.route.snapshot.paramMap.get('id');
+    window.scrollTo(0, 0); // para que vaya al principio del componente aunque en otro este abajo
+
     this.id = parseInt(idParametro || '0');
     console.log(this.id);
 
@@ -35,10 +38,13 @@ export class FichaPeliculaComponent {
   }
 
   generarEstrellas() {
-    const rating = Math.round(this.pelicula.mediaValoracion); // redondeo si viene decimal
-    this.estrellasLlenas = Array(rating).fill(0);
-    this.estrellasVacias = Array(5 - rating).fill(0);
+    const rating = Math.round(this.pelicula.mediaValoracion);
+    const maxEstrellas = 10;
+
+    this.estrellasLlenas = Array(rating).fill(0); // las de la nota
+    this.estrellasVacias = Array(maxEstrellas - rating).fill(0); // las vacias que faltan para llegar a 10
   }
+
 }
 
 

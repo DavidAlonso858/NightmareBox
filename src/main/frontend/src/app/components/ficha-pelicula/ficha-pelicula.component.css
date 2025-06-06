@@ -1,5 +1,12 @@
+ .fondo {
+     background: linear-gradient(45deg, #0a0a0a 0%, #1a0a0a 50%, #2a0f0f 100%);
+     min-height: 100vh;
+     position: relative;
+     overflow-x: hidden;
+ }
+
  .movie-container {
-     max-width: 1400px;
+     max-width: 1300px;
      margin: 2rem auto;
      padding: 0 2rem;
  }
@@ -43,6 +50,7 @@
  }
 
  @keyframes pulse {
+
      0%,
      100% {
          transform: scale(1);
@@ -60,7 +68,7 @@
  }
 
  .movie-title {
-     font-size: 3.2rem;
+     font-size: 3.5rem;
      font-weight: bold;
      color: #ff6b6b;
      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
@@ -83,15 +91,15 @@
  .rating-stars {
      display: flex;
      gap: 0.2rem;
- }
-
- .star {
-     font-size: 2rem;
-     color: #ffd700;
-     filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));
+     color: gold;
+     font-size: 1.5rem;
  }
 
  .rating-number {
+     background-color: rgba(139, 0, 0, 0.2);
+     padding: 1px 20px;
+     border: 2px gold solid;
+     border-radius: 10px;
      font-size: 2.2rem;
      color: #ffd700;
      font-weight: bold;
@@ -141,7 +149,7 @@
  }
 
  .synopsis-text {
-     font-size: 1.2rem;
+     font-size: 1.3rem;
      line-height: 1.8;
      color: #e0e0e0;
      text-align: justify;

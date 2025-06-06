@@ -15,9 +15,12 @@
           <button class="carousel-btn left" (click)="scrollCarrusel('left', track4)">&#10094;</button>
 
           <div class="carousel-track" #track4>
-            <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
-              class="carousel-img" />
+            <a *ngFor="let peli of peliculaListaSubgenero" [routerLink]="['/pelicula', peli.id]"
+              class="text-decoration-none" routerLinkActive="active">
+              <img [src]="peli.poster" [alt]="peli.titulo" class="carousel-img" />
+            </a>
           </div>
+
 
           <button class="carousel-btn right" (click)="scrollCarrusel('right', track4)">&#10095;</button>
         </div>
@@ -33,8 +36,10 @@
           <button class="carousel-btn left" (click)="scrollCarrusel('left', track0)">&#10094;</button>
 
           <div class="carousel-track" #track0>
-            <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
-              class="carousel-img" />
+            <a *ngFor="let peli of peliculaListaSubgenero" [routerLink]="['/pelicula', peli.id]"
+              class="text-decoration-none" routerLinkActive="active">
+              <img [src]="peli.poster" [alt]="peli.titulo" class="carousel-img" />
+            </a>
           </div>
 
           <button class="carousel-btn right" (click)="scrollCarrusel('right', track0)">&#10095;</button>
@@ -47,8 +52,10 @@
           <button class="carousel-btn left" (click)="scrollCarrusel('left', track1)">&#10094;</button>
 
           <div class="carousel-track" #track1>
-            <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
-              class="carousel-img" />
+            <a *ngFor="let peli of peliculaListaSubgenero" [routerLink]="['/pelicula', peli.id]"
+              class="text-decoration-none" routerLinkActive="active">
+              <img [src]="peli.poster" [alt]="peli.titulo" class="carousel-img" />
+            </a>
           </div>
 
           <button class="carousel-btn right" (click)="scrollCarrusel('right', track1)">&#10095;</button>
@@ -64,8 +71,10 @@
           <button class="carousel-btn left" (click)="scrollCarrusel('left', track3)">&#10094;</button>
 
           <div class="carousel-track" #track3>
-            <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
-              class="carousel-img" />
+            <a *ngFor="let peli of peliculaListaSubgenero" [routerLink]="['/pelicula', peli.id]"
+              class="text-decoration-none" routerLinkActive="active">
+              <img [src]="peli.poster" [alt]="peli.titulo" class="carousel-img" />
+            </a>
           </div>
 
           <button class="carousel-btn right" (click)="scrollCarrusel('right', track3)">&#10095;</button>
@@ -81,8 +90,10 @@
           <button class="carousel-btn left" (click)="scrollCarrusel('left', track2)">&#10094;</button>
 
           <div class="carousel-track" #track2>
-            <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
-              class="carousel-img" />
+            <a *ngFor="let peli of peliculaListaSubgenero" [routerLink]="['/pelicula', peli.id]"
+              class="text-decoration-none" routerLinkActive="active">
+              <img [src]="peli.poster" [alt]="peli.titulo" class="carousel-img" />
+            </a>
           </div>
 
           <button class="carousel-btn right" (click)="scrollCarrusel('right', track2)">&#10095;</button>
@@ -94,8 +105,10 @@
           <button class="carousel-btn left" (click)="scrollCarrusel('left', track5)">&#10094;</button>
 
           <div class="carousel-track" #track5>
-            <img *ngFor="let peli of peliculaListaSubgenero" [src]="peli.poster" [alt]="peli.titulo"
-              class="carousel-img" />
+            <a *ngFor="let peli of peliculaListaSubgenero" [routerLink]="['/pelicula', peli.id]"
+              class="text-decoration-none" routerLinkActive="active">
+              <img [src]="peli.poster" [alt]="peli.titulo" class="carousel-img" />
+            </a>
           </div>
 
           <button class="carousel-btn right" (click)="scrollCarrusel('right', track5)">&#10095;</button>
