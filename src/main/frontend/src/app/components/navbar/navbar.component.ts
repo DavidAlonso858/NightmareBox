@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import { Pelicula } from '../../models/pelicula';
+import { PeliculaService } from '../../service/pelicula.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,8 +15,10 @@ import { AuthService } from '../../service/auth.service';
 export class NavbarComponent implements OnInit {
   usuario: any = null;
   nombreUsuario: string = '';
+  peliculasNumero: number = 0;
 
-  constructor(private authService: AuthService, private router: Router) { }
+
+  constructor(private authService: AuthService, private router: Router, private peliculaService: PeliculaService) { }
 
   ngOnInit(): void {
     this.authService.usuario$.subscribe(usuario => {
@@ -26,6 +30,20 @@ export class NavbarComponent implements OnInit {
     if (this.authService.estaLogueado() && !this.usuario) {
       this.authService.cargarUsuarioDesdeBackend();
     }
+
+    this.peliculaService.getPeliculas().subscribe(pelis => {
+      this.peliculasNumero = pelis.length + 1;
+    });
+  }
+
+  // para la ficha random sin que salga 0 ni el 26 que lo elimine
+  peliAleatoria(): number {
+    let aleatorio;
+    do {
+      aleatorio = Math.floor(Math.random() * this.peliculasNumero) + 1;
+    } while (aleatorio === 26);
+
+    return aleatorio;
   }
 
   estaLogueado(): boolean {

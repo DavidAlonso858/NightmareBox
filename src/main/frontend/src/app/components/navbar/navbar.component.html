@@ -7,10 +7,12 @@
         </div>
 
         <div class="nav-center">
-            <a [routerLink]="['/directores']" routerLinkActive="active" class="me-3"><i
-                    class="bi bi-camera-reels"></i> Directores</a>
-            <a [routerLink]="['/peliculas']" routerLinkActive="active" class="me-3"><i class="bi bi-film"></i> Películas</a>
-            <a [routerLink]="['/random']" routerLinkActive="active" class="me-3"><i class="bi bi-shuffle"></i> Random</a>
+            <a [routerLink]="['/directores']" routerLinkActive="active" class="me-3"><i class="bi bi-camera-reels"></i>
+                Directores</a>
+            <a [routerLink]="['/peliculas']" routerLinkActive="active" class="me-3"><i class="bi bi-film"></i>
+                Películas</a>
+            <a [routerLink]="['/pelicula', peliAleatoria()]" routerLinkActive="active" class="me-3"><i
+                    class="bi bi-shuffle"></i> Random</a>
         </div>
 
         <div class="nav-right">

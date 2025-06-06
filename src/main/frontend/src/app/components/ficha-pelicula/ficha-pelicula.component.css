@@ -1,0 +1,180 @@
+ .movie-container {
+     max-width: 1400px;
+     margin: 2rem auto;
+     padding: 0 2rem;
+ }
+
+ .movie-hero {
+     display: grid;
+     grid-template-columns: 400px 1fr;
+     gap: 3rem;
+     margin-bottom: 3rem;
+     background: rgba(0, 0, 0, 0.7);
+     padding: 2rem;
+     border-radius: 12px;
+     border: 2px solid #8b0000;
+     box-shadow: 0 0 30px rgba(139, 0, 0, 0.3);
+ }
+
+ .poster-section {
+     position: relative;
+ }
+
+ .poster {
+     width: 100%;
+     height: 600px;
+     object-fit: cover;
+     border-radius: 8px;
+     border: 4px solid #8b0000;
+     box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+ }
+
+ .award-badge {
+     position: absolute;
+     top: -10px;
+     right: -10px;
+     background: linear-gradient(45deg, #ffd700, #ffed4e);
+     color: #000;
+     padding: 0.5rem;
+     border-radius: 50%;
+     font-size: 1.5rem;
+     box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+     animation: pulse 2s infinite;
+ }
+
+ @keyframes pulse {
+     0%,
+     100% {
+         transform: scale(1);
+     }
+
+     50% {
+         transform: scale(1.1);
+     }
+ }
+
+ .movie-info {
+     display: flex;
+     flex-direction: column;
+     gap: 1.5rem;
+ }
+
+ .movie-title {
+     font-size: 3.2rem;
+     font-weight: bold;
+     color: #ff6b6b;
+     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+     margin-bottom: 0.5rem;
+ }
+
+ .movie-year {
+     font-size: 1.7rem;
+     color: #cccccc;
+     font-weight: 300;
+ }
+
+ .rating-section {
+     display: flex;
+     align-items: center;
+     gap: 1rem;
+     margin: 1rem 0;
+ }
+
+ .rating-stars {
+     display: flex;
+     gap: 0.2rem;
+ }
+
+ .star {
+     font-size: 2rem;
+     color: #ffd700;
+     filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));
+ }
+
+ .rating-number {
+     font-size: 2.2rem;
+     color: #ffd700;
+     font-weight: bold;
+ }
+
+ .movie-details {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+     gap: 1.5rem;
+     margin: 1.5rem 0;
+ }
+
+ .detail-item {
+     background: rgba(139, 0, 0, 0.2);
+     padding: 1rem;
+     border-radius: 8px;
+     border-left: 4px solid #8b0000;
+ }
+
+ .detail-label {
+     font-size: 1.2rem;
+     color: #ff6b6b;
+     font-weight: bold;
+     margin-bottom: 0.5rem;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+ }
+
+ .detail-value {
+     font-size: 1.1rem;
+     color: #ffffff;
+ }
+
+ .synopsis-section {
+     background: rgba(0, 0, 0, 0.8);
+     padding: 2rem;
+     border-radius: 12px;
+     border: 2px solid #8b0000;
+     margin-bottom: 2rem;
+ }
+
+ .synopsis-title {
+     font-size: 2.5rem;
+     color: #ff6b6b;
+     margin-bottom: 1rem;
+     text-align: center;
+ }
+
+ .synopsis-text {
+     font-size: 1.2rem;
+     line-height: 1.8;
+     color: #e0e0e0;
+     text-align: justify;
+ }
+
+ .countries-tags {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 0.5rem;
+     margin-top: 0.5rem;
+ }
+
+ .country-tag {
+     background: rgba(139, 0, 0, 0.3);
+     color: #ffffff;
+     padding: 0.3rem 0.8rem;
+     border-radius: 20px;
+     font-size: 1rem;
+     border: 1px solid rgba(139, 0, 0, 0.5);
+ }
+
+ @media (max-width: 768px) {
+     .movie-hero {
+         grid-template-columns: 1fr;
+         text-align: center;
+     }
+
+     .movie-title {
+         font-size: 2rem;
+     }
+
+     .movie-details {
+         grid-template-columns: 1fr;
+     }
+ }

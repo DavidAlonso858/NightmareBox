@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { FichaPeliculaComponent } from './components/ficha-pelicula/ficha-pelicula.component';
 
 export const routes: Routes = [
     {
@@ -29,6 +30,9 @@ export const routes: Routes = [
     },
     {
         path: 'usuarios', component: UsuariosComponent
+    },
+    {
+        path: 'pelicula/:id', component: FichaPeliculaComponent
     }
 
 ];

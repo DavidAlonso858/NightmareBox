@@ -4,7 +4,7 @@ import { SubGenero } from './subgenero';
 export interface Pelicula {
   id: number;
   titulo: string;
-  year: string; // si se formatea como "2022"
+  year: string;
   duracion: number;
   sinopsis?: string;
   premio?: boolean;

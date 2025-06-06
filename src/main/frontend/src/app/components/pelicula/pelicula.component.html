@@ -35,12 +35,12 @@
 
             <div class="filtroAnio">
                 <label for="anioInicio"> Desde:</label>
-                <input type="number" id="anioInicio" name="anioInicio" [(ngModel)]="anioInicio" placeholder="Ej: 1990"
-                    min="1900" max="2099" />
+                <input type="number" id="anioInicio" name="anioInicio" [(ngModel)]="anioInicio"
+                    (change)="validarRango('inicio')" placeholder="Ej: 1950" min="1950" max="2025" />
 
                 <label for="anioFin" class=" mt-2"> Hasta:</label>
-                <input type="number" id="anioFin" name="anioFin" [(ngModel)]="anioFin" placeholder="Ej: 2025" min="1900"
-                    max="2099" />
+                <input type="number" id="anioFin" name="anioFin" [(ngModel)]="anioFin" (change)="validarRango('fin')"
+                    placeholder="Ej: 2025" min="1950" max="2025" />
             </div>
 
             <div class="filtro-duracion d-flex justify-content-center">
@@ -77,7 +77,7 @@
                     Limpiar filtros
                 </button>
             </div>
-            
+
         </div>
 
         <div class="row m-5 p-5">

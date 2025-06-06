@@ -65,6 +65,33 @@ export class PeliculaComponent {
     }
   }
 
+  validarRango(tipo: 'inicio' | 'fin') {
+    const min = 1950;
+    const max = 2025;
+
+    if (tipo === 'inicio') {
+      let valor = parseInt(this.anioInicio, 10);
+      if (isNaN(valor)) {
+        this.anioInicio = '';
+        return;
+      }
+      if (valor < min) valor = min;
+      if (valor > max) valor = max;
+      this.anioInicio = valor.toString();
+    }
+
+    if (tipo === 'fin') {
+      let valor = parseInt(this.anioFin, 10);
+      if (isNaN(valor)) {
+        this.anioFin = '';
+        return;
+      }
+      if (valor < min) valor = min;
+      if (valor > max) valor = max;
+      this.anioFin = valor.toString();
+    }
+  }
+  
   onDuracionChange(): void {
     this.aplicarFiltros();
   }
