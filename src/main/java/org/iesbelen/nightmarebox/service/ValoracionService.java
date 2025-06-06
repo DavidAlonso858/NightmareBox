@@ -49,7 +49,11 @@ public class ValoracionService {
 
     public Valoracion replace(Valoracion valoracion, Long id) {
         return valoracionRepository.findById(id)
-                .map(v -> (id.equals(valoracion.getId()) ? valoracionRepository.save(valoracion) : null))
+                .map(v -> {
+                    v.setNotaValoracion(valoracion.getNotaValoracion());
+                    // Si quieres, puedes también actualizar más campos si es necesario.
+                    return valoracionRepository.save(v);
+                })
                 .orElseThrow(() -> new ValoracionNotFoundException(id));
     }
 

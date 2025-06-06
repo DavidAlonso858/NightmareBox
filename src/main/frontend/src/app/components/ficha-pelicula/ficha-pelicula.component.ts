@@ -26,6 +26,7 @@ export class FichaPeliculaComponent {
 
   notas: number[] = Array.from({ length: 10 }, (_, i) => i + 1); // [1,2,3...10]
   valoracionSeleccionada: number = 0;
+  valoracionExistente: Valoracion | null = null;
 
   constructor(private title: Title, private route: ActivatedRoute, private peliculaService: PeliculaService,
     private authService: AuthService, private valoracionService: ValoracionService) {
@@ -34,17 +35,32 @@ export class FichaPeliculaComponent {
 
   ngOnInit() {
     const idParametro = this.route.snapshot.paramMap.get('id');
-    window.scrollTo(0, 0); // para que vaya al principio del componente aunque en otro este abajo
-
     this.id = parseInt(idParametro || '0');
-    console.log(this.id);
+    window.scrollTo(0, 0);
 
     this.peliculaService.getPeliculaById(this.id).subscribe(peli => {
       this.pelicula = peli;
       this.generarEstrellas();
-      console.log(this.pelicula);
-    })
+
+      const usuario = this.authService.obtenerUsuario();
+      if (usuario) {
+        // Buscar si ya hay valoración del usuario para esta película
+        this.valoracionService
+          .getValoracionDeUsuarioParaPelicula(usuario.id, this.pelicula.id)
+          .subscribe({
+            next: (valoracion) => {
+              this.valoracionExistente = valoracion;
+              this.valoracionSeleccionada = valoracion.notaValoracion; // Rellenar el select
+            },
+            error: (err) => {
+              // Si no existe la valoración, no pasa nada
+              console.log("No hay valoración previa para esta película por el usuario", err);
+            }
+          });
+      }
+    });
   }
+
 
   generarEstrellas() {
     const rating = Math.round(this.pelicula.mediaValoracion);
@@ -60,31 +76,50 @@ export class FichaPeliculaComponent {
 
   enviarValoracion() {
     const usuarioLog = this.authService.obtenerUsuario();
+
+    if (!usuarioLog || !this.pelicula || this.valoracionSeleccionada === 0) {
+      alert("Faltan datos para enviar la valoración.");
+      return;
+    }
+
     const valoracion: Valoracion = {
       notaValoracion: this.valoracionSeleccionada,
       usuario: usuarioLog,
       pelicula: this.pelicula
     };
 
-    this.valoracionService.addValoracion(valoracion).subscribe({
+    // Solo añadir el id si es una edición
+    if (this.valoracionExistente) {
+      valoracion.id = this.valoracionExistente.id;
+    }
+
+    const accion = this.valoracionExistente
+      ? this.valoracionService.editarValoracion(valoracion)
+      : this.valoracionService.addValoracion(valoracion);
+
+    accion.subscribe({
       next: () => {
         Swal.fire({
-          title: '🕸️ Gracias por tu valoración! 🕸️',
+          title: this.valoracionExistente ? 'Valoración actualizada!' : 'Gracias por tu valoración!',
           background: '#000000',
           color: '#FF0000',
           position: 'top',
-        })
+        });
+
         this.peliculaService.getPeliculaById(this.pelicula.id).subscribe(peli => {
           this.pelicula = peli;
-          this.generarEstrellas(); // actualiza la media visual
+          this.generarEstrellas();
         });
+
+        this.valoracionExistente = valoracion; // marcar como existente para futuras ediciones
       },
       error: err => {
-        console.error("Error al enviar valoración:", err);
+        console.error("Error al enviar/editar valoración:", err);
         alert("No se pudo enviar la valoración.");
       }
     });
   }
+
 }
 
 
