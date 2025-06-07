@@ -49,7 +49,14 @@
                     <button class="btn btn-valoracion" (click)="enviarValoracion()">Enviar</button>
                 </div>
 
-
+                <button *ngIf="estaLogueado()" class="btn-favorito" [class.favorito-activo]="esFavorita"
+                    [disabled]="cargandoFavorito" (click)="manejoFavorito()"
+                    [title]="esFavorita ? 'Quitar de favoritos' : 'Agregar a favoritos'">
+                    <span *ngIf="!cargandoFavorito">
+                        {{ esFavorita ? '❤️' : '🤍' }}
+                    </span>
+                    <span *ngIf="cargandoFavorito" class="loading-spinner">⏳</span>
+                </button>
             </div>
 
 

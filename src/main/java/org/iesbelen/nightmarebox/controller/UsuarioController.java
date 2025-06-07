@@ -31,6 +31,7 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
     @Autowired
     private PeliculaService peliculaService;
 
@@ -45,7 +46,7 @@ public class UsuarioController {
         return usuarioService.findAll();
     }
 
-    @GetMapping("/id/{id}") // Changed path
+    @GetMapping("/id/{id}")
     public Usuario one(@PathVariable Long id) {
         log.info("USUARIO CON ID {}", id);
         return usuarioService.findById(id);
@@ -71,6 +72,17 @@ public class UsuarioController {
                 .toList();
 
         return ResponseEntity.ok(favoritasDTO);
+    }
+
+    @GetMapping("/usuario/perfil")
+    public ResponseEntity<Usuario> obtenerPerfil(Authentication authentication) {
+        try {
+            String username = authentication.getName();
+            Usuario usuario = usuarioService.findByNombre(username);
+            return ResponseEntity.ok(usuario);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     // CREACION
@@ -143,5 +155,19 @@ public class UsuarioController {
         log.info("BORRADO USUARIO CON ID {}", id);
 
         usuarioService.delete(id);
+    }
+
+    @DeleteMapping("/favoritas/{idPelicula}")
+    public ResponseEntity<?> quitarPeliculaFavorita(@PathVariable Long idPelicula, Authentication authentication) {
+        try {
+            String username = authentication.getName();
+            Usuario usuario = usuarioService.findByNombre(username);
+            Usuario actualizado = usuarioService.quitarPelicula(idPelicula, usuario.getId());
+
+            return ResponseEntity.ok(actualizado);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Fallo al quitar la peli fav", HttpStatus.UNAUTHORIZED);
+        }
     }
 }

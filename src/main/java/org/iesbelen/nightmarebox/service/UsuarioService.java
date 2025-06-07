@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.iesbelen.nightmarebox.domain.Pelicula;
 import org.iesbelen.nightmarebox.domain.Usuario;
-import org.iesbelen.nightmarebox.dto.PeliculaMediaValoracionDTO;
 import org.iesbelen.nightmarebox.exception.UsuarioNotFoundException;
-import org.iesbelen.nightmarebox.repository.PeliculaRepository;
 import org.iesbelen.nightmarebox.repository.UsuarioRepository;
 import org.iesbelen.nightmarebox.utilJWT.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +42,6 @@ public class UsuarioService {
         return usuarioRepository.findByNombre(nombre).orElseThrow(() -> new UsuarioNotFoundException(nombre));
     }
 
-    // PROBARLO PILLANDO LA ID DEL JWT
     public Usuario agregarPelicula(Long idPelicula, Long idUsuario) {
         Usuario user = this.findById(idUsuario);
         Pelicula peli = this.peliculaService.encontrarPorId(idPelicula);
@@ -53,6 +50,17 @@ public class UsuarioService {
         Hibernate.initialize(user.getPeliculasFavs());
 
         user.getPeliculasFavs().add(peli);
+        return usuarioRepository.save(user);
+    }
+
+    public Usuario quitarPelicula(Long idPelicula, Long idUsuario) {
+        Usuario user = this.findById(idUsuario);
+        Pelicula peli = this.peliculaService.encontrarPorId(idPelicula);
+
+        // inicializarlo para poder modificarlo
+        Hibernate.initialize(user.getPeliculasFavs());
+
+        user.getPeliculasFavs().remove(peli);
         return usuarioRepository.save(user);
     }
 

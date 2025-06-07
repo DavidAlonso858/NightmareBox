@@ -211,6 +211,63 @@
      transform: scale(1.15);
  }
 
+ /* Estilos para el botón de favoritos */
+ .btn-favorito {
+     background: transparent;
+     border: 2px solid #FF0000;
+     border-radius: 50%;
+     width: 50px;
+     height: 50px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     cursor: pointer;
+     font-size: 24px;
+     transition: all 0.3s ease;
+     box-shadow: 0 2px 8px rgba(255, 0, 0, 0.3);
+ }
+
+ .btn-favorito:hover {
+     background-color: rgba(255, 0, 0, 0.1);
+     transform: scale(1.1);
+     box-shadow: 0 4px 12px rgba(255, 0, 0, 0.5);
+ }
+
+ .btn-favorito:active {
+     transform: scale(0.95);
+ }
+
+ .btn-favorito:disabled {
+     opacity: 0.6;
+     cursor: not-allowed;
+     transform: none;
+ }
+
+ /* Estado activo (favorito) */
+ .favorito-activo {
+     background-color: rgba(255, 0, 0, 0.2);
+     border-color: #FF4444;
+ }
+
+ .favorito-activo:hover {
+     background-color: rgba(255, 0, 0, 0.3);
+ }
+
+ /* Animación de loading */
+ .loading-spinner {
+     animation: spin 1s linear infinite;
+ }
+
+ @keyframes spin {
+     0% {
+         transform: rotate(0deg);
+     }
+
+     100% {
+         transform: rotate(360deg);
+     }
+ }
+
  @media (max-width: 768px) {
      .movie-hero {
          grid-template-columns: 1fr;

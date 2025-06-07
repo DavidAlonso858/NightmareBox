@@ -92,9 +92,23 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
+
   // AGREGAR PELÍCULA A FAVORITOS
   agregarPeliculaFavorita(idPelicula: number) {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.obtenerToken()}`);
     return this.http.put(`${this.apiUrl}/favoritas/${idPelicula}`, {}, { headers });
   }
+
+  // QUITAR PELÍCULA DE FAVORITOS
+  quitarPeliculaFavorita(idPelicula: number) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.obtenerToken()}`);
+    return this.http.delete(`${this.apiUrl}/favoritas/${idPelicula}`, { headers });
+  }
+
+  // OBTENER INFORMACIÓN ACTUALIZADA DEL USUARIO (para mantener sincronización después de cambios en favoritos)
+  obtenerUsuarioActualizado() {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.obtenerToken()}`);
+    return this.http.get<Usuario>(`${this.apiUrl}/usuario/perfil`, { headers });
+  }
+
 }

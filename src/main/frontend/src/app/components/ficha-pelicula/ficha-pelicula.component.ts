@@ -9,6 +9,7 @@ import { ValoracionService } from '../../service/valoracion.service';
 import { Valoracion } from '../../models/valoracion';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { PeliculaComponent } from '../pelicula/pelicula.component';
 
 @Component({
   selector: 'app-ficha-pelicula',
@@ -28,6 +29,9 @@ export class FichaPeliculaComponent {
   valoracionSeleccionada: number = 0;
   valoracionExistente: Valoracion | null = null;
 
+  esFavorita: boolean = false;
+  cargandoFavorito: boolean = false;
+
   constructor(private title: Title, private route: ActivatedRoute, private peliculaService: PeliculaService,
     private authService: AuthService, private valoracionService: ValoracionService) {
     this.title.setTitle('NightmareBox-Ficha Pelicula');
@@ -44,6 +48,8 @@ export class FichaPeliculaComponent {
 
       const usuario = this.authService.obtenerUsuario();
       if (usuario) {
+        this.verificarSiEsFavorita();
+
         // Buscar si ya hay valoración del usuario para esta película
         this.valoracionService
           .getValoracionDeUsuarioParaPelicula(usuario.id, this.pelicula.id)
@@ -60,7 +66,6 @@ export class FichaPeliculaComponent {
       }
     });
   }
-
 
   generarEstrellas() {
     const rating = Math.round(this.pelicula.mediaValoracion);
@@ -120,6 +125,97 @@ export class FichaPeliculaComponent {
     });
   }
 
+  verificarSiEsFavorita() {
+    const usuario = this.authService.obtenerUsuario();
+    if (usuario && usuario.peliculasFavs && this.pelicula.id) {
+      this.esFavorita = usuario.peliculasFavs.some((peli: Pelicula) => peli.id === this.pelicula.id);
+    }
+  }
+
+  manejoFavorito() {
+    if (this.cargandoFavorito) return;
+
+    this.cargandoFavorito = true;
+
+    if (this.esFavorita) {
+      this.quitarDeFavoritos();
+    } else {
+      this.agregarAFavoritos();
+    }
+  }
+
+  agregarAFavoritos() {
+    this.authService.agregarPeliculaFavorita(this.pelicula.id).subscribe({
+      next: () => {
+        this.esFavorita = true;
+        this.cargandoFavorito = false;
+
+        // Recargar el usuario desde el backend para tener los datos actualizados
+        this.authService.cargarUsuarioDesdeBackend();
+
+        Swal.fire({
+          title: '¡Añadida a favoritos!',
+          text: `${this.pelicula.titulo} se ha agregado a tu lista de favoritos`,
+          icon: 'success',
+          background: '#000000',
+          color: '#FF0000',
+          position: 'top',
+          timer: 2000,
+          showConfirmButton: false
+        });
+      },
+      error: (err) => {
+        this.cargandoFavorito = false;
+        console.error('Error al agregar a favoritos:', err);
+
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo agregar la película a favoritos',
+          icon: 'error',
+          background: '#000000',
+          color: '#FF0000',
+          position: 'top'
+        });
+      }
+    });
+  }
+
+  quitarDeFavoritos() {
+    this.authService.quitarPeliculaFavorita(this.pelicula.id).subscribe({
+      next: () => {
+        this.esFavorita = false;
+        this.cargandoFavorito = false;
+
+        // Recargar el usuario desde el backend para tener los datos actualizados
+        this.authService.cargarUsuarioDesdeBackend();
+
+        Swal.fire({
+          title: '¡Quitada de favoritos!',
+          text: `${this.pelicula.titulo} se ha eliminado de tu lista de favoritos`,
+          icon: 'info',
+          background: '#000000',
+          color: '#FF0000',
+          position: 'top',
+          timer: 2000,
+          showConfirmButton: false
+        });
+      },
+      error: (err) => {
+        this.cargandoFavorito = false;
+        console.error('Error al quitar de favoritos:', err);
+
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo quitar la película de favoritos',
+          icon: 'error',
+          background: '#000000',
+          color: '#FF0000',
+          position: 'top'
+        });
+      }
+    });
+
+  }
 }
 
 
