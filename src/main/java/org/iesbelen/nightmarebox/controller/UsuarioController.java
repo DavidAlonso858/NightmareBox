@@ -157,6 +157,7 @@ public class UsuarioController {
         usuarioService.delete(id);
     }
 
+    // BORRADO DE PELICULAS FAVS
     @DeleteMapping("/favoritas/{idPelicula}")
     public ResponseEntity<?> quitarPeliculaFavorita(@PathVariable Long idPelicula, Authentication authentication) {
         try {

@@ -56,10 +56,9 @@ export class FichaPeliculaComponent {
           .subscribe({
             next: (valoracion) => {
               this.valoracionExistente = valoracion;
-              this.valoracionSeleccionada = valoracion.notaValoracion; // Rellenar el select
+              this.valoracionSeleccionada = valoracion.notaValoracion;
             },
             error: (err) => {
-              // Si no existe la valoración, no pasa nada
               console.log("No hay valoración previa para esta película por el usuario", err);
             }
           });
@@ -105,7 +104,7 @@ export class FichaPeliculaComponent {
     accion.subscribe({
       next: () => {
         Swal.fire({
-          title: this.valoracionExistente ? 'Valoración actualizada!' : 'Gracias por tu valoración!',
+          title: this.valoracionExistente ? '🕸️Valoración actualizada 🕸️' : '🕷️ Gracias por su valoración 🕷️',
           background: '#000000',
           color: '#FF0000',
           position: 'top',
