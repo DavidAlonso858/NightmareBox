@@ -45,6 +45,7 @@ public class PeliculaController {
     // CREACION
     @PostMapping(value = { "", "/" })
     public Pelicula newPelicula(@RequestBody Pelicula pelicula) {
+        pelicula.setId(null);
         log.info("NUEVA PELICULA: {}", pelicula);
         return this.peliculaService.save(pelicula);
     }

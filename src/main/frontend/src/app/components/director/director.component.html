@@ -1,6 +1,11 @@
 <div class="fondo">
     <div class="container">
         <div class="header">
+            <div class="d-flex justify-content-end align-items-end">
+                <a [routerLink]="['/crearDirector']" routerLinkActive="active" class="text-decoration-none"> <button
+                        *ngIf="estaLogueado() && usuario?.rolUsuario === 'ADMINISTRADOR'"
+                        class="mt-2 bg-primary text-white rounded">Crear</button></a>
+            </div>
             <h1>Maestros del Terror</h1>
             <p>Algunos de los directores que han definido el género del horror</p>
         </div>
@@ -30,7 +35,7 @@
                     </div>
 
                     <div class="featured-films d-flex justify-content-center"
-                        *ngIf="listaPeliculasDirector(directores[18].id) as peliculasDirector">
+                        *ngIf="directores[18]?.id !== undefined && listaPeliculasDirector(directores[18].id!) as peliculasDirector">
 
                         <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
                                 class="text-decoration-none" [routerLink]="['/pelicula/',pelicula.id]"
@@ -57,7 +62,7 @@
                     </div>
 
                     <div class="featured-films d-flex justify-content-center"
-                        *ngIf="listaPeliculasDirector(directores[0].id) as peliculasDirector">
+                        *ngIf="directores[0]?.id !== undefined && listaPeliculasDirector(directores[0].id!) as peliculasDirector">
                         <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
                                 class="text-decoration-none" [routerLink]="['/pelicula/',pelicula.id]"
                                 routerLinkActive="active">{{pelicula.titulo}}</a></span>
@@ -83,7 +88,7 @@
                     </div>
 
                     <div class="featured-films d-flex justify-content-center"
-                        *ngIf="listaPeliculasDirector(directores[2].id) as peliculasDirector">
+                        *ngIf="directores[2]?.id !== undefined && listaPeliculasDirector(directores[2].id!)as peliculasDirector">
                         <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
                                 class="text-decoration-none" [routerLink]="['/pelicula/',pelicula.id]"
                                 routerLinkActive="active">{{pelicula.titulo}}</a></span>
@@ -109,7 +114,7 @@
                     </div>
 
                     <div class="featured-films d-flex justify-content-center"
-                        *ngIf="listaPeliculasDirector(directores[12].id) as peliculasDirector">
+                        *ngIf="directores[12]?.id !== undefined && listaPeliculasDirector(directores[12].id!) as peliculasDirector">
                         <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
                                 class="text-decoration-none" [routerLink]="['/pelicula/',pelicula.id]"
                                 routerLinkActive="active">{{pelicula.titulo}}</a></span>
@@ -136,7 +141,7 @@
                     </div>
 
                     <div class="featured-films d-flex justify-content-center"
-                        *ngIf="listaPeliculasDirector(directores[22].id) as peliculasDirector">
+                        *ngIf="directores[22]?.id !== undefined && listaPeliculasDirector(directores[22].id!) as peliculasDirector">
                         <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
                                 class="text-decoration-none" [routerLink]="['/pelicula/',pelicula.id]"
                                 routerLinkActive="active">{{pelicula.titulo}}</a></span>
@@ -163,7 +168,7 @@
                     </div>
 
                     <div class="featured-films d-flex justify-content-center"
-                        *ngIf="listaPeliculasDirector(directores[8].id) as peliculasDirector">
+                        *ngIf="directores[8]?.id !== undefined && listaPeliculasDirector(directores[8].id!) as peliculasDirector">
                         <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
                                 class="text-decoration-none" [routerLink]="['/pelicula/', pelicula.id]"
                                 routerLinkActive="active">{{pelicula.titulo}}</a></span>
@@ -190,7 +195,7 @@
                 <div class="director-data">{{director.paises}}</div>
                 <div class="director-stats">
                     <div class="featured-films d-flex justify-content-center"
-                        *ngIf="listaPeliculasDirector(director.id) as peliculasDirector">
+                        *ngIf="director?.id !== undefined && listaPeliculasDirector(director.id!) as peliculasDirector">
                         <span class="film-tag" *ngFor="let pelicula of peliculasDirector"><a
                                 class="text-decoration-none" [routerLink]="['/pelicula/', pelicula.id]"
                                 routerLinkActive="active">{{pelicula.titulo}}</a></span>

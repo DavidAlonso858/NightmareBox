@@ -2,7 +2,7 @@ import { Director } from './director';
 import { SubGenero } from './subgenero';
 
 export interface Pelicula {
-  id: number;
+  id?: number;
   titulo: string;
   year: string;
   duracion: number;

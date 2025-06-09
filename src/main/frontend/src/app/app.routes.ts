@@ -8,6 +8,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { FichaPeliculaComponent } from './components/ficha-pelicula/ficha-pelicula.component';
 import { EditarPeliculaComponent } from './components/pelicula/editar-pelicula/editar-pelicula.component';
+import { CrearPeliculaComponent } from './components/pelicula/crear-pelicula/crear-pelicula.component';
+import { CrearDirectorComponent } from './components/director/crear-director/crear-director.component';
 
 export const routes: Routes = [
     {
@@ -37,6 +39,12 @@ export const routes: Routes = [
     },
     {
         path: 'editarPelicula/:id', component: EditarPeliculaComponent
+    },
+    {
+        path: 'crearPelicula', component: CrearPeliculaComponent
+    },
+    {
+        path: 'crearDirector', component: CrearDirectorComponent
     }
 
 ];

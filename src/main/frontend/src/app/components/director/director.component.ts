@@ -8,6 +8,7 @@ import { Pelicula } from '../../models/pelicula';
 import { PeliculaService } from '../../service/pelicula.service';
 import { log } from 'console';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-director',
@@ -18,7 +19,7 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class DirectorComponent {
-
+  usuario: any = null;
   directores: Director[] = [];
   directoresGenerales: Director[] = [];
 
@@ -28,11 +29,20 @@ export class DirectorComponent {
   searchTerm: string = '';
   filteredDirectores: Director[] = [];
 
-  constructor(private title: Title, private directorService: DirectorService, private peliculaService: PeliculaService) {
+  constructor(private title: Title, private directorService: DirectorService, private peliculaService: PeliculaService, private authService: AuthService) {
     this.title.setTitle('NightmareBox - Directores');
   }
 
   ngOnInit(): void {
+    this.authService.usuario$.subscribe(usuario => {
+      this.usuario = usuario;
+    });
+
+    // Por si refresca la página y hay token pero no usuario cargado aún
+    if (this.authService.estaLogueado() && !this.usuario) {
+      this.authService.cargarUsuarioDesdeBackend();
+    }
+
     this.directorService.getDirectores().subscribe(directores => {
       this.directores = directores;
     });
@@ -52,7 +62,7 @@ export class DirectorComponent {
       return this.filteredDirectores;
     } else {
 
-      this.directoresGenerales = this.directores.filter(d => ![1, 3, 9, 23, 13, 19].includes(d.id))
+      this.directoresGenerales = this.directores.filter(d => d.id !== undefined && ![1, 3, 9, 23, 13, 19].includes(d.id))
       console.log(this.directoresGenerales);
 
       // ordenados alfabeticamente
@@ -60,7 +70,6 @@ export class DirectorComponent {
     }
 
   }
-
 
   listaPeliculasDirector(id: number) {
     const director = this.directores.find(d => d.id === id);
@@ -78,4 +87,9 @@ export class DirectorComponent {
       director.nombre.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
+
+  estaLogueado(): boolean {
+    return this.authService.estaLogueado();
+  }
+
 }

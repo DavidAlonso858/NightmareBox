@@ -39,6 +39,8 @@ export class FichaPeliculaComponent {
 
   ngOnInit() {
     const idParametro = this.route.snapshot.paramMap.get('id');
+    console.log(idParametro);
+    
     this.id = parseInt(idParametro || '0');
     window.scrollTo(0, 0);
 
@@ -52,7 +54,7 @@ export class FichaPeliculaComponent {
 
         // Buscar si ya hay valoración del usuario para esta película
         this.valoracionService
-          .getValoracionDeUsuarioParaPelicula(usuario.id, this.pelicula.id)
+          .getValoracionDeUsuarioParaPelicula(usuario.id, this.pelicula.id!)
           .subscribe({
             next: (valoracion) => {
               this.valoracionExistente = valoracion;
@@ -110,7 +112,7 @@ export class FichaPeliculaComponent {
           position: 'top',
         });
 
-        this.peliculaService.getPeliculaById(this.pelicula.id).subscribe(peli => {
+        this.peliculaService.getPeliculaById(this.pelicula.id!).subscribe(peli => {
           this.pelicula = peli;
           this.generarEstrellas();
         });
@@ -144,7 +146,7 @@ export class FichaPeliculaComponent {
   }
 
   agregarAFavoritos() {
-    this.authService.agregarPeliculaFavorita(this.pelicula.id).subscribe({
+    this.authService.agregarPeliculaFavorita(this.pelicula.id!).subscribe({
       next: () => {
         this.esFavorita = true;
         this.cargandoFavorito = false;
@@ -180,7 +182,7 @@ export class FichaPeliculaComponent {
   }
 
   quitarDeFavoritos() {
-    this.authService.quitarPeliculaFavorita(this.pelicula.id).subscribe({
+    this.authService.quitarPeliculaFavorita(this.pelicula.id!).subscribe({
       next: () => {
         this.esFavorita = false;
         this.cargandoFavorito = false;

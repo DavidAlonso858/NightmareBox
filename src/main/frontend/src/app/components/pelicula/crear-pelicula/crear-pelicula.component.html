@@ -4,8 +4,21 @@
 </head>
 
 <body id="fondoLogin" class="d-flex align-items-center justify-content-center vh-100">
-    <form [formGroup]="peliculaForm" (ngSubmit)="onSubmit()" class="box shadow">
-        <h2 class="text-white text-center fst-italic fw-bold">Actualizar Datos de la Película</h2>
+    <form [formGroup]="peliculaForm" (ngSubmit)="crearPelicula()" class="box shadow">
+        <h2 class="text-white text-center fst-italic fw-bold">Crear Nueva Película</h2>
+
+        <div class="formu-apartado">
+            <label class="label text-white me-3 fs-5">Director</label>
+            <select formControlName="idDirector" class="form-select w-auto">
+                <option value="">Seleccione un director</option>
+                <option *ngFor="let director of directores" [value]="director.id">{{director.nombre}}</option>
+            </select>
+
+            <div *ngIf="peliculaForm.get('idDirector')?.invalid && peliculaForm.get('idDirector')?.touched"
+                class="text-danger fw-bold ms-1">
+                Es obligatorio seleccionar el director de la película
+            </div>
+        </div>
 
         <div class="formu-apartado">
             <label class="label text-white me-3 fs-5">Subgénero</label>
@@ -13,7 +26,7 @@
                 <option value="">Seleccione un subgénero</option>
                 <option *ngFor="let subgenero of subgeneros" [value]="subgenero.id">{{subgenero.nombre}}</option>
             </select>
-            <!--MENSAJE VALIDACION-->
+
             <div *ngIf="peliculaForm.get('idSubGenero')?.invalid && peliculaForm.get('idSubGenero')?.touched"
                 class="text-danger fw-bold ms-1">
                 Es obligatorio seleccionar el subgénero de la película
@@ -24,7 +37,7 @@
             <label for="Titulo" class="label text-white me-3 fs-5">Título</label>
             <input type="text" id="Titulo" formControlName="titulo" class="form-control w-auto"
                 title="Título de la película" required>
-            <!--MENSAJE VALIDACION-->
+
             <div *ngIf="peliculaForm.get('titulo')?.invalid && peliculaForm.get('titulo')?.touched"
                 class="text-danger fw-bold ms-1">
                 Es obligatorio el título de la película
@@ -35,7 +48,7 @@
             <label for="Year" class="label text-white me-3 fs-5">Año</label>
             <input type="number" id="Year" formControlName="year" class="form-control w-auto"
                 title="Año de la película (4 dígitos)" min="1900" max="2030" required>
-            <!--MENSAJE VALIDACION-->
+
             <div *ngIf="peliculaForm.get('year')?.invalid && peliculaForm.get('year')?.touched"
                 class="text-danger fw-bold ms-1">
                 Es obligatorio el año de la película (4 dígitos)
@@ -46,7 +59,7 @@
             <label for="Duracion" class="label text-white me-3 fs-5">Duración (minutos)</label>
             <input type="number" id="Duracion" formControlName="duracion" class="form-control w-auto"
                 title="Duración en minutos" min="1" required>
-            <!--MENSAJE VALIDACION-->
+
             <div *ngIf="peliculaForm.get('duracion')?.invalid && peliculaForm.get('duracion')?.touched"
                 class="text-danger fw-bold ms-1">
                 Es obligatoria la duración de la película
@@ -63,7 +76,7 @@
             <label for="Paises" class="label text-white me-3 fs-5">País</label>
             <input type="text" id="Paises" formControlName="paises" class="form-control w-auto"
                 placeholder="Ej: España, Francia (separados por comas)" required>
-            <!--MENSAJE VALIDACION-->
+
             <div *ngIf="peliculaForm.get('paises')?.invalid && peliculaForm.get('paises')?.touched"
                 class="text-danger fw-bold ms-1">
                 Es obligatorio indicar los países de la película
@@ -79,7 +92,7 @@
             <label for="Poster" class="label text-white me-3 fs-5">Póster</label>
             <input type="text" id="Poster" formControlName="poster" class="form-control w-auto"
                 placeholder="URL de la imagen del póster">
-            <!--MENSAJE VALIDACION-->
+
             <div *ngIf="peliculaForm.get('poster')?.invalid && peliculaForm.get('poster')?.touched"
                 class="text-danger fw-bold ms-1">
                 Introduzca la URL de la imagen de la película
@@ -87,13 +100,13 @@
         </div>
 
         <div class="formu-apartado d-flex justify-content-between">
-            <button type="submit" [disabled]="peliculaForm.invalid" class="btn btn-success text-white mt-4">
-                Actualizar Película
+            <button type="submit" [disabled]="peliculaForm.invalid" class="btn btn-primary text-white mt-4">
+                Crear Película
             </button>
+
             <button type="button" (click)="cancelar()" class="btn btn-secondary text-white mt-4">
                 Cancelar
             </button>
         </div>
-
     </form>
 </body>

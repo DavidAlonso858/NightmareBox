@@ -1,0 +1,57 @@
+<head>
+    <!-- PRECARGAR LA IMAGEN DE FONDO PARA QUITAR POPEO -->
+    <link rel="preload" as="image" href="/fondoResident.jpg">
+</head>
+
+<body id="fondoLogin" class="d-flex align-items-center justify-content-center vh-100">
+    <form [formGroup]="directorForm" (ngSubmit)="crearDirector()" class="box shadow">
+        <h2 class="text-white text-center fst-italic fw-bold">Crear Nuevo Director</h2>
+
+        <div class="formu-apartado">
+            <label class="label text-white me-3 fs-5">Nombre</label>
+            <input type="text" formControlName="nombre" class="form-control w-auto" required />
+
+            <div *ngIf="directorForm.get('nombre')?.invalid && directorForm.get('nombre')?.touched"
+                class="text-danger fw-bold ms-1">
+                Es obligatorio el nombre del director
+            </div>
+        </div>
+
+        <div class="formu-apartado">
+            <label class="label text-white me-3 fs-5">Edad</label>
+            <input type="number" formControlName="edad" class="form-control w-auto" min="1" required />
+
+            <div *ngIf="directorForm.get('edad')?.invalid && directorForm.get('edad')?.touched"
+                class="text-danger fw-bold ms-1">
+                Es obligatoria la edad del director
+            </div>
+        </div>
+
+        <div class="formu-apartado">
+            <label class="label text-white me-3 fs-5">Póster</label>
+            <input type="text" formControlName="poster" class="form-control w-auto"
+                placeholder="URL del póster (opcional)" />
+        </div>
+
+        <div class="formu-apartado">
+            <label class="label text-white me-3 fs-5">Países</label>
+            <input type="text" formControlName="paises" class="form-control w-auto" placeholder="Ej: España, Francia"
+                required />
+
+            <div *ngIf="directorForm.get('paises')?.invalid && directorForm.get('paises')?.touched"
+                class="text-danger fw-bold ms-1">
+                Es obligatorio indicar al menos un país
+            </div>
+        </div>
+
+        <div class="formu-apartado d-flex justify-content-between">
+            <button type="submit" [disabled]="directorForm.invalid" class="btn btn-primary text-white mt-4">
+                Crear Director
+            </button>
+
+            <button type="button" (click)="cancelar()" class="btn btn-secondary text-white mt-4">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</body>

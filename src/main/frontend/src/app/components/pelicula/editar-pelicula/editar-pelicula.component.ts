@@ -50,7 +50,7 @@ export class EditarPeliculaComponent {
     console.log(this.peliculaId);
     
     this.directorService.getDirectores().subscribe(directores => {
-      this.directores = directores;
+      this.directores = directores.sort((a, b) => a.nombre.localeCompare(b.nombre));
     });
 
     this.subgeneroService.getSubgeneros().subscribe(subgeneros => {
