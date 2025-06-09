@@ -34,7 +34,6 @@ export class SignUpComponent {
         nombre: this.signUpForm.value.nombre,
         password: this.signUpForm.value.password,
         rolUsuario: 'USUARIO'
-
       }
 
       this.authService.signUp(nuevoUsuario).subscribe({

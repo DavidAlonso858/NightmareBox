@@ -9,6 +9,7 @@ import { SubGenero } from '../../models/subgenero';
 import { SubgeneroService } from '../../service/subgenero.service';
 import { Director } from '../../models/director';
 import { DirectorService } from '../../service/director.service';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-pelicula',
@@ -19,6 +20,7 @@ import { DirectorService } from '../../service/director.service';
 })
 
 export class PeliculaComponent {
+  usuario: any = null;
   peliculas: Pelicula[] = []
   peliculasFiltradas: Pelicula[] = []
 
@@ -34,11 +36,21 @@ export class PeliculaComponent {
 
   searchTerm: string = '';
 
-  constructor(private peliculaService: PeliculaService, private title: Title, private subgneroService: SubgeneroService, private directorService: DirectorService) {
+  constructor(private peliculaService: PeliculaService, private title: Title, private subgneroService: SubgeneroService,
+    private authService: AuthService, private directorService: DirectorService) {
     this.title.setTitle('NightmareBox-Peliculas');
   }
 
   ngOnInit() {
+    this.authService.usuario$.subscribe(usuario => {
+      this.usuario = usuario;
+    });
+
+    // Por si refresca la página y hay token pero no usuario cargado aún
+    if (this.authService.estaLogueado() && !this.usuario) {
+      this.authService.cargarUsuarioDesdeBackend();
+    }
+
     this.peliculaService.getPeliculas().subscribe(data => {
       this.peliculas = data;
       this.peliculasFiltradas = this.peliculas;
@@ -91,7 +103,7 @@ export class PeliculaComponent {
       this.anioFin = valor.toString();
     }
   }
-  
+
   onDuracionChange(): void {
     this.aplicarFiltros();
   }
@@ -157,6 +169,23 @@ export class PeliculaComponent {
     this.conPremio = false;
     this.duracionMaxima = 200;
     this.aplicarFiltros();
+  }
+
+  estaLogueado(): boolean {
+    return this.authService.estaLogueado();
+  }
+
+  borrarPelicula(id: number) {
+    this.peliculaService.deletePelicula(id).subscribe({
+      next: (response) => {
+        alert('Película borrada correctamente');
+        this.ngOnInit();
+      },
+      error: (error) => {
+        console.error('Error al borrar la película:', error);
+        alert('Error al borrar la película. Inténtalo de nuevo.');
+      }
+    });
   }
 
 }

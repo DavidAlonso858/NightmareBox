@@ -86,9 +86,14 @@
                 <a [routerLink]="['/pelicula', peli.id]" class="text-decoration-none" routerLinkActive="active">
                     <img class="img-fluid rounded shadow mb-4" [src]="peli.poster" [alt]="peli.titulo">
                 </a>
+
+                <a [routerLink]="['/editarPelicula', peli.id]" class="text-decoration-none" routerLinkActive="active">
+                    <button class=" mb-3 bg-success text-white rounded">Editar</button> </a>
+
+                <button *ngIf="estaLogueado() && usuario?.rolUsuario === 'ADMINISTRADOR'"
+                    class=" mb-3 ms-3 bg-danger text-white rounded" (click)="borrarPelicula(peli.id)">Borrar</button>
             </div>
         </div>
-
     </div>
 
 </div>

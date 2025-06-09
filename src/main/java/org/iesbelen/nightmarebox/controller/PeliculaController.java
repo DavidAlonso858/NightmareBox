@@ -50,7 +50,7 @@ public class PeliculaController {
     }
 
     // EDICION
-    @PutMapping("/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<?> replacePelicula(@PathVariable Long id, @RequestBody Pelicula pelicula) {
         log.info("EDITANDO PELICULA CON ID: {}", id);
         try {

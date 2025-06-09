@@ -7,6 +7,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { FichaPeliculaComponent } from './components/ficha-pelicula/ficha-pelicula.component';
+import { EditarPeliculaComponent } from './components/pelicula/editar-pelicula/editar-pelicula.component';
 
 export const routes: Routes = [
     {
@@ -33,6 +34,9 @@ export const routes: Routes = [
     },
     {
         path: 'pelicula/:id', component: FichaPeliculaComponent
+    },
+    {
+        path: 'editarPelicula/:id', component: EditarPeliculaComponent
     }
 
 ];

@@ -26,7 +26,7 @@ export class PeliculaService {
   }
 
   editarPelicula(peli: Pelicula) {
-    return this.http.put<Pelicula>(`${this.urlSpring}/${peli.id}`, peli)
+    return this.http.put<Pelicula>(`${this.urlSpring}/editar/${peli.id}`, peli)
   }
 
   getPeliculaById(id: number) {
