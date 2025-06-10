@@ -156,7 +156,7 @@ export class FichaPeliculaComponent {
 
         Swal.fire({
           title: '¡Añadida a favoritos!',
-          text: `${this.pelicula.titulo} se ha agregado a tu lista de favoritos`,
+          html: `<b>${this.pelicula.titulo}</b> se ha agregado a tu lista de favoritos`,
           icon: 'success',
           background: '#000000',
           color: '#FF0000',

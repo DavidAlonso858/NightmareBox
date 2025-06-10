@@ -281,16 +281,85 @@
 
 
 /* MOVILES O TABLETS*/
+/* MODO RESPONSIVO */
 @media (max-width: 768px) {
-    .directors-grid {
-        grid-template-columns: 1fr;
-    }
-
+    .directors-grid,
     .featured-grid {
         grid-template-columns: 1fr;
     }
 
     .header h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+
+    .header p {
+        font-size: 1.2rem;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .featured-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .featured-info {
+        margin-left: 0;
+        margin-top: 15px;
+    }
+
+    .featured-image img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .featured-description {
+        font-size: 15px;
+        text-align: justify;
+    }
+
+    .film-tag a {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+
+    .search-input {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.7rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .featured-info h3 {
+        font-size: 1.5rem;
+    }
+
+    .featured-description {
+        font-size: 14px;
+    }
+
+    .director-name {
+        font-size: 1.4rem;
+    }
+
+    .director-data {
+        font-size: 1rem;
+    }
+
+    .director-stats {
+        flex-direction: column;
+        gap: 10px;
     }
 }

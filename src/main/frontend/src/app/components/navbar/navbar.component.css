@@ -43,6 +43,9 @@ nav a:hover {
   margin-right: 50px;
 }
 
+#aleatorio:hover{
+  cursor: pointer;
+}
 
 @media (max-width: 1200px) {
   nav {

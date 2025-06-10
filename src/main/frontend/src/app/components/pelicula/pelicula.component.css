@@ -459,14 +459,94 @@ select option:hover {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .container {
+        padding: 20px 10px;
+    }
+
+    .btn-limpiar-filtros {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 10px 16px;
+        font-size: 16px;
+        gap: 8px;
+        /* espacio entre icono y texto */
+        border-radius: 12px;
+        border: 2px solid #cc0000;
+        background-color: #1a0000;
+        color: #ccff00;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .btn-limpiar-filtros i {
+        font-size: 18px;
+        /* ajusta el tamaño del icono */
+    }
+
+    .header h1 {
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+    }
+
+    .header p {
+        font-size: 1.2rem;
+    }
+
     .filters-container {
-        max-width: 100%;
-        /* Ocupa todo el ancho en móviles */
-        grid-template-columns: 1fr;
+        padding: 20px 15px;
         gap: 20px;
     }
 
-    .filtroAnio {
-        align-items: stretch;
+    .filtros-fila {
+        flex-direction: column;
+    }
+
+    .filtroSubgenero,
+    .filtroDirector {
+        width: 100%;
+    }
+
+    .filtroPremio {
+        flex-direction: column;
+    }
+
+    .btn-limpiar-filtros {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .search-bar {
+        margin-bottom: 30px;
+    }
+
+    .search-input {
+        font-size: 16px;
+        padding: 12px 20px;
+    }
+
+    .filtroAnio label {
+        font-size: 12px;
+    }
+
+    .duracion-marcas span {
+        font-size: 12px;
+    }
+
+    .filtroPremio label {
+        font-size: 14px;
+        padding: 12px 16px;
+    }
+
+    .filtroAnio input[type="number"] {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .img-fluid:hover {
+        transform: none;
+        box-shadow: none;
+        border: none;
     }
 }

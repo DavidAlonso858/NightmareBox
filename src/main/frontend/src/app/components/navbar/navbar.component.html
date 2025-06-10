@@ -11,15 +11,16 @@
                 Directores</a>
             <a [routerLink]="['/peliculas']" routerLinkActive="active" class="me-3"><i class="bi bi-film"></i>
                 Películas</a>
-            <a [routerLink]="['/pelicula', peliAleatoria()]" routerLinkActive="active" class="me-3"><i
-                    class="bi bi-shuffle"></i> Random</a>
+            <a (click)="irAPeliculaAleatoria()" id="aleatorio" class="me-3"><i class="bi bi-shuffle"></i>
+                Random</a>
         </div>
 
         <div class="nav-right">
             <a *ngIf="estaLogueado() && usuario?.rolUsuario === 'ADMINISTRADOR'" [routerLink]="['/usuarios']"
                 class="me-4 text-primary" id="usuario">Usuarios</a>
 
-            <a *ngIf="estaLogueado()" [routerLink]="['/usuario', nombreUsuario]"><i class="bi bi-person-fill me-1"></i>{{nombreUsuario}}</a>
+            <a *ngIf="estaLogueado()" [routerLink]="['/usuario', nombreUsuario]"><i
+                    class="bi bi-person-fill me-1"></i>{{nombreUsuario}}</a>
             <!--PONER {{ }} para una variable del ts-->
 
             <a *ngIf="estaLogueado()" (click)="cerrarSesion()" class="cursor"> / Cerrar sesión</a>

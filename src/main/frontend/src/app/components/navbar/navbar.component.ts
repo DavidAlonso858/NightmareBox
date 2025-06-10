@@ -37,14 +37,20 @@ export class NavbarComponent implements OnInit {
   }
 
   // para la ficha random sin que salga 0 ni el 26 que lo elimine
-  peliAleatoria(): number {
-    let aleatorio;
-    do {
-      aleatorio = Math.floor(Math.random() * this.peliculasNumero) + 1;
-    } while (aleatorio === 26);
+  irAPeliculaAleatoria(): void {
+    this.peliculaService.getPeliculas().subscribe(pelis => {
+      const pelisValidas = pelis.filter(p => p.id !== 26);
+      const randomIndex = Math.floor(Math.random() * pelisValidas.length);
+      const randomId = pelisValidas[randomIndex].id;
 
-    return aleatorio;
+      // Fuerza la navegación a la misma ruta para que se recargue
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/pelicula', randomId]);
+      });
+    });
   }
+
+
 
   estaLogueado(): boolean {
     return this.authService.estaLogueado();
